@@ -1,10 +1,5 @@
 ---
 ideas:
-- title: exercise
-  description: play video games
-- title: Test
-  description: This is my big idea!
-- title: Monkeys
-  description: 15 monkeys jumping on the bed.
-- title: Gym
-  description: Go three times a week
+- title: Eat
+  description: Pizza all day
+  rank: 2
