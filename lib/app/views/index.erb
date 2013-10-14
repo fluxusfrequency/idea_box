@@ -5,15 +5,15 @@
   <ul>
     <% ideas.each_with_index do |idea, id| %>
       <li>
+        <%= idea.title %><br/>
+        <%= idea.description %>
         <form action='/<%= idea.id %>/like' method='POST' style="display: inline">
           <input type='submit' value='+'/>
         </form>
-        <%= idea.title %><br/>
-        <%= idea.description %>
         <a href="/<%= idea.id %>/edit">Edit</a>
         <form action="/<%= idea.id %>" method="POST">
           <input type="hidden" name="_method" value="DELETE">
-          <input type="submit" value="delete" />
+          <input type="submit" value="Delete" />
         </form>
       </li>
     <% end %>
