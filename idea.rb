@@ -27,7 +27,6 @@ class Idea
   def self.all
     raw_ideas.map do |data|
       new(data[:title], data[:description])
-      db['ideas'] || []
     end
   end
 
