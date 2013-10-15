@@ -10,15 +10,20 @@ class TaggingTest < Minitest::Test
     IdeaStore.set_test
   end
 
-#   def teardown
-#     file = File.open('./db/test', 'w+')
-#     file <<
-# # "---
-# # ideas:
-# # - id: 1
-# #   title: Eat
-# #   description: Pizza all day"
-#   end
+
+  def teardown
+    file = File.open('./db/test', 'w+')
+    file << "---
+ideas:
+- id: 37
+  title: Transporation
+  description: Bicycles and busses
+  tags: bike, bus
+  rank: 0
+  created_at: 2013-10-15 06:30:51.000000000 -06:00
+  updated_at: 2013-10-15 06:30:51.000000000 -06:00
+  revision: 1"
+  end
 
   def test_it_can_show_ideas_broken_down_by_hour_of_day
     IdeaStore.create({

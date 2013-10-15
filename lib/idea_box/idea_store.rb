@@ -23,8 +23,8 @@ class IdeaStore
 
     def all
       ideas = []
-      raw_ideas.each_with_index do |data, i|
-        ideas << Idea.new(data.merge("id" => i))
+      raw_ideas.each do |data|
+        ideas << Idea.new(data.merge("id" => data["id"]))
       end
       ideas
     end
@@ -41,6 +41,16 @@ class IdeaStore
       Idea.new(raw_idea.merge("id" => id))
     end
 
+    def find_history_for_idea(id)
+     group_all_by_id[id]
+    end
+
+    def group_all_by_id
+      all.group_by do |idea|
+        idea.id
+      end
+    end
+
     def find_all_by_tags(*tags)
       raw_ideas = tags.collect do |tag|
         find_raw_idea_by_tag(tag)
@@ -49,12 +59,6 @@ class IdeaStore
         Idea.new(raw_idea)
       end
     end
-
-    # def find_all_by_time_created(range_start, range_end)
-    #   all.group_by
-    #   range_start..range_end.include?
-    #   Date.parse(date).strftime "%l : %M %p"
-    # end
 
     def group_all_by_tags
       all.group_by do |idea|
@@ -68,21 +72,29 @@ class IdeaStore
       end
     end
 
+    # def find_all_by_time_created(range_start, range_end)
+    #   all.group_by
+    #   range_start..range_end.include?
+    #   Date.parse(date).strftime "%l : %M %p"
+    # end
+
     def group_all_by_day_created
       all.group_by do |idea|
         idea.created_at.strftime "%a"
       end
     end
 
-    def update(id, data)
-      attrs = ['id', 'title', 'description', 'rank', 'tags', 'created_at', 'updated_at']
-      database.transaction do
-        attrs.each do |attr|
-          database['ideas'][id][attr] = data[attr] if data[attr]
-        end
-        database['ideas'][id]["updated_at"] = Time.now
-        database['ideas'][id]["revision"] += 1
-      end
+    def update(id, attributes)
+      new_attrs = {
+        "id" => id,
+        "title" => attributes["title"] || find(id).title,
+        "description" => attributes["description"] || find(id).description,
+        "rank" => attributes["rank"] || find(id).rank,
+        "created_at" => attributes["created_at"] || find(id).created_at,
+        "updated_at" => Time.now,
+        "revision" => find(id).revision + 1 }
+
+      create(new_attrs)
     end
 
     def delete(position)
@@ -99,7 +111,10 @@ class IdeaStore
 
     def find_raw_idea(id)
       database.transaction do
-        database['ideas'].at(id)
+        found = database['ideas'].select do |idea|
+          idea['id'] == id
+        end
+        found.last
       end
     end
 

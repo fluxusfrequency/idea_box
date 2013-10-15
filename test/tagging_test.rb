@@ -10,16 +10,20 @@ class TaggingTest < Minitest::Test
     IdeaStore.set_test
   end
 
-  # def teardown
-  #   file = File.open('./db/test', 'w+')
-  #   file <<
-  #   # "---
-  #   # ideas:
-  #   # - id: 1
-  #   #   title: Eat
-  #   #   description: Pizza all day"
 
-  # end
+  def teardown
+    file = File.open('./db/test', 'w+')
+    file << "---
+ideas:
+- id: 37
+  title: Transporation
+  description: Bicycles and busses
+  tags: bike, bus
+  rank: 0
+  created_at: 2013-10-15 06:30:51.000000000 -06:00
+  updated_at: 2013-10-15 06:30:51.000000000 -06:00
+  revision: 1"
+  end
 
   def test_it_can_create_and_find_ideas
     assert IdeaStore.create({
@@ -44,7 +48,7 @@ class TaggingTest < Minitest::Test
   end
 
   def test_it_can_sort_ideas_by_tags
-    assert_kind_of Hash, IdeaStore.group_all
+    assert_kind_of Hash, IdeaStore.group_all_by_tags
   end
 
 end
