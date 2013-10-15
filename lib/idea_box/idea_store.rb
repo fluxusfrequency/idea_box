@@ -43,7 +43,6 @@ class IdeaStore
 
     def find(id)
       raw_idea = find_raw_idea(id)
-      puts raw_idea
       Idea.new(raw_idea.to_h)
     end
 
@@ -116,26 +115,16 @@ class IdeaStore
     end
 
     def update(id, attributes)
-      updated_idea = Idea.new(attributes.merge("id" => id))
-      puts updated_idea
+      updated_idea = Idea.new(attributes.merge("id" => id, "created_at" => find(id).created_at, "updated_at" => Time.now, "revision" => find(id).revision + 1))
       database.transaction do
-        database['ideas'][id] = updated_idea.to_h
+        database['ideas'][id.to_i-1] = updated_idea.to_h
+        puts database['ideas'].inspect
       end
-      # new_attrs = {
-      #   "id" => id,
-      #   "title" => attributes["title"] || find(id).title,
-      #   "description" => attributes["description"] || find(id).description,
-      #   "rank" => attributes["rank"] || find(id).rank,
-      #   "created_at" => attributes["created_at"] || find(id).created_at,
-      #   "updated_at" => Time.now,
-      #   "revision" => find(id).revision + 1 }
-
-      # create(new_attrs)
     end
 
-    def delete(id)
+    def delete(position)
       database.transaction do
-        database['ideas'].delete_at(position)
+        database['ideas'].delete_at(position-1)
       end
     end
 
@@ -152,13 +141,21 @@ class IdeaStore
     end
 
     def find_raw_idea(id)
-      find_raw_ideas(id).last
+      begin
+        find_raw_ideas(id).last
+      rescue
+        return
+      end
     end
 
     def find_raw_ideas(id)
       database.transaction do
-        database['ideas'].select do |idea|
-          idea['id'] == id
+        begin
+          database['ideas'].select do |idea|
+            idea['id'] == id
+          end
+        rescue
+          return
         end
       end
     end

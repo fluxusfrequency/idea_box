@@ -33,13 +33,13 @@
       =idea.description
       %br
 
-      %form{ :action => "/#{id}/like", :method => 'POST', :style => "display: inline"}
+      %form{ :action => "/#{idea.id}/like", :method => 'POST', :style => "display: inline"}
         %input{:type => 'submit', :value => '+'}
 
-      %form{:action => "/#{id}/edit", :method => "GET", :style => "display: inline"}
+      %form{:action => "/#{idea.id}/edit", :method => "GET", :style => "display: inline"}
         %input{:type => "submit", :value => "Edit"}
 
-      %form{:action => "/#{id}", :method => "POST", :style => "display: inline"}
+      %form{:action => "/#{idea.id}", :method => "POST", :style => "display: inline"}
         %input{:type => "hidden", :name => "_method", :value => "DELETE"}
         %input{:type => "submit", :value => "Delete"}
 
