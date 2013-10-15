@@ -44,9 +44,7 @@ class IdeaStore
       raw_ideas = tags.collect do |tag|
         find_raw_idea_by_tag(tag)
       end
-      # test = raw_ideas.compact.flatten.group_by do |idea|
-      #   idea['tags']
-      # end
+
       raw_ideas.compact.flatten.collect do |raw_idea|
         Idea.new(raw_idea)
       end
