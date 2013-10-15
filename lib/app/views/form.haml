@@ -19,7 +19,7 @@
   %input{:type => 'text', :name => 'idea[updated_at]', :value => idea.updated_at, :style => "display: inline"}
   %br
   Description
-  %textarea{:name =>'idea[description]', :value => idea.description }
+  %textarea{:name =>'idea[description]'}= idea.description
   %br
   %br
   %input{:type => 'submit', :value => 'Submit'}

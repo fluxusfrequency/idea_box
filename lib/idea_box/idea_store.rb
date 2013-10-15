@@ -24,8 +24,8 @@ class IdeaStore
 
     def all
       ideas = []
-      raw_ideas.each do |data|
-        ideas << Idea.new(data)
+      raw_ideas.each_with_index do |data, id|
+        ideas << Idea.new(data.merge("id" => id+1))
       end
       ideas
     end
@@ -104,7 +104,7 @@ class IdeaStore
       find_all_by_group(group).sort_by(&:rank).reverse
     end
 
-    def sort_by_id(group)
+    def sort_by_group(group)
       find_all_by_group(group).sort_by(&:id)
     end
 
@@ -127,7 +127,7 @@ class IdeaStore
       create(new_attrs)
     end
 
-    def delete(position)
+    def delete(id)
       database.transaction do
         database['ideas'].delete_at(position)
       end
@@ -146,11 +146,14 @@ class IdeaStore
     end
 
     def find_raw_idea(id)
+      find_raw_ideas(id).last
+    end
+
+    def find_raw_ideas(id)
       database.transaction do
-        found = database['ideas'].select do |idea|
+        database['ideas'].select do |idea|
           idea['id'] == id
         end
-        found.last
       end
     end
 

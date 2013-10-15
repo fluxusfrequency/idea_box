@@ -8,7 +8,7 @@ class IdeaBoxAppTest < Minitest::Test
   include Rack::Test::Methods
 
   def setup
-    # IdeaStore.filename = 'db/test'
+    IdeaStore.filename = 'db/test'
   end
 
   def teardown
@@ -37,22 +37,25 @@ class IdeaBoxAppTest < Minitest::Test
     assert_equal 200, last_response.status
   end
 
-  # TO DO: FIX ME
-  # def test_edit_idea_by_id
-  #   put '/1', {idea: { title: "exercise", description: "sign up for stick fighting classes"}}
-  #   assert_equal 200, last_response.status
-  # end
+  def test_edit_idea_by_id
+    post '/1', {idea: { title: "exercise", description: "sign up for stick fighting classes"}}
+    put '/1', {idea: { title: "exercise", description: "sign up for capoeria classes"}}
+    assert_equal "sign up for capoeria classes", IdeaStore.find(1).description
+    assert_equal 302, last_response.status
+  end
 
   # def test_delete_idea_by_id
   #   post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes"}}
   #   delete '/1'
-  #   assert_equal 200, last_response.status
+  #   assert_equal nil, IdeaStore.find(1)
+  #   assert_equal 302, last_response.status
   # end
 
-  # def test_liking_an_idea
-  #   post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes"}}
-  #   post '/1/like'
-  #   assert_equal 200, last_response.status
-  # end
+  def test_liking_an_idea
+    post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes"}}
+    post '/1/like'
+    assert_equal 1, IdeaStore.find(1).rank
+    assert_equal 302, last_response.status
+  end
 
 end

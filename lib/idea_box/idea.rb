@@ -3,7 +3,7 @@
  class Idea
   include Comparable
 
-  attr_reader :title, :description, :rank, :id, :tags, :created_at, :updated_at, :revision, :group
+  attr_reader :id, :title, :description, :rank, :tags, :created_at, :updated_at, :revision, :group
 
   def initialize(attributes={})
     attributes = default_idea.merge(attributes)

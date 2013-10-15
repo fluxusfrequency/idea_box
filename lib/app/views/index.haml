@@ -3,15 +3,12 @@
 %h3 Existing Ideas
 
 %ul
-  - ideas.each do |idea|
+  - ideas.each_with_index do |idea, id|
     %li
       Id:
       =idea.id
       Title:
       =idea.title
-      %br
-      Description:
-      =idea.description
       %br
       Rank:
       =idea.rank
@@ -31,14 +28,17 @@
       Revision Number:
       =idea.revision
       %br
+      Description:
+      =idea.description
+      %br
 
-      %form{ :action => "/#{idea.id}/like", :method => 'POST', :style => "display: inline"}
+      %form{ :action => "/#{id}/like", :method => 'POST', :style => "display: inline"}
         %input{:type => 'submit', :value => '+'}
 
-      %form{:action => "/#{idea.id}/edit", :method => "GET", :style => "display: inline"}
+      %form{:action => "/#{id}/edit", :method => "GET", :style => "display: inline"}
         %input{:type => "submit", :value => "Edit"}
 
-      %form{:action => "/#{idea.id}", :method => "POST", :style => "display: inline"}
+      %form{:action => "/#{id}", :method => "POST", :style => "display: inline"}
         %input{:type => "hidden", :name => "_method", :value => "DELETE"}
         %input{:type => "submit", :value => "Delete"}
 
