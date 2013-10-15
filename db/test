@@ -36,3 +36,10 @@ ideas:
   title: Diet
   description: Pizza all the time
   tags: food, diet
+- id: 1
+  title: Diet
+  description: Pizza all the time
+- id: 2
+  title: Diet
+  description: Pizza all the time
+  tags: food, diet
