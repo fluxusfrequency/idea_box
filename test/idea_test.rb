@@ -6,9 +6,6 @@ require_relative '../lib/idea_box/idea_store.rb'
 
 class IdeaTest < Minitest::Test
 
-  def setup
-  end
-
   def test_it_can_set_up_attrs
     idea = Idea.new({
       'id' => 1,

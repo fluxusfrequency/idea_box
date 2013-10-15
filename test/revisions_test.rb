@@ -7,8 +7,7 @@ require_relative '../lib/idea_box/idea.rb'
 class RevisionsTest < Minitest::Test
 
   def setup
-    IdeaStore.set_test
-    IdeaStore.delete_all
+    IdeaStore.filename = 'db/test'
   end
 
   def teardown

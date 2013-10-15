@@ -3,30 +3,35 @@ require 'yaml/store'
 class IdeaStore
   class << self
     def database
-      if @env == "test"
-        @database ||= YAML::Store.new('db/test')
-        return @database
-      end
-
-      return @database if @database
-
-      @database ||= YAML::Store.new('db/ideabox')
-      @database.transaction do
-        @database['ideas'] || []
-      end
-      @database
+      @database ||= initialize_database
     end
 
-    def set_test
-      @env = "test"
+    def initialize_database
+      db ||= YAML::Store.new(filename)
+      db.transaction do
+        db ||= []
+      end
+      db
+    end
+
+    def filename
+      @filename || 'db/ideabox'
+    end
+
+    def filename=(name)
+      @filename = name
     end
 
     def all
       ideas = []
       raw_ideas.each do |data|
-        ideas << Idea.new(data.merge("id" => data["id"]))
+        ideas << Idea.new(data)
       end
       ideas
+    end
+
+    def size
+      raw_ideas.length
     end
 
     def create(attributes)
@@ -66,6 +71,19 @@ class IdeaStore
       end
     end
 
+    def find_all_by_time_created(range_start, range_end)
+      #12:00AM, 12:59AM
+      start = Time.strptime(range_start, "%l:%M%p")
+      stop = Time.strptime(range_stop, "%l:%M%p")
+      find_ideas_between_times(start, stop).values
+    end
+
+    def find_ideas_between_times(start, stop)
+      group_all_by_time_created.select do |key, value|
+        (start..stop).cover?(key)
+      end
+    end
+
     def group_all_by_time_created
       all.group_by do |idea|
         idea.created_at.strftime "%l:%M%p"
@@ -89,12 +107,6 @@ class IdeaStore
     def sort_by_id(group)
       find_all_by_group(group).sort_by(&:id)
     end
-
-    # def find_all_by_time_created(range_start, range_end)
-    #   all.group_by
-    #   range_start..range_end.include?
-    #   Date.parse(date).strftime "%l : %M %p"
-    # end
 
     def group_all_by_day_created
       all.group_by do |idea|

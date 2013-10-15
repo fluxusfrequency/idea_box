@@ -6,15 +6,16 @@
   attr_reader :title, :description, :rank, :id, :tags, :created_at, :updated_at, :revision, :group
 
   def initialize(attributes={})
-    @id          = attributes["id"] || IdeaStore.all.last.id + 1
-    @title       = attributes["title"] || 'New Idea'
-    @description = attributes["description"] || 'My idea is...'
-    @rank        = attributes["rank"] || 0
-    @tags        = attributes["tags"] || 'unsorted'
-    @created_at  = attributes["created_at"] || Time.now
-    @updated_at  = attributes["updated_at"] || Time.now
-    @revision    = attributes["revision"] || 1
-    @group       = attributes["group"] || 'work'
+    attributes = default_idea.merge(attributes)
+    @id          = attributes["id"]
+    @title       = attributes["title"]
+    @description = attributes["description"]
+    @rank        = attributes["rank"]
+    @tags        = attributes["tags"]
+    @created_at  = attributes["created_at"]
+    @updated_at  = attributes["updated_at"]
+    @revision    = attributes["revision"]
+    @group       = attributes["group"]
   end
 
   def save
@@ -40,6 +41,28 @@
 
   def <=>(other)
     other.rank <=> rank
+  end
+
+  def default_idea
+    {
+      "id" => next_id,
+      "title" => 'New Idea',
+      "description" => 'My Idea is...',
+      "rank" => 0,
+      "tags" => 'unsorted',
+      "created_at" => Time.now,
+      "updated_at" => Time.now,
+      "revision" => 1,
+      "group" => 'work'
+    }
+  end
+
+  def next_id
+    begin
+      IdeaStore.size + 1
+    rescue
+      1
+    end
   end
 
 end
