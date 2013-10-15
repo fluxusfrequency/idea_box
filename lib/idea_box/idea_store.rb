@@ -43,6 +43,7 @@ class IdeaStore
 
     def find(id)
       raw_idea = find_raw_idea(id)
+      puts raw_idea
       Idea.new(raw_idea.to_h)
     end
 
@@ -115,16 +116,21 @@ class IdeaStore
     end
 
     def update(id, attributes)
-      new_attrs = {
-        "id" => id,
-        "title" => attributes["title"] || find(id).title,
-        "description" => attributes["description"] || find(id).description,
-        "rank" => attributes["rank"] || find(id).rank,
-        "created_at" => attributes["created_at"] || find(id).created_at,
-        "updated_at" => Time.now,
-        "revision" => find(id).revision + 1 }
+      updated_idea = Idea.new(attributes.merge("id" => id))
+      puts updated_idea
+      database.transaction do
+        database['ideas'][id] = updated_idea.to_h
+      end
+      # new_attrs = {
+      #   "id" => id,
+      #   "title" => attributes["title"] || find(id).title,
+      #   "description" => attributes["description"] || find(id).description,
+      #   "rank" => attributes["rank"] || find(id).rank,
+      #   "created_at" => attributes["created_at"] || find(id).created_at,
+      #   "updated_at" => Time.now,
+      #   "revision" => find(id).revision + 1 }
 
-      create(new_attrs)
+      # create(new_attrs)
     end
 
     def delete(id)

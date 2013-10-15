@@ -1,4 +1,4 @@
-=haml :form, locals: { idea: idea }
+=haml :form, locals: { idea: idea, mode: "new" }
 
 %h3 Existing Ideas
 
@@ -7,6 +7,7 @@
     %li
       Id:
       =idea.id
+      %br
       Title:
       =idea.title
       %br

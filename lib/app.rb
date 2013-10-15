@@ -1,6 +1,6 @@
 require 'haml'
-require 'better_errors'
 require 'sinatra/base'
+require 'sinatra/reloader'
 require_relative './idea_box/idea.rb'
 require_relative './idea_box/idea_store.rb'
 
@@ -11,8 +11,7 @@ class IdeaBoxApp < Sinatra::Base
   set :root, 'lib/app'
 
   configure :development do
-    use BetterErrors::Middleware
-    BetterErrors.application_root = __dir__
+    register Sinatra::Reloader
   end
 
   not_found do
@@ -20,7 +19,7 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/' do
-    haml :index , locals: {:ideas => IdeaStore.all.sort, :idea => Idea.new}
+    haml :index, locals: { ideas: IdeaStore.all.sort, idea: Idea.new }
   end
 
   post '/' do
@@ -30,7 +29,7 @@ class IdeaBoxApp < Sinatra::Base
 
   get '/:id/edit' do |id|
     idea = IdeaStore.find(id.to_i)
-    haml :edit, locals: {idea: idea}
+    haml :edit, locals: { idea: idea }
   end
 
   put '/:id' do |id|

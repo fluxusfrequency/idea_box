@@ -1,8 +1,11 @@
-%form{:action => 'id', :method => 'POST'}
-  Edit your idea:
+%form{:action => "/#{idea.id}", :method => 'POST'}
+  -if idea.id
+    %p Edit Your Idea:
+    %input{:type => "hidden", :name => "_method", :value =>"PUT", :style => "display: inline"}
+  -else
+    %p Your Idea:
   %br
   %br
-  %input{:type => "hidden", :name => "_method", :value =>"PUT", :style => "display: inline"}
   Title
   %input{:type => 'text', :name => 'idea[title]', :value => idea.title, :style => "display: inline"}
   %br
