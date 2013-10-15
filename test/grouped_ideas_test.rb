@@ -4,10 +4,15 @@ require 'minitest/pride'
 require_relative '../lib/idea_box/idea_store.rb'
 require_relative '../lib/idea_box/idea.rb'
 
-class RevisionsTest < Minitest::Test
+class GroupedIdeasTest < Minitest::Test
 
   def setup
     IdeaStore.set_test
+    IdeaStore.delete_all
+  end
+
+  def teardown
+    IdeaStore.delete_all
   end
 
   def test_ideas_are_grouped_by_work_by_default

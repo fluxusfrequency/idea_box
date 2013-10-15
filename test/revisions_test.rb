@@ -8,21 +8,12 @@ class RevisionsTest < Minitest::Test
 
   def setup
     IdeaStore.set_test
+    IdeaStore.delete_all
   end
 
-#   def teardown
-#     file = File.open('./db/test', 'w+')
-#     file << "---
-# ideas:
-# - id: 37
-#   title: Transporation
-#   description: Bicycles and busses
-#   tags: bike, bus
-#   rank: 0
-#   created_at: 2013-10-15 06:30:51.000000000 -06:00
-#   updated_at: 2013-10-15 06:30:51.000000000 -06:00
-#   revision: 1"
-#   end
+  def teardown
+    IdeaStore.delete_all
+  end
 
   def test_it_can_edit_ideas
     idea = IdeaStore.create({
@@ -51,6 +42,17 @@ class RevisionsTest < Minitest::Test
     assert_kind_of Array, IdeaStore.find_history_for_idea(2)
     assert_kind_of Idea, IdeaStore.find_history_for_idea(2).first
     assert_equal 2, IdeaStore.find_history_for_idea(2).length
+  end
+
+  def test_it_can_destroy_all_db_entries
+    idea = IdeaStore.create({
+      "id" => 3,
+      "title" => "Hobbies",
+      "description" => "Mountain Biking",
+      "tags" => "exercise"
+      })
+    IdeaStore.delete_all
+    assert_equal 0, IdeaStore.all.count
   end
 
 end

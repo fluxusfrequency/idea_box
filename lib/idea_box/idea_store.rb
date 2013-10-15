@@ -121,6 +121,12 @@ class IdeaStore
       end
     end
 
+    def delete_all
+      database.transaction do
+        database['ideas'] = []
+      end
+    end
+
     def raw_ideas
       database.transaction do |db|
         database['ideas'] ||= []
