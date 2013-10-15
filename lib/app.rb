@@ -1,13 +1,10 @@
 require 'idea_box'
+require 'sinatra/base'
 
 class IdeaBoxApp < Sinatra::Base
 
   set :method_override, true
   set :root, 'lib/app'
-
-  configure :development do
-    register Sinatra::Reloader
-  end
 
   not_found do
     erb :error
