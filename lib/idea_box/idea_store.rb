@@ -30,8 +30,9 @@ class IdeaStore
     end
 
     def create(attributes)
+      new_idea = Idea.new(attributes)
       database.transaction do
-        database['ideas'] << attributes
+        database['ideas'] << new_idea.to_h
       end
     end
 
@@ -49,13 +50,11 @@ class IdeaStore
       end
     end
 
-    def find_all_by_time_created(range_start, range_end)
-      # 12:00AM to 12:59AM
-      # 1:00AM to 1:59AM
-      all.group_by
-      range_start..range_end.include?
-      Date.parse(date).strftime "%l : %M %p"
-    end
+    # def find_all_by_time_created(range_start, range_end)
+    #   all.group_by
+    #   range_start..range_end.include?
+    #   Date.parse(date).strftime "%l : %M %p"
+    # end
 
     def group_all_by_tags
       all.group_by do |idea|
@@ -76,8 +75,13 @@ class IdeaStore
     end
 
     def update(id, data)
+      attrs = ['id', 'title', 'description', 'rank', 'tags', 'created_at', 'updated_at']
       database.transaction do
-        database['ideas'][id] = data
+        attrs.each do |attr|
+          database['ideas'][id][attr] = data[attr] if data[attr]
+        end
+        database['ideas'][id]["updated_at"] = Time.now
+        database['ideas'][id]["revision"] += 1
       end
     end
 
