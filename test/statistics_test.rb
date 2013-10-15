@@ -38,4 +38,22 @@ class TaggingTest < Minitest::Test
     assert IdeaStore.group_all_by_time_created
   end
 
+  def test_it_can_show_ideas_broken_down_day_of_the_week
+    IdeaStore.create({
+      'id' => 5,
+      'title' => "Water",
+      'description' => "Drink from the creek",
+      'tags' => 'giardia',
+      'created_at' => Time.now
+      })
+    IdeaStore.create({
+      'id' => 6,
+      'title' => "Monday",
+      'description' => "Pancakes for breakfast",
+      'tags' => 'obesity',
+      'created_at' => Time.now
+      })
+    assert_kind_of Hash, IdeaStore.group_all_by_day_created
+  end
+
 end

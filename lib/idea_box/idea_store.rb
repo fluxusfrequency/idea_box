@@ -57,10 +57,6 @@ class IdeaStore
       Date.parse(date).strftime "%l : %M %p"
     end
 
-    # def find_all_by_weekday_created(day)
-    #   Date.parse(date).strftime "%a"
-    # end
-
     def group_all_by_tags
       all.group_by do |idea|
         idea.tags
@@ -73,12 +69,11 @@ class IdeaStore
       end
     end
 
-    # def sort_by_tags
-    #   r = group_all.sort_by do |tag_list, idea|
-    #     tag_list.to_i
-    #   end
-    #   puts r.inspect
-    # end
+    def group_all_by_day_created
+      all.group_by do |idea|
+        idea.created_at.strftime "%a"
+      end
+    end
 
     def update(id, data)
       database.transaction do
