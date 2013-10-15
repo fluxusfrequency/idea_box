@@ -44,15 +44,32 @@ class IdeaStore
       raw_ideas = tags.collect do |tag|
         find_raw_idea_by_tag(tag)
       end
-
       raw_ideas.compact.flatten.collect do |raw_idea|
         Idea.new(raw_idea)
       end
     end
 
-    def group_all
+    def find_all_by_time_created(range_start, range_end)
+      # 12:00AM to 12:59AM
+      # 1:00AM to 1:59AM
+      all.group_by
+      range_start..range_end.include?
+      Date.parse(date).strftime "%l : %M %p"
+    end
+
+    # def find_all_by_weekday_created(day)
+    #   Date.parse(date).strftime "%a"
+    # end
+
+    def group_all_by_tags
       all.group_by do |idea|
         idea.tags
+      end
+    end
+
+    def group_all_by_time_created
+      all.group_by do |idea|
+        idea.created_at.strftime "%l:%M%p"
       end
     end
 

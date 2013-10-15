@@ -1,13 +1,8 @@
 ---
 ideas:
 - id: 1
-  title: Diet
+  title: Eat
   description: Pizza all day
-  tags: food
-- id: 2
-  title: Diet
-  description: Pizza all the time
-  tags: food, diet
 - id: 1
   title: Diet
   description: Pizza all the time
@@ -22,24 +17,23 @@ ideas:
   title: Diet
   description: Pizza all the time
   tags: food, diet
-- id: 1
-  title: Diet
-  description: Pizza all the time
-- id: 2
-  title: Diet
-  description: Pizza all the time
-  tags: food, diet
-- id: 1
-  title: Diet
-  description: Pizza all the time
-- id: 2
-  title: Diet
-  description: Pizza all the time
-  tags: food, diet
-- id: 1
-  title: Diet
-  description: Pizza all the time
-- id: 2
-  title: Diet
-  description: Pizza all the time
-  tags: food, diet
+- id: 3
+  title: Transporation
+  description: Bicycles and busses
+  tags: bike, bus
+  created_at: 2013-10-14
+- id: 4
+  title: Sundays
+  description: In the park with George
+  tags: gerschwin
+  created_at: 2013-10-14
+- id: 3
+  title: Transporation
+  description: Bicycles and busses
+  tags: bike, bus
+  created_at: 2013-10-14
+- id: 4
+  title: Sundays
+  description: In the park with George
+  tags: gerschwin
+  created_at: 2013-10-14

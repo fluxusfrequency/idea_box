@@ -1,7 +1,9 @@
-class Idea
+ require 'time'
+
+ class Idea
   include Comparable
 
-  attr_reader :title, :description, :rank, :id, :tags
+  attr_reader :title, :description, :rank, :id, :tags, :created_at
 
   def initialize(attributes={})
     @id          = attributes["id"]
@@ -9,6 +11,7 @@ class Idea
     @description = attributes["description"]
     @rank        = attributes["rank"] || 0
     @tags        = attributes["tags"]
+    @created_at  = attributes["created_at"].to_time
   end
 
   def save
