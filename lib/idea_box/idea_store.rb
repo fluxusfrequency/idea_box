@@ -72,6 +72,24 @@ class IdeaStore
       end
     end
 
+    def find_all_by_group(group)
+      group_all_by_group[group]
+    end
+
+    def group_all_by_group
+      all.group_by do |idea|
+        idea.group
+      end
+    end
+
+    def sort_by_rank(group)
+      find_all_by_group(group).sort_by(&:rank).reverse
+    end
+
+    def sort_by_id(group)
+      find_all_by_group(group).sort_by(&:id)
+    end
+
     # def find_all_by_time_created(range_start, range_end)
     #   all.group_by
     #   range_start..range_end.include?

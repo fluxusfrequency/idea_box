@@ -3,7 +3,7 @@
  class Idea
   include Comparable
 
-  attr_reader :title, :description, :rank, :id, :tags, :created_at, :updated_at, :revision
+  attr_reader :title, :description, :rank, :id, :tags, :created_at, :updated_at, :revision, :group
 
   def initialize(attributes={})
     @id          = attributes["id"] || IdeaStore.all.last.id + 1
@@ -13,7 +13,8 @@
     @tags        = attributes["tags"] || 'unsorted'
     @created_at  = attributes["created_at"] || Time.now
     @updated_at  = attributes["updated_at"] || Time.now
-    @revision = attributes["revision"] || 1
+    @revision    = attributes["revision"] || 1
+    @group       = attributes["group"] || 'work'
   end
 
   def save
@@ -28,7 +29,8 @@
       "tags" => tags,
       "created_at" => created_at,
       "updated_at" => updated_at,
-      "revision" => revision
+      "revision" => revision,
+      "group" => group.scan(/\w+/).first
     }
   end
 

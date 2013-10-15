@@ -17,7 +17,8 @@ class IdeaTest < Minitest::Test
       'tags' => 'bike, bus',
       'created_at' => Time.now,
       'updated_at' => Time.now,
-      'revision' => 1
+      'revision' => 1,
+      'group' => 'home'
       })
     assert_respond_to idea, :id
     assert_respond_to idea, :title
@@ -27,6 +28,7 @@ class IdeaTest < Minitest::Test
     assert_respond_to idea, :created_at
     assert_respond_to idea, :updated_at
     assert_respond_to idea, :revision
+    assert_respond_to idea, :group
   end
 
   def test_it_can_populate_default_attrs
@@ -39,6 +41,7 @@ class IdeaTest < Minitest::Test
     assert_respond_to idea, :created_at
     assert_respond_to idea, :updated_at
     assert_respond_to idea, :revision
+    assert_respond_to idea, :group
   end
 
 end
