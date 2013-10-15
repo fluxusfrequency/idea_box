@@ -43,7 +43,7 @@ class IdeaStore
 
     def find(id)
       raw_idea = find_raw_idea(id)
-      Idea.new(raw_idea.merge("id" => id))
+      Idea.new(raw_idea.to_h)
     end
 
     def find_history_for_idea(id)
