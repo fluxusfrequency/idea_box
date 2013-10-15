@@ -2,6 +2,16 @@ GEM
   remote: https://rubygems.org/
   specs:
     backports (3.3.5)
+    better_errors (1.0.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
+    coderay (1.0.9)
+    debug_inspector (0.0.2)
+    erubis (2.7.0)
+    haml (4.0.3)
+      tilt
     minitest (5.0.8)
     multi_json (1.7.9)
     rack (1.5.2)
@@ -28,6 +38,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  better_errors
+  binding_of_caller
+  haml
   minitest
   rack
   rack-test

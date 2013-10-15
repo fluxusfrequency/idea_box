@@ -1,0 +1,25 @@
+%form{:action => 'id', :method => 'POST'}
+  Edit your idea:
+  %br
+  %br
+  %input{:type => "hidden", :name => "_method", :value =>"PUT", :style => "display: inline"}
+  Title
+  %input{:type => 'text', :name => 'idea[title]', :value => idea.title, :style => "display: inline"}
+  %br
+  Tags
+  %input{:type => 'text', :name => 'idea[tags]', :value => idea.tags, :style => "display: inline"}
+  %br
+  Group
+  %input{:type => 'text', :name => 'idea[group]', :value => idea.group, :style => "display: inline"}
+  %br
+  Time Created
+  %input{:type => 'text', :name => 'idea[created_at]', :value => idea.created_at, :style => "display: inline"}
+  %br
+  Time Updated
+  %input{:type => 'text', :name => 'idea[updated_at]', :value => idea.updated_at, :style => "display: inline"}
+  %br
+  Description
+  %textarea{:name =>'idea[description]', :value => idea.description }
+  %br
+  %br
+  %input{:type => 'submit', :value => 'Submit'}
