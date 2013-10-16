@@ -1,4 +1,4 @@
-require 'haml'
+require 'slim'
 require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative './idea_box/idea.rb'
@@ -15,11 +15,11 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   not_found do
-    haml :error
+    slim :error
   end
 
   get '/' do
-    haml :index, locals: { ideas: IdeaStore.all.sort, idea: Idea.new }
+    slim :index, locals: { ideas: IdeaStore.all.sort, idea: Idea.new }
   end
 
   post '/' do
@@ -29,12 +29,12 @@ class IdeaBoxApp < Sinatra::Base
 
   get '/:id' do |id|
     idea = IdeaStore.find(id.to_i)
-    haml :show, locals: { idea: idea }
+    slim :show, locals: { idea: idea }
   end
 
   get '/:id/edit' do |id|
     idea = IdeaStore.find(id.to_i)
-    haml :edit, locals: { idea: idea }
+    slim :edit, locals: { idea: idea }
   end
 
   put '/:id' do |id|
@@ -55,17 +55,17 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/all/tags/:tag' do |tag|
-    haml :tag_view, locals: { tag: tag }
+    slim :tag_view, locals: { tag: tag }
   end
 
   get '/all/tags' do
     ideas = IdeaStore.sort_all_by_tags
-    haml :all_tags, locals: { ideas: ideas }
+    slim :all_tags, locals: { ideas: ideas }
   end
 
   get '/all/day' do
     ideas = IdeaStore.group_all_by_day_created
-    haml :all_day, locals: { ideas: ideas }
+    slim :all_day, locals: { ideas: ideas }
   end
 
 end
