@@ -54,8 +54,13 @@ class IdeaBoxApp < Sinatra::Base
     redirect '/'
   end
 
-  get '/all/:tag/' do |tag|
+  get '/all/:tag' do |tag|
     haml :tag_view, locals: { tag: tag }
+  end
+
+  get '/all/' do
+    ideas = IdeaStore.sort_all_by_tags
+    haml :show_all, locals: { ideas: ideas }
   end
 
 end

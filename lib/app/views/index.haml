@@ -1,7 +1,9 @@
 =haml :form, locals: { idea: idea, mode: "new" }
 
 %h3 Existing Ideas
-
+%p View all ideas sorted by tags:
+%form{ :action => "/all/", :method => 'GET'}
+  %input{:type => 'submit', :value => 'Go'}
 %ul
   - ideas.each_with_index do |idea, id|
     %li
@@ -16,7 +18,8 @@
       %br
       Tags:
       -idea.all_my_tags.each do |tag|
-        %a{ href: "/all/#{tag}/", title: "#{tag}" } #{tag},
+        %a{ href: "/all/#{tag}", title: "#{tag}" } #{tag}
+        \-
       %br
       Group:
       =idea.group

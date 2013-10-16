@@ -68,7 +68,15 @@ class IdeaBoxAppTest < Minitest::Test
     post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes", tags: "exercise"}}
     post '/', {idea: {title: "running", description: "jog before work", tags: "exercise"}}
     get '/all/exercise'
-    assert_equal 200, last_response.status
+    assert last_response.body.include?("All Ideas Tagged With: exercise")
+  end
+
+  def test_it_shows_all_ideas_sorted_by_tag
+    post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes", tags: "exercise"}}
+    post '/', {idea: {title: "running", description: "jog before work", tags: "exercise"}}
+    post '/', {idea: {title: "work", description: "computers", tags: "job"}}
+    get '/all'
+    assert last_response.body.include?("All Ideas (Sorted By Tag)")
   end
 
 end
