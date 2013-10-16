@@ -1,8 +1,9 @@
 require 'slim'
 require 'sinatra/base'
 require 'sinatra/reloader'
-require_relative './idea_box/idea.rb'
-require_relative './idea_box/idea_store.rb'
+require 'better_errors'
+require 'sass'
+require './lib/idea_box'
 
 
 class IdeaBoxApp < Sinatra::Base
@@ -10,14 +11,10 @@ class IdeaBoxApp < Sinatra::Base
   set :method_override, true
   set :root, 'lib/app'
 
-  configure :development do
-    register Sinatra::Reloader
-    register Sinatra::AssetPack
-  end
+  register Sinatra::AssetPack
 
   assets {
     serve '/javscripts', from: 'javascripts'
-
     js :foundation, [
       'javascripts/foundation/foundation.js',
       'javascripts/foundation/foundation.*.js'
@@ -38,14 +35,18 @@ class IdeaBoxApp < Sinatra::Base
     css_compression :sass
   }
 
+  configure :development do
+    register Sinatra::Reloader
+    use BetterErrors::Middleware
+    BetterErrors.application_root = 'lib/app'
+  end
+
   not_found do
     slim :error
   end
 
   get '/' do
-    @show_index += 3 if @show_index
-    @show_index ||= 0 
-    slim :index, locals: { ideas: IdeaStore.all.sort, idea: Idea.new, show_index: @show_index }
+    slim :index, locals: { ideas: IdeaStore.all.sort, idea: Idea.new}
   end
 
   post '/' do
@@ -103,7 +104,7 @@ class IdeaBoxApp < Sinatra::Base
     slim :search, locals: { search: params[:search_text], result: false }
   end
 
-  post '/all/times' do
+  post '/search/times' do
 
   end
 

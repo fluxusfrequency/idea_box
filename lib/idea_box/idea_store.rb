@@ -1,4 +1,5 @@
 require 'yaml/store'
+require 'time'
 
 class IdeaStore
   class << self
@@ -100,7 +101,7 @@ class IdeaStore
 
     def group_all_by_time_created
       all.group_by do |idea|
-        idea.created_at.strftime "%l:%M%p"
+        Date.parse(idea.created_at).strftime "%l:%M%p"
       end
     end
 
@@ -124,7 +125,8 @@ class IdeaStore
 
     def group_all_by_day_created
       all.group_by do |idea|
-        idea.created_at.strftime "%a"
+        new_date = Date.parse(idea.created_at) unless idea.created_at.class == Time
+        new_date.strftime "%a" if new_date
       end
     end
 

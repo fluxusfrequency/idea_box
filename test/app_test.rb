@@ -1,6 +1,8 @@
 gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'sinatra'
+require 'sinatra/assetpack'
 require 'rack/test'
 require_relative '../lib/app'
 
