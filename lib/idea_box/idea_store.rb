@@ -41,6 +41,10 @@ class IdeaStore
       end
     end
 
+    def search_ideas(search)
+
+    end
+
     def find(id)
       raw_idea = find_raw_idea(id)
       Idea.new(raw_idea.to_h)
@@ -167,6 +171,16 @@ class IdeaStore
           return
         end
       end
+    end
+
+    def find_raw_idea_by_tag(tag)
+      result = []
+      database.transaction do
+        database['ideas'].each do |idea|
+          result << idea if idea['tags'].to_s.include?(tag)
+        end
+      end
+      result
     end
 
     def find_raw_idea_by_tag(tag)

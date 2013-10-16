@@ -3,20 +3,20 @@ ideas:
 - id: 1
   title: New Idea
   description: My Idea is...
-  rank: 0
+  rank: 1
   tags: unsorted, mumbojumbo
   created_at: 2013-10-15 18:57:50.000000000 -06:00
-  updated_at: 2013-10-15 20:36:17.000000000 -06:00
-  revision: 4
+  updated_at: 2013-10-16 16:27:16.000000000 -06:00
+  revision: 5
   group: work
 - id: 2
-  title: I love cats
-  description: Let's watch cat videos
+  title: I love cats a lot!!!!
+  description: Let's watch cat videos right now!
   rank: 0
   tags: mumbojumbo
   created_at: 2013-10-15 19:30:39.000000000 -06:00
-  updated_at: 2013-10-15 19:30:39.000000000 -06:00
-  revision: 2
+  updated_at: 2013-10-16 16:25:17.000000000 -06:00
+  revision: 4
   group: work
 - id: 3
   title: Food
@@ -30,20 +30,20 @@ ideas:
 - id: 4
   title: The Future
   description: We have to go back, Marty!
-  rank: 1
+  rank: 2
   tags: mumbojumbo
   created_at: 2013-10-15 20:13:36.000000000 -06:00
-  updated_at: 2013-10-16 07:12:13.000000000 -06:00
-  revision: 4
+  updated_at: 2013-10-16 16:27:17.000000000 -06:00
+  revision: 5
   group: work
 - id: 5
   title: Jesus
   description: Christ
-  rank: 0
+  rank: 3
   tags: unsorted
   created_at: 2013-10-15 20:23:00.000000000 -06:00
-  updated_at: 2013-10-15 20:23:00.000000000 -06:00
-  revision: 2
+  updated_at: 2013-10-16 16:27:19.000000000 -06:00
+  revision: 5
   group: work
 - id: 6
   title: portishead
@@ -52,5 +52,32 @@ ideas:
   tags: unsorted
   created_at: '2013-10-16 07:13:19 -0600'
   updated_at: '2013-10-16 07:13:19 -0600'
+  revision: 1
+  group: work
+- id: 7
+  title: Using Zurb
+  description: Is a whole lot of fun!
+  rank: 0
+  tags: zurb
+  created_at: 2013-10-16 15:19:15.000000000 -06:00
+  updated_at: 2013-10-16 15:19:15.000000000 -06:00
+  revision: 1
+  group: work
+- id: 8
+  title: 'Idea #8'
+  description: Drive a train
+  rank: 4
+  tags: locomotion
+  created_at: 2013-10-16 15:21:23.000000000 -06:00
+  updated_at: 2013-10-16 16:27:43.000000000 -06:00
+  revision: 5
+  group: work
+- id: 9
+  title: Filling In
+  description: Temp
+  rank: 0
+  tags: space
+  created_at: 2013-10-16 15:21:35.000000000 -06:00
+  updated_at: 2013-10-16 15:21:35.000000000 -06:00
   revision: 1
   group: work

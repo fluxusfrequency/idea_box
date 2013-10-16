@@ -1,27 +1,24 @@
-form action=("#{idea.id if mode == 'edit'}") method='POST'
+form action=("/#{idea.id if mode == 'edit'}") method='POST'
   -if mode == "edit"
-    p Edit Idea:
     input type="hidden" name="_method" value="PUT" style=("display: inline")
-  -else
-    p Your Idea:
   br
   | Title
   input type='text' name='idea[title]' value=idea.title style=("display: inline")
   br
-  | Tags
-  input type='text' name='idea[tags]' value=idea.tags style=("display: inline")
-  br
-  | Group
-  input type='text' name='idea[group]' value=idea.group style=("display: inline")
-  br
-  | Time Created
-  input type='text' name='idea[created_at]' value=idea.created_at style=("display: inline")
-  br
-  | Time Updated
-  input type='text' name='idea[updated_at]' value=idea.updated_at style=("display: inline")
-  br
+  / | Group
+  / input type='text' name='idea[group]' value=idea.group style=("display: inline")
+  / br
+  / | Time Created
+  / input type='text' name='idea[created_at]' value=idea.created_at style=("display: inline")
+  / br
+  / | Time Updated
+  / input type='text' name='idea[updated_at]' value=idea.updated_at style=("display: inline")
+  / br
   | Description
   textarea name='idea[description]' = idea.description
+  br
+  | Tags 
+  input type='text' name='idea[tags]' value=idea.tags style=("display: inline")
   br
   br
   input type='submit' value='Submit'

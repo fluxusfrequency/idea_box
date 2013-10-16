@@ -1,37 +1,37 @@
 h3 All Ideas (Sorted By Tag)
 
 p
--IdeaStore.sort_all_by_tags.keys.each do |key|
-  | Tag:
+-IdeaStore.sort_all_by_tags.keys.sort.each do |key|
+  | Tag: 
   =key
   br
   -IdeaStore.sort_all_by_tags[key].each do |idea|
-    | Id:
+    | Id: 
     =idea.id
-    | Title:
+    br
+    | Title: 
     =idea.title
     br
-    | Rank:
+    | Rank: 
     =idea.rank
     br
-    | Tags:
+    | Tags: 
     -idea.all_my_tags.each do |tag|
-      a href="/all/#{tag}" title="#{tag}" =tag
-      | \-
+      a href="/all/#{tag}" title="#{tag}" #{tag} 
     br
-    | Group:
+    | Group: 
     =idea.group
     br
-    | Created At:
+    | Created At: 
     =idea.created_at
     br
-    | Updated At:
+    | Updated At: 
     =idea.updated_at
     br
-    | Revision Number:
+    | Revision Number: 
     =idea.revision
     br
-    | Description:
+    | Description: 
     =idea.description
     br
     br

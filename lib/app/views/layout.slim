@@ -5,5 +5,29 @@ html
     ==js :application
     ==css :application
   body
-    h1 IdeaBox
-    ==yield
+  div class="row"
+    div class="large-12 columns"
+      nav class="top-bar" style="padding-right: 15px"
+        ul class="title-area"
+
+          li class="name"
+            h1 style="font-size: 1.6em"
+              a href="/" IdeaBox
+          li class="toggle-topbar menu-icon"
+            a href="#"
+
+        section class="top-bar-section"
+          ul class="left"
+            li
+              a href="#" Work
+            li 
+              a href="#" Home
+
+          ul class="right"
+            form action="/search/result" method='POST'
+              li class="search"
+                input type="search" name="search_text"
+              li 
+                input type="submit" name="search" class="has-button small button" value="Search"
+
+      ==yield

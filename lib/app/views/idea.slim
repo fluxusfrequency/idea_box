@@ -1,0 +1,30 @@
+h4 #{idea.title}
+=idea.description
+br
+br
+h7 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
+-idea.all_my_tags.each do |tag|
+  a href="/all/tags/#{tag}" title="#{tag}" style=("display: inline; font-size: 0.8em") #{tag} 
+br
+/ b Id: 
+/ =idea.id
+/ br
+/ b Title: 
+/ =idea.title
+/ br
+/ b Rank: 
+/ =idea.rank
+/ br
+/ b Group: 
+/ =idea.group
+/ br
+/ b Created At: 
+/ =idea.created_at
+/ br
+/ b Updated At: 
+/ =idea.updated_at
+/ br
+/ b Revision Number: 
+/ =idea.revision
+/ br
+br

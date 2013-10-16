@@ -1,53 +1,42 @@
-==slim :form, locals: { idea: idea, mode: "new" }
-
-h3 Existing Ideas
-p View all ideas sorted by tags:
-form action="/all/" method='GET'
-  input type='submit' value='Go'
-ul
-  - ideas.each_with_index do |idea, id|
-    li
-      | Id: 
-      =idea.id
-      br
-      | Title: 
-      =idea.title
-      br
-      | Rank: 
-      =idea.rank
-      br
-      | Tags: 
-      -idea.all_my_tags.each do |tag|
-        a href="/all/tags/#{tag}" title="#{tag}" #{tag} 
-        | - 
-      br
-      | Group: 
-      =idea.group
-      br
-      | Created At: 
-      =idea.created_at
-      br
-      | Updated At: 
-      =idea.updated_at
-      br
-      | Revision Number: 
-      =idea.revision
-      br
-      | Description: 
-      =idea.description
-      br
-
-      form  action="/#{idea.id}" method='GET' style=("display: inline")
-        input type='submit' value='Show'
-
-      form  action="/#{idea.id}/like" method='POST' style=("display: inline")
-        input type='submit' value='+'
-
-      form action="/#{idea.id}/edit" method="GET" style=("display: inline")
-        input type="submit" value="Edit"
-
-      form action="/#{idea.id}" method="POST" style=("display: inline")
-        input type="hidden" name="_method" value="DELETE"
-        input type="submit" value="Delete"
-
-    br
+h2 align="center" Existing Ideas
+div class="row"
+  -ideas[show_index, 9].each do |idea|
+    div class="small-4 large-4 columns"
+      div class="panel"
+        ==slim :idea, locals: { idea: idea }
+        br
+        ul class="button-group round even-4"
+          li
+            form action="/#{idea.id}" method='GET' style=("display: inline")
+              input class="tiny button" type='submit' value='Show'
+          li
+            form action="/#{idea.id}/edit" method="GET" style=("display: inline")
+              input class="tiny button" type="submit" value="Edit"
+          li
+            form action="/#{idea.id}" method="POST" style=("display: inline")
+              input type="hidden" name="_method" value="DELETE"
+              input class="tiny button" type="submit" value="Delete"
+          li
+            form action="/#{idea.id}/like" method='POST' style=("display: inline")
+              input class="tiny button" type='submit' value='+'
+hr
+h2 align="center" Work With Your Ideas
+div class="row"
+  div class="large-12 columns"
+    div class="panel"
+      h3 Create a New Idea
+      ==slim :form, locals: { idea: idea, mode: "new" }
+div class="row"      
+  div class="large-6 columns"
+    div class="panel"
+      h3 View all ideas sorted by:
+      form action="/all/tags" method='GET' style=("display: inline; margin: 5px")
+        input class="small button" type='submit' value='Tags'
+      form action="/all/day" method='GET' style=("display: inline; margin: 5px")
+        input class="small button" type='submit' value='Day' 
+  div class="large-6 columns"
+    div class="panel"
+      h3 Search for ideas created between:
+      form action="/all/times" method='POST'
+        input type="search" name="time_search" value="1:00PM-1:45PM"
+        input type="submit" name="time_seach_submit" class="has-button small button" value="Search"

@@ -43,7 +43,9 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/' do
-    slim :index, locals: { ideas: IdeaStore.all.sort, idea: Idea.new }
+    @show_index += 3 if @show_index
+    @show_index ||= 0 
+    slim :index, locals: { ideas: IdeaStore.all.sort, idea: Idea.new, show_index: @show_index }
   end
 
   post '/' do
@@ -93,7 +95,16 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/foundation/home' do
-    :foundation
+    slim :foundation_test
+  end
+
+  post '/search/result' do
+    # search_result = IdeaStore.find_by_
+    slim :search, locals: { search: params[:search_text], result: false }
+  end
+
+  post '/all/times' do
+
   end
 
 end

@@ -1,32 +1,13 @@
-h3 Idea: #{idea.title}
-
-p
-| Id: 
-=idea.id
-br
-| Title: 
-=idea.title
-br
-| Rank: 
-=idea.rank
-br
-| Tags: 
--idea.all_my_tags.each do |tag|
-  a href="/all/tags/#{tag}" title="#{tag}" #{tag} 
-  | - 
-br
-| Group: 
-=idea.group
-br
-| Created At: 
-=idea.created_at
-br
-| Updated At: 
-=idea.updated_at
-br
-| Revision Number: 
-=idea.revision
-br
-| Description: 
-=idea.description
-br
+div class="panel"
+  ==slim :idea, locals: { idea: idea }
+  ul class="button-group round even-4"
+    li
+      form action="/#{idea.id}/edit" method="GET" style=("display: inline")
+        input class="tiny button" type="submit" value="Edit"
+    li
+      form action="/#{idea.id}" method="POST" style=("display: inline")
+        input type="hidden" name="_method" value="DELETE"
+        input class="tiny button" type="submit" value="Delete"
+    li
+      form action="/#{idea.id}/like" method='POST' style=("display: inline")
+        input class="tiny button" type='submit' value='+'
