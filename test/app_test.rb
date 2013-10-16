@@ -67,7 +67,7 @@ class IdeaBoxAppTest < Minitest::Test
   def test_it_shows_all_ideas_with_a_given_tag
     post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes", tags: "exercise"}}
     post '/', {idea: {title: "running", description: "jog before work", tags: "exercise"}}
-    get '/all/exercise'
+    get '/all/tags/exercise'
     assert last_response.body.include?("All Ideas Tagged With: exercise")
   end
 
@@ -75,8 +75,17 @@ class IdeaBoxAppTest < Minitest::Test
     post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes", tags: "exercise"}}
     post '/', {idea: {title: "running", description: "jog before work", tags: "exercise"}}
     post '/', {idea: {title: "work", description: "computers", tags: "job"}}
-    get '/all'
+    get '/all/tags'
     assert last_response.body.include?("All Ideas (Sorted By Tag)")
+  end
+
+  def test_it_shows_all_ideas_sorted_by_day
+    post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes", created_at:
+      "2013-10-15 18:57:50 -0600" }}
+    post '/', {idea: {title: "running", description: "jog before work", created_at: "2013-10-14 18:57:50 -0600"}}
+    post '/', {idea: {title: "work", description: "computers", created_at: "2013-10-15 18:58:50 -0600"}}
+    get '/all/day'
+    assert last_response.body.include?("All Ideas (Sorted By Day)")
   end
 
 end

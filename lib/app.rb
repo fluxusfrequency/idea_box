@@ -54,13 +54,18 @@ class IdeaBoxApp < Sinatra::Base
     redirect '/'
   end
 
-  get '/all/:tag' do |tag|
+  get '/all/tags/:tag' do |tag|
     haml :tag_view, locals: { tag: tag }
   end
 
-  get '/all/' do
+  get '/all/tags' do
     ideas = IdeaStore.sort_all_by_tags
-    haml :show_all, locals: { ideas: ideas }
+    haml :all_tags, locals: { ideas: ideas }
+  end
+
+  get '/all/day' do
+    ideas = IdeaStore.group_all_by_day_created
+    haml :all_day, locals: { ideas: ideas }
   end
 
 end

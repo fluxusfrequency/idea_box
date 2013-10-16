@@ -6,8 +6,8 @@ ideas:
   rank: 0
   tags: unsorted, mumbojumbo
   created_at: 2013-10-15 18:57:50.000000000 -06:00
-  updated_at: 2013-10-15 18:57:50.000000000 -06:00
-  revision: 2
+  updated_at: 2013-10-15 20:36:17.000000000 -06:00
+  revision: 4
   group: work
 - id: 2
   title: I love cats
@@ -25,5 +25,23 @@ ideas:
   tags: falafel
   created_at: 2013-10-15 19:38:01.000000000 -06:00
   updated_at: 2013-10-15 19:38:01.000000000 -06:00
+  revision: 2
+  group: work
+- id: 4
+  title: The Future
+  description: We have to go back, Marty!
+  rank: 0
+  tags: mumbojumbo
+  created_at: 2013-10-15 20:13:36.000000000 -06:00
+  updated_at: 2013-10-15 20:17:31.000000000 -06:00
+  revision: 3
+  group: work
+- id: 5
+  title: Jesus
+  description: Christ
+  rank: 0
+  tags: unsorted
+  created_at: 2013-10-15 20:23:00.000000000 -06:00
+  updated_at: 2013-10-15 20:23:00.000000000 -06:00
   revision: 2
   group: work

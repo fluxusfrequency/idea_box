@@ -1,0 +1,37 @@
+%h3 All Ideas (Sorted By Day)
+
+%p
+-IdeaStore.group_all_by_day_created.keys.each do |key|
+  Day:
+  =key
+  %br
+  -IdeaStore.group_all_by_day_created[key].each do |idea|
+    Id:
+    =idea.id
+    Title:
+    =idea.title
+    %br
+    Rank:
+    =idea.rank
+    %br
+    Tags:
+    -idea.all_my_tags.each do |tag|
+      %a{ href: "/all/tags/#{tag}", title: "#{tag}" } #{tag}
+      \-
+    %br
+    Group:
+    =idea.group
+    %br
+    Created At:
+    =idea.created_at
+    %br
+    Updated At:
+    =idea.updated_at
+    %br
+    Revision Number:
+    =idea.revision
+    %br
+    Description:
+    =idea.description
+    %br
+    %br
