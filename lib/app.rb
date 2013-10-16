@@ -12,7 +12,31 @@ class IdeaBoxApp < Sinatra::Base
 
   configure :development do
     register Sinatra::Reloader
+    register Sinatra::AssetPack
   end
+
+  assets {
+    serve '/javscripts', from: 'javascripts'
+
+    js :foundation, [
+      'javascripts/foundation/foundation.js',
+      'javascripts/foundation/foundation.*.js'
+    ]
+
+    js :application, [
+      '/javascripts/vendor/*.js',
+      '/javascripts/app.js'
+    ]
+
+    serve '/stylesheets', from: 'stylesheets'
+    css :application, [
+      '/stylesheets/normalize.css',
+      '/stylesheets/app.css'
+    ]
+
+    js_compression :jsmin
+    css_compression :sass
+  }
 
   not_found do
     slim :error
@@ -66,6 +90,10 @@ class IdeaBoxApp < Sinatra::Base
   get '/all/day' do
     ideas = IdeaStore.group_all_by_day_created
     slim :all_day, locals: { ideas: ideas }
+  end
+
+  get '/foundation/home' do
+    :foundation
   end
 
 end
