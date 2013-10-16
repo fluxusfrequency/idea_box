@@ -58,4 +58,17 @@ class IdeaBoxAppTest < Minitest::Test
     assert_equal 302, last_response.status
   end
 
+  def test_it_shows_an_idea
+    post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes"}}
+    get '/1'
+    assert_equal 200, last_response.status
+  end
+
+  def test_it_shows_all_ideas_with_a_given_tag
+    post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes", tags: "exercise"}}
+    post '/', {idea: {title: "running", description: "jog before work", tags: "exercise"}}
+    get '/all/exercise'
+    assert_equal 200, last_response.status
+  end
+
 end

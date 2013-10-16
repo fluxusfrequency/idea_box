@@ -65,4 +65,8 @@
     end
   end
 
+  def all_my_tags
+    Array(tags.split(", "))
+  end
+
 end

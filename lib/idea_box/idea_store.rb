@@ -65,9 +65,19 @@ class IdeaStore
       end
     end
 
-    def group_all_by_tags
-      all.group_by do |idea|
-        idea.tags
+    def sort_all_by_tags
+      sorted = Hash.new([])
+      all_tags.flatten.uniq.each do |tag|
+        all.each do |idea|
+          sorted[tag] += Array(idea) if idea.tags.include?(tag)
+        end
+      end
+      sorted
+    end
+
+    def all_tags
+      all.collect do |idea|
+        idea.tags.split(", ")
       end
     end
 
@@ -118,7 +128,6 @@ class IdeaStore
       updated_idea = Idea.new(attributes.merge("id" => id, "created_at" => find(id).created_at, "updated_at" => Time.now, "revision" => find(id).revision + 1))
       database.transaction do
         database['ideas'][id.to_i-1] = updated_idea.to_h
-        puts database['ideas'].inspect
       end
     end
 

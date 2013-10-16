@@ -24,7 +24,7 @@ class TaggingTest < Minitest::Test
   end
 
   def test_it_can_create_and_find_ideas_with_tags
-    assert IdeaStore.create({
+    IdeaStore.create({
       "id" => 2,
       "title" => "Diet",
       "description" => "Pizza all the time",
@@ -34,10 +34,29 @@ class TaggingTest < Minitest::Test
     assert_kind_of Idea, IdeaStore.find_all_by_tags('food', 'diet').first
     assert_kind_of Array, IdeaStore.find_all_by_tags('food')
     assert_kind_of Idea, IdeaStore.find_all_by_tags('food').first
+    assert_kind_of Array, IdeaStore.find_all_by_tags('diet')
+    assert_kind_of Idea, IdeaStore.find_all_by_tags('diet').first
   end
 
   def test_it_can_sort_ideas_by_tags
-    assert_kind_of Hash, IdeaStore.group_all_by_tags
+    IdeaStore.create({
+      "title" => "Diet",
+      "description" => "Pizza all the time",
+      "tags" => "food, diet"
+      })
+    IdeaStore.create({
+      "title" => "Beverages",
+      "description" => "Beer all the time",
+      "tags" => "diet"
+      })
+    IdeaStore.create({
+      "title" => "BBQ",
+      "description" => "Beer and BBQ",
+      "tags" => "food, fun"
+      })
+    assert 1, IdeaStore.sort_all_by_tags['fun'].length
+    assert 2, IdeaStore.sort_all_by_tags['diet'].length
+    assert 2, IdeaStore.sort_all_by_tags['food'].length
   end
 
 end

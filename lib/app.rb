@@ -27,6 +27,11 @@ class IdeaBoxApp < Sinatra::Base
     redirect '/'
   end
 
+  get '/:id' do |id|
+    idea = IdeaStore.find(id.to_i)
+    haml :show, locals: { idea: idea }
+  end
+
   get '/:id/edit' do |id|
     idea = IdeaStore.find(id.to_i)
     haml :edit, locals: { idea: idea }
@@ -47,6 +52,10 @@ class IdeaBoxApp < Sinatra::Base
     idea.like!
     IdeaStore.update(id.to_i, idea.to_h)
     redirect '/'
+  end
+
+  get '/all/:tag/' do |tag|
+    haml :tag_view, locals: { tag: tag }
   end
 
 end

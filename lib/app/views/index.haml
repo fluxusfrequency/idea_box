@@ -15,7 +15,8 @@
       =idea.rank
       %br
       Tags:
-      =idea.tags
+      -idea.all_my_tags.each do |tag|
+        %a{ href: "/all/#{tag}/", title: "#{tag}" } #{tag},
       %br
       Group:
       =idea.group
@@ -32,6 +33,9 @@
       Description:
       =idea.description
       %br
+
+      %form{ :action => "/#{idea.id}", :method => 'GET', :style => "display: inline"}
+        %input{:type => 'submit', :value => 'Show'}
 
       %form{ :action => "/#{idea.id}/like", :method => 'POST', :style => "display: inline"}
         %input{:type => 'submit', :value => '+'}
