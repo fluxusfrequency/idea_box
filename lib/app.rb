@@ -46,7 +46,7 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/' do
-    slim :index, locals: { ideas: IdeaStore.all.sort, idea: Idea.new}
+    slim :index, locals: { ideas: IdeaStore.all.sort || [], idea: Idea.new}
   end
 
   post '/' do
@@ -99,14 +99,15 @@ class IdeaBoxApp < Sinatra::Base
     slim :foundation_test
   end
 
-  post '/search/result' do
-    # search_result = IdeaStore.find_by_
-    slim :search, locals: { search: params[:search_text], time_range: nil, result: false }
+  post '/search/results' do
+    results = IdeaStore.search_for(params[:search_text])
+    slim :search, locals: { search: params[:search_text], time_range: nil, results: results }
   end
 
-  post '/search/time/result' do
+  post '/search/time/results' do
     time_range = params[:time_range].split("-")
-    slim :search, locals: { search: nil , time_range: time_range, result: nil }
+    results = IdeaStore.find_all_by_time_created(time_range[0], time_range[1])
+    slim :search, locals: { search: nil , time_range: time_range, results: results }
   end
 
 end

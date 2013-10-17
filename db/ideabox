@@ -1,14 +1,5 @@
 ---
 ideas:
-- id: 1
-  title: New Idea
-  description: My Idea is...
-  rank: 4
-  tags: unsorted, mumbojumbo
-  created_at: 2013-10-15 18:57:50.000000000 -06:00
-  updated_at: 2013-10-16 19:26:18.000000000 -06:00
-  revision: 8
-  group: work
 - id: 2
   title: I love cats a lot!!!!
   description: Let's watch cat videos right now!
@@ -72,30 +63,30 @@ ideas:
   updated_at: 2013-10-17 07:54:34.000000000 -06:00
   revision: 8
   group: work
-- id: 9
-  title: Filling In
-  description: Temp
+- id: 8
+  title: Hello
+  description: World
   rank: 0
-  tags: space
-  created_at: 2013-10-16 15:21:35.000000000 -06:00
-  updated_at: 2013-10-16 15:21:35.000000000 -06:00
+  tags: test
+  created_at: '2013-10-17 10:09:53 -0600'
+  updated_at: '2013-10-17 10:09:53 -0600'
+  revision: 1
+  group: work
+- id: 9
+  title: New Idea
+  description: My Idea is...
+  rank: 0
+  tags: unsorted
+  created_at: '2013-10-17 10:25:52 -0600'
+  updated_at: '2013-10-17 10:25:52 -0600'
   revision: 1
   group: work
 - id: 10
-  title: Beer
-  description: It's Beer Thirty
+  title: New Idea
+  description: My Idea is...
   rank: 0
-  tags: 7:56 AM!!!!!!!
-  created_at: 2013-10-17 07:56:47.000000000 -06:00
-  updated_at: 2013-10-17 07:56:47.000000000 -06:00
-  revision: 1
-  group: work
-- id: 11
-  title: Yum
-  description: A yum yum
-  rank: 0
-  tags: tum
-  created_at: '2013-10-17 13:59:05 UTC'
-  updated_at: '2013-10-17 13:59:05 UTC'
+  tags: unsorted
+  created_at: '2013-10-17 10:25:57 -0600'
+  updated_at: '2013-10-17 10:25:57 -0600'
   revision: 1
   group: work

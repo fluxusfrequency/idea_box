@@ -6,8 +6,13 @@ br
 -else
   p style="display: inline" "#{search}"
 hr
-h5 class="subheader" style="display: inline" Ideas Found:
--if result
-  =result
+h5 class="subheader" Ideas Found:
+-if results
+  -results.each do |idea|
+    div class="large-3 left columns"
+      div class="panel"
+        ==slim :idea, locals: { idea: idea }
+        form action="/#{idea.id}" method='GET' style=("display: inline")
+          input class="tiny button" type='submit' value='Show'
 -else
   p Sorry, your search did not return any results. 
