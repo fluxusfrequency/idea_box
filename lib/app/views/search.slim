@@ -1,8 +1,12 @@
 h2 Search Results:
 h5 class="subheader" style="display: inline" You searched for: 
-p style="display: inline" "#{search}"
 br
-br
+-if time_range
+  p All Ideas Created Between #{time_range[0]} and #{time_range[1]}
+-else
+  p style="display: inline" "#{search}"
+hr
+h5 class="subheader" style="display: inline" Ideas Found:
 -if result
   =result
 -else

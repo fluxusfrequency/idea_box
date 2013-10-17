@@ -101,11 +101,12 @@ class IdeaBoxApp < Sinatra::Base
 
   post '/search/result' do
     # search_result = IdeaStore.find_by_
-    slim :search, locals: { search: params[:search_text], result: false }
+    slim :search, locals: { search: params[:search_text], time_range: nil, result: false }
   end
 
-  post '/search/times' do
-
+  post '/search/time/result' do
+    time_range = params[:time_range].split("-")
+    slim :search, locals: { search: nil , time_range: time_range, result: nil }
   end
 
 end

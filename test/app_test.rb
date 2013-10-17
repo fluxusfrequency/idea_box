@@ -90,4 +90,20 @@ class IdeaBoxAppTest < Minitest::Test
     assert last_response.body.include?("All Ideas (Sorted By Day)")
   end
 
+  def test_it_shows_a_page_for_search
+    post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes", created_at:
+          "2013-10-15 18:57:50 -0600" }}
+    post '/search/result', {search_text: "Beer!"}
+    assert last_response.body.include?("You searched for:")
+    assert last_response.body.include?("Beer!")
+
+  end
+
+  def test_it_shows_a_page_for_time_search
+    post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes", created_at:
+          "2013-10-15 18:57:50 -0600" }}
+    post '/search/time/result', {time_range: "1:00PM-1:45PM"}
+    assert last_response.body.include?("All Ideas Created Between")
+  end
+
 end

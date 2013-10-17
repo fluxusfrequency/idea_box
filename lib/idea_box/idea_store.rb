@@ -131,7 +131,7 @@ class IdeaStore
     end
 
     def update(id, attributes)
-      updated_idea = Idea.new(attributes.merge("id" => id, "created_at" => find(id).created_at, "updated_at" => Time.now, "revision" => find(id).revision + 1))
+      updated_idea = Idea.new(attributes.merge("id" => id, "created_at" => find(id).created_at, "updated_at" => Time.now.utc.to_s, "revision" => find(id).revision + 1))
       database.transaction do
         database['ideas'][id.to_i-1] = updated_idea.to_h
       end

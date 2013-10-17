@@ -50,8 +50,8 @@
       "description" => 'My Idea is...',
       "rank" => 0,
       "tags" => 'unsorted',
-      "created_at" => Time.now,
-      "updated_at" => Time.now,
+      "created_at" => Time.now.utc.to_s,
+      "updated_at" => Time.now.utc.to_s,
       "revision" => 1,
       "group" => 'work'
     }
