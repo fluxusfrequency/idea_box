@@ -21,7 +21,7 @@ class ResourcesTest < Minitest::Test
       'tags' => 'bike, bus',
       'resources' => "www.bike.com"
       })
-    assert_equal "www.bike.com", IdeaStore.find_all_by_tags("bus").first.resources
+    assert_equal ["www.bike.com"], IdeaStore.find_all_by_tags("bus").first.resources
   end
 
   def test_it_can_persist_two_resources
