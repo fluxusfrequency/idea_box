@@ -155,6 +155,13 @@ class IdeaStore
       end
     end
 
+    # def find_raw({:tag => "unsorted"})
+    # end
+
+    # def search_raw(query)
+    #   find_raw {tag: query, title: query}
+    # end
+
     def find_raw_idea(id)
       begin
         find_raw_ideas(id).last

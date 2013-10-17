@@ -20,14 +20,14 @@ class TaggingTest < Minitest::Test
       'title' => "Transporation",
       'description' => "Bicycles and busses",
       'tags' => 'bike, bus',
-      'created_at' => Time.now
+      'created_at' => Time.now.to_s
       })
     IdeaStore.create({
       'id' => 4,
       'title' => "Sundays",
       'description' => "In the park with George",
       'tags' => 'gerschwin',
-      'created_at' => Time.now
+      'created_at' => Time.now.to_s
       })
     assert IdeaStore.group_all_by_time_created
   end
