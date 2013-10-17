@@ -3,7 +3,7 @@
  class Idea
   include Comparable
 
-  attr_reader :id, :title, :description, :rank, :tags, :created_at, :updated_at, :revision, :group
+  attr_reader :id, :title, :description, :rank, :tags, :created_at, :updated_at, :revision, :group, :resources
 
   def initialize(attributes={})
     attributes = default_idea.merge(attributes)
@@ -16,6 +16,7 @@
     @updated_at  = attributes["updated_at"]
     @revision    = attributes["revision"]
     @group       = attributes["group"]
+    @resources   = attributes["resources"]
   end
 
   def save
@@ -31,7 +32,8 @@
       "created_at" => created_at,
       "updated_at" => updated_at,
       "revision" => revision,
-      "group" => group.scan(/\w+/).first
+      "group" => group.scan(/\w+/).first,
+      "resources" => resources
     }
   end
 
@@ -53,7 +55,8 @@
       "created_at" => Time.now.to_s,
       "updated_at" => Time.now.to_s,
       "revision" => 1,
-      "group" => 'work'
+      "group" => 'work',
+      "resources" => ['none']
     }
   end
 

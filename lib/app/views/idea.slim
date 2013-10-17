@@ -2,6 +2,16 @@ h4 #{idea.title}
 =idea.description
 br
 br
+-if show_resources
+  h7 class="subheader" style=("display: inline; font-size: 0.8em") Resources: 
+  -idea.resources.each do |resource|
+    -if resource.match(/(http:\/\/)?www\..+\..+/)
+      a href="http://#{resource}" title=resource style=("display: inline; font-size: 0.8em") #{resource}#{", " unless resource == idea.resources.last}
+    -elsif resource.match(/(http:\/\/)www\..+\..+/)
+      a href="#{resource}" title=resource style=("display: inline; font-size: 0.8em") #{resource}#{", " unless resource == idea.resources.last}
+    -else 
+      p style=("display: inline; font-size: 0.8em") #{resource} #{", " unless resource == idea.resources.last}
+br
 h7 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
 -idea.all_my_tags.each do |tag|
   a href="/all/tags/#{tag}" title="#{tag}" style=("display: inline; font-size: 0.8em") #{tag} 

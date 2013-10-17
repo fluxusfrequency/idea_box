@@ -1,28 +1,28 @@
 h2 align="center" Existing Ideas
--index = 0
--2.times do
-  div class="row" 
-    -if ideas[0] 
-      -ideas[index, 4].each do |idea|
-        div class="large-3 left columns"
-          div class="panel"
-            ==slim :idea, locals: { idea: idea }
-            br
-            ul class="button-group round even-4"
-              li
-                form action="/#{idea.id}" method='GET' style=("display: inline")
-                  input class="tiny button" type='submit' value='Show'
-              li
-                form action="/#{idea.id}/edit" method="GET" style=("display: inline")
-                  input class="tiny button" type="submit" value="Edit"
-              li
-                form action="/#{idea.id}" method="POST" style=("display: inline")
-                  input type="hidden" name="_method" value="DELETE"
-                  input class="tiny button" type="submit" value="Delete"
-              li
-                form action="/#{idea.id}/like" method='POST' style=("display: inline")
-                  input class="tiny button" type='submit' value='Like'
-  -index += 4
+div class="row" 
+  -ideas.each_with_index do |idea, index|
+    div class="large-3 left columns"
+      div class="panel"
+        ==slim :idea, locals: { idea: idea, show_resources: false }
+        br
+        ul class="button-group round even-4"
+          li
+            form action="/#{idea.id}" method='GET' style=("display: inline")
+              input class="tiny button" type='submit' value='Show'
+          li
+            form action="/#{idea.id}/edit" method="GET" style=("display: inline")
+              input class="tiny button" type="submit" value="Edit"
+          li
+            form action="/#{idea.id}" method="POST" style=("display: inline")
+              input type="hidden" name="_method" value="DELETE"
+              input class="tiny button" type="submit" value="Delete"
+          li
+            form action="/#{idea.id}/like" method='POST' style=("display: inline")
+              input class="tiny button" type='submit' value='Like'
+    -if index == 3 || index == 7 || index == 11
+      div class="row" 
+    -break if index >= 15
+
 hr
 h2 align="center" Work With Your Ideas
 div class="row"

@@ -4,7 +4,7 @@ require 'minitest/pride'
 require_relative '../lib/idea_box/idea_store.rb'
 require_relative '../lib/idea_box/idea.rb'
 
-class TaggingTest < Minitest::Test
+class SearchingTest < Minitest::Test
 
   def setup
     IdeaStore.filename = 'db/test'

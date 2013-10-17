@@ -14,7 +14,7 @@ class IdeaBoxApp < Sinatra::Base
   register Sinatra::AssetPack
 
   assets {
-    serve '/javscripts', from: 'javascripts'
+    serve '/javascripts', from: 'javascripts'
     js :foundation, [
       'javascripts/foundation/foundation.js',
       'javascripts/foundation/foundation.*.js'
@@ -46,7 +46,7 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/' do
-    slim :index, locals: { ideas: IdeaStore.all.sort || [], idea: Idea.new}
+    slim :index, locals: { ideas: IdeaStore.all.sort, idea: Idea.new, show_resources: false }
   end
 
   post '/' do
@@ -56,7 +56,7 @@ class IdeaBoxApp < Sinatra::Base
 
   get '/:id' do |id|
     idea = IdeaStore.find(id.to_i)
-    slim :show, locals: { idea: idea }
+    slim :show, locals: { idea: idea, show_resources: true }
   end
 
   get '/:id/edit' do |id|

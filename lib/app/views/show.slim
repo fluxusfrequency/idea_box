@@ -1,5 +1,6 @@
+h2 align="center" Viewing: #{idea.title}
 div class="panel"
-  ==slim :idea, locals: { idea: idea }
+  ==slim :idea, locals: { idea: idea, show_resources: true }
   ul class="button-group round even-4"
     li
       form action="/#{idea.id}/edit" method="GET" style=("display: inline")

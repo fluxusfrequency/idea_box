@@ -44,17 +44,28 @@ class IdeaStore
     end
 
     def create(attributes)
-      new_idea = Idea.new(attributes)
+      new_idea = Idea.new(attributes.merge("resources" => Array(attributes['resources'])))
       database.transaction do
         database['ideas'] << new_idea.to_h
       end
     end
 
     def update(id, attributes)
-      updated_idea = Idea.new(attributes.merge("id" => id, "created_at" => find(id).created_at, "updated_at" => Time.now.to_s, "revision" => find(id).revision + 1))
+      resources = split_resources(attributes['resources'])
+      updated_idea = Idea.new(attributes.merge( "id" => id, 
+                                                "created_at" => find(id).created_at, 
+                                                "updated_at" => Time.now.to_s, 
+                                                "revision" => find(id).revision + 1, 
+                                                "resources" => resources ))
       database.transaction do
         database['ideas'][id.to_i-1] = updated_idea.to_h
       end
+    end
+
+    # TO DO: find a module to put this
+    def split_resources(resources)
+      return if resources.nil? || resources.class == Array
+      Array(resources.split(", ")) unless resources.length < 2 
     end
 
     def delete(position)

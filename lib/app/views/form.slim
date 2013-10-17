@@ -3,7 +3,7 @@ form action=("/#{idea.id if mode == 'edit'}") method='POST'
     input type="hidden" name="_method" value="PUT" style=("display: inline")
   br
   | Title
-  input type='text' name='idea[title]' value=idea.title style=("display: inline")
+  input type='text' name='idea[title]' value="#{idea.title if mode == "edit"}" style=("display: inline")
   br
   / | Group
   / input type='text' name='idea[group]' value=idea.group style=("display: inline")
@@ -15,10 +15,13 @@ form action=("/#{idea.id if mode == 'edit'}") method='POST'
   / input type='text' name='idea[updated_at]' value=idea.updated_at style=("display: inline")
   / br
   | Description
-  textarea name='idea[description]' = idea.description
+  textarea name='idea[description]' #{idea.description if mode == "edit"}
   br
   | Tags 
-  input type='text' name='idea[tags]' value=idea.tags style=("display: inline")
+  input type='text' name='idea[tags]' value="#{idea.tags if mode == "edit"}" style=("display: inline")
+  br
+  | Resources
+  input type='text' name='idea[resources]' value="#{idea.resources.join(", ") if mode == "edit"}" style=("display: inline")
   br
   br
   input type='submit' value='Submit'
