@@ -46,12 +46,17 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/' do
-    slim :index, locals: { ideas: IdeaStore.all.sort, idea: Idea.new, show_resources: false }
+    @idea = IdeaStore.all.sort.first
+    slim :index, locals: { ideas: IdeaStore.all.sort, idea: @idea, show_resources: false }
   end
 
-  post '/' do
+  post '/:id' do
     IdeaStore.create(params[:idea])
-    redirect '/'
+    redirect "/"
+  end
+
+  get '/new' do
+    slim :new, locals: { idea: Idea.new }
   end
 
   get '/:id' do |id|

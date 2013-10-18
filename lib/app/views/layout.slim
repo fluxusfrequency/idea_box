@@ -8,20 +8,22 @@ html
   div class="row"
     div class="large-12 columns"
       nav class="top-bar" style="padding-right: 15px"
-        ul class="title-area"
-
-          li class="name"
-            h1 style="font-size: 1.6em"
-              a href="/" IdeaBox
-          li class="toggle-topbar menu-icon"
-            a href="#"
 
         section class="top-bar-section"
           ul class="left"
-            li
-              a href="#" Work
+            li class="name has-dropdown not-click"
+              h1 style="font-size: 1.6em"
+                a href="/" IdeaBox
+              / a href="#" User
+              ul class="dropdown"
+                li class=""
+                  a href="#" Portfolios
+                li class=""
+                  a href="#" Profile  
+                li class=""
+                  a href="#" Log Out
             li 
-              a href="#" Home
+              a href="/new" New Idea
 
           ul class="right"
             form action="/search/results" method='POST'

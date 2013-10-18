@@ -65,7 +65,11 @@ class IdeaStore
     # TO DO: find a module to put this
     def split_resources(resources)
       return if resources.nil? || resources.class == Array
-      Array(resources.split(", ")) unless resources.length < 2 
+      if resources.length < 2 
+        Array(resources.split(", ")) 
+      else
+        Array(resources)
+      end
     end
 
     def delete(position)

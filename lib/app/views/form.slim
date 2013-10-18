@@ -1,27 +1,26 @@
-form action=("/#{idea.id if mode == 'edit'}") method='POST'
+form action=("/#{idea.id if mode == 'edit'}#{'new' if mode == 'new'}") method='POST'
   -if mode == "edit"
     input type="hidden" name="_method" value="PUT" style=("display: inline")
   br
   | Title
-  input type='text' name='idea[title]' value="#{idea.title if mode == "edit"}" style=("display: inline")
+  input type='text' name='idea[title]' placeholder="Title" value="#{idea.title if mode == "edit"}" style=("display: inline")
   br
-  / | Group
-  / input type='text' name='idea[group]' value=idea.group style=("display: inline")
-  / br
-  / | Time Created
-  / input type='text' name='idea[created_at]' value=idea.created_at style=("display: inline")
-  / br
-  / | Time Updated
-  / input type='text' name='idea[updated_at]' value=idea.updated_at style=("display: inline")
-  / br
   | Description
-  textarea name='idea[description]' #{idea.description if mode == "edit"}
+  textarea name='idea[description]' style="height: 450px" placeholder="Type your idea here." #{idea.description if mode == "edit"}
   br
   | Tags 
-  input type='text' name='idea[tags]' value="#{idea.tags if mode == "edit"}" style=("display: inline")
+  input type='text' name='idea[tags]' placeholder="Enter comma separated tags here." value="#{idea.tags if mode == "edit"}" style=("display: inline")
   br
   | Resources
-  input type='text' name='idea[resources]' value="#{idea.resources.join(", ") if mode == "edit"}" style=("display: inline")
+  input type='text' name='idea[resources]' placeholder="Add text or links here." value="#{idea.resources.join(", ") if mode == "edit"}" style=("display: inline")
   br
   br
-  input type='submit' value='Submit'
+  ul class="button-group round even-4" style="align: middle"
+    li
+      a href="/" 
+        input class="small button left" type='submit' value='Previous'
+    li
+      input type='submit' class="small button center" value='Submit'
+    li
+      a href="/" 
+        input class="small button right" type='submit' value='Next'

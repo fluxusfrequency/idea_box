@@ -1,18 +1,19 @@
-h2 Search Results:
-h5 class="subheader" style="display: inline" You searched for: 
-br
--if time_range
-  p All Ideas Created Between #{time_range[0]} and #{time_range[1]}
--else
-  p style="display: inline" "#{search}"
-hr
-h5 class="subheader" Ideas Found:
--if results
-  -results.each do |idea|
-    div class="large-3 left columns"
-      div class="panel"
-        ==slim :idea, locals: { idea: idea }
-        form action="/#{idea.id}" method='GET' style=("display: inline")
-          input class="tiny button" type='submit' value='Show'
--else
-  p Sorry, your search did not return any results. 
+fieldset
+  h1 Search Results:
+  h5 class="subheader" style="display: inline" You searched for: 
+  br
+  -if time_range
+    p All Ideas Created Between #{time_range[0]} and #{time_range[1]}
+  -else
+    p style="display: inline" "#{search}"
+  hr
+  h5 class="subheader" Ideas Found:
+  -if results && results.length > 0 
+    -results.each do |idea|
+      div class="large-3 left columns"
+        div class="panel"
+          a href="/#{idea.id}" 
+            h5 #{idea.title}
+          ==slim :idea, locals: { idea: idea }
+  -else
+    p Sorry, your search did not return any results. 

@@ -1,2 +1,3 @@
-h2 align="center" Editing: #{idea.title}
-==slim :form, locals: {idea: idea, show_resources: true, mode: 'edit' }
+fieldset
+  h1 Editing: #{idea.title}
+  ==slim :form, locals: {idea: idea, show_resources: true, mode: 'edit' }
