@@ -124,4 +124,29 @@ class RevisionTest < Minitest::Test
     assert_equal 2, RevisionStore.find_all_by_idea_id(idea.id).length
   end
 
+  def test_it_can_destroy_all_db_entries
+    idea = IdeaStore.create({
+      "id" => 3,
+      "title" => "Hobbies",
+      "description" => "Mountain Biking",
+      "tags" => "exercise"
+      })
+    IdeaStore.delete_all
+    assert_equal 0, IdeaStore.all.count
+  end
+
+  def test_it_can_edit_ideas
+    idea = IdeaStore.create({
+      "id" => 1,
+      "title" => "Love Life",
+      "description" => "Watching movies alone at home",
+      "tags" => "love"
+      })
+    sleep(1)
+    IdeaStore.update(1, 'title' => 'Friday Night')
+    assert_equal 'Friday Night', IdeaStore.find(1).title
+    assert_equal 2, IdeaStore.find(1).revision
+    refute_equal IdeaStore.find(1).created_at, IdeaStore.find(1).updated_at
+  end
+
 end

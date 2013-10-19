@@ -1,45 +1,34 @@
 ---
 ideas:
 - id: 1
-  title: Swimming
-  description: Skinny Dip
+  title: Hello
+  description: asdasd
   rank: 0
-  tags: nudity
-  created_at: '2013-10-19 10:30:11 -0600'
-  updated_at: '2013-10-19 11:02:45 -0600'
-  revision: 5
+  tags: unsorted
+  created_at: '2013-10-19 11:21:08 -0600'
+  updated_at: '2013-10-19 11:21:36 -0600'
+  revision: 2
   group: work
   resources: []
-- id: 3
-  title: Pilfering
-  description: Taking things from a store.
+- id: 2
+  title: asdkfjasdf
+  description: sdfssdfsd
   rank: 0
-  tags: theivery
-  created_at: '2013-10-19 11:03:08 -0600'
-  updated_at: '2013-10-19 11:03:08 -0600'
+  tags: ''
+  created_at: '2013-10-19 11:21:46 -0600'
+  updated_at: '2013-10-19 11:21:46 -0600'
   revision: 1
   group: work
   resources:
   - ''
-- id: 4
-  title: Zombies
-  description: Controlling a botnet
+- id: 3
+  title: asdf
+  description: sad v
   rank: 0
-  tags: 'Yes'
-  created_at: '2013-10-19 11:03:27 -0600'
-  updated_at: '2013-10-19 11:03:27 -0600'
+  tags: ffff
+  created_at: '2013-10-19 11:22:04 -0600'
+  updated_at: '2013-10-19 11:22:04 -0600'
   revision: 1
   group: work
   resources:
-  - ok
-- id: 5
-  title: Test
-  description: Testing 1 2 3
-  rank: 0
-  tags: unsorted
-  created_at: '2013-10-19 11:16:00 -0600'
-  updated_at: '2013-10-19 11:16:00 -0600'
-  revision: 2
-  group: work
-  resources:
-  - none
+  - ''

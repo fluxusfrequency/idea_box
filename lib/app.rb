@@ -48,7 +48,7 @@ class IdeaBoxApp < Sinatra::Base
 
   get '/' do
     @idea = IdeaStore.all.sort.first || IdeaStore.create({})
-    slim :index, locals: { ideas: IdeaStore.all.sort, idea: @idea, show_resources: false, mode: 'edit' }
+    slim :index, locals: { ideas: IdeaStore.all.sort, idea: @idea, show_resources: false, mode: 'new' }
   end
 
   post '/:id' do
@@ -68,7 +68,7 @@ class IdeaBoxApp < Sinatra::Base
 
   get '/:id/edit' do |id|
     idea = IdeaStore.find(id.to_i)
-    slim :index, locals: { idea: idea, ideas: IdeaStore.all.sort, show_resources: false }
+    slim :index, locals: { idea: idea, ideas: IdeaStore.all.sort, show_resources: false, mode: 'edit' }
   end
 
   put '/:id' do |id|
