@@ -5,7 +5,8 @@ fieldset
       -ideas.each_with_index do |idea, index|
         / div class="large-4 small-4 left columns"
         div class="panel"
-          a href="/#{idea.id}" 
+          a href="/#{idea.id}/edit"
+           
             h5 #{idea.title}
           =idea.description
           br
@@ -16,23 +17,28 @@ fieldset
           br
           ul class="button-group round even-4"
             li
-              form action="/#{idea.id}/edit" method="GET" style=("display: inline")
-                input class="tiny button" type="submit" value="Edit"
+              form action="/#{idea.id}" method="GET" style=("display: inline")
+                input class="tiny button" type="submit" value="View"
             li
               form action="/#{idea.id}" method="POST" style=("display: inline")
                 input type="hidden" name="_method" value="DELETE"
                 input class="tiny button" type="submit" value="Delete"
             li
               form action="/#{idea.id}/like" method='POST' style=("display: inline")
-                input class="tiny button" type='submit' value='Like'
+                input class="tiny button" type='submit' value='+'
         / -if index == 3 || index == 7 || index == 11
         /   div class="row" 
         -break if index >= 3
-
-    div class="large-9 small-9 columns"
-      h3 #{idea.title}
-      div class="columns panel" style="height: 813px;"
-        ==slim :form, locals: {idea: idea, show_resources: true, mode: 'edit' }
+    -if mode == "edit"
+      div class="large-9 small-9 columns"
+        h3 Editing - #{idea.title}
+        div class="columns panel" style="height: 813px;"
+          ==slim :form, locals: {idea: idea, show_resources: true, mode: 'edit' }
+    -elsif mode == "new"
+      div class="large-9 small-9 columns"
+        h3 Creating A New Idea
+        div class="columns panel" style="height: 813px;"
+          ==slim :form, locals: { idea: idea, mode: "new", mode: 'new' }
     
 hr
 fieldset
