@@ -92,16 +92,6 @@ class IdeaBoxApp < Sinatra::Base
     slim :tag_view, locals: { tag: tag }
   end
 
-  get '/all/tags' do
-    ideas = IdeaStore.sort_all_by_tags
-    slim :all_tags, locals: { ideas: ideas }
-  end
-
-  get '/all/day' do
-    ideas = IdeaStore.group_all_by_day_created
-    slim :all_day, locals: { ideas: ideas }
-  end
-
   get '/foundation/home' do
     slim :foundation_test
   end
@@ -114,7 +104,17 @@ class IdeaBoxApp < Sinatra::Base
   post '/search/time/results' do
     time_range = params[:time_range].split("-")
     results = IdeaStore.find_all_by_time_created(time_range[0], time_range[1])
-    slim :search, locals: { search: nil , time_range: time_range, results: results }
+    slim :search, locals: { search: "All Ideas Created Between #{time_range[0]} and #{time_range[1]}", results: results }
+  end
+
+  post '/search/tags/results' do
+    results = IdeaStore.sort_all_by_tags
+    slim :search, locals: { search: "All Ideas Sorted By Tags", results: results }
+  end
+
+  post '/search/day/results' do
+    results = IdeaStore.group_all_by_day_created
+    slim :search, locals: { search: "All Ideas Sorted By Day", results: results }
   end
 
 end

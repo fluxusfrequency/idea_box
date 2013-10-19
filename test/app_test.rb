@@ -78,8 +78,8 @@ class IdeaBoxAppTest < Minitest::Test
     post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes", tags: "exercise"}}
     post '/', {idea: {title: "running", description: "jog before work", tags: "exercise"}}
     post '/', {idea: {title: "work", description: "computers", tags: "job"}}
-    get '/all/tags'
-    assert last_response.body.include?("All Ideas (Sorted By Tag)")
+    post 'search/tags/results'
+    assert last_response.body.include?("All Ideas Sorted By Tag")
   end
 
   def test_it_shows_all_ideas_sorted_by_day
@@ -87,8 +87,8 @@ class IdeaBoxAppTest < Minitest::Test
       "2013-10-15 18:57:50 -0600" }}
     post '/', {idea: {title: "running", description: "jog before work", created_at: "2013-10-14 18:57:50 -0600"}}
     post '/', {idea: {title: "work", description: "computers", created_at: "2013-10-15 18:58:50 -0600"}}
-    get '/all/day'
-    assert last_response.body.include?("All Ideas (Sorted By Day)")
+    post '/search/day/results'
+    assert last_response.body.include?("All Ideas Sorted By Day")
   end
 
   def test_it_shows_a_page_for_search

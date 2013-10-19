@@ -13,3 +13,34 @@ div class="panel"
     li
       form action="/#{idea.id}/like" method='POST' style=("display: inline")
         input class="tiny button" type='submit' value='+'
+  fieldset
+    h6 style=("display: inline") History: 
+    br
+    -history.each_with_index do |revision, i|
+        br
+        h7 class="subheader" style=("display: inline; font-size: 0.8em") Revision number: 
+        p style=("display: inline; font-size: 0.8em") #{i+1}
+        br
+        h7 class="subheader" style=("display: inline; font-size: 0.8em") Title: 
+        p style=("display: inline; font-size: 0.8em") #{revision.title}
+        br
+        h7 class="subheader" style=("display: inline; font-size: 0.8em") Description: 
+        p style=("display: inline; font-size: 0.8em") #{revision.description}
+        br
+        h7 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
+        p style=("display: inline; font-size: 0.8em") #{revision.tags}
+        br
+        h7 class="subheader" style=("display: inline; font-size: 0.8em") 
+        h7 class="subheader" style=("display: inline; font-size: 0.8em")  Resources: 
+        p style=("display: inline; font-size: 0.8em") #{"none" if revision.resources.empty?}
+        -revision.resources.each do |resource|
+          -if resource.match(/(http:\/\/)?www\..+\..+/)
+            a href="http://#{resource}" title=resource style=("display: inline; font-size: 0.8em") #{resource}#{", " unless resource == revision.resources.last}
+          -elsif resource.match(/(http:\/\/)www\..+\..+/)
+            a href="#{resource}" title=resource style=("display: inline; font-size: 0.8em") #{resource}#{", " unless resource == revision.resources.last}
+          -else 
+            p style=("display: inline; font-size: 0.8em") #{resource} #{", " unless resource == revision.resources.last}
+        br
+        h7 class="subheader" style=("display: inline; font-size: 0.8em") Updated on: 
+        p style=("display: inline; font-size: 0.8em") #{revision.updated_at}
+        br
