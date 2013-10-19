@@ -62,7 +62,8 @@ class IdeaBoxApp < Sinatra::Base
 
   get '/:id' do |id|
     idea = IdeaStore.find(id.to_i)
-    slim :show, locals: { idea: idea, show_resources: true }
+    history = RevisionStore.find_all_by_idea_id(id.to_i)
+    slim :show, locals: { idea: idea, show_resources: true, history: history }
   end
 
   get '/:id/edit' do |id|

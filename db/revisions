@@ -6,5 +6,39 @@ ideas:
   description: Watching movies alone at home
   tags: love
   created_at: '2013-10-19 10:24:39 -0600'
-  updated_at: 2013-10-19 10:24:40.242403000 -06:00
+  updated_at: 2013-10-19 10:24:40.000000000 -06:00
   resources: []
+- id: 1
+  idea_id: 1
+  title: New Idea
+  description: My Idea is...
+  tags: unsorted
+  created_at: '2013-10-19 10:30:11 -0600'
+  updated_at: 2013-10-19 10:30:58.000000000 -06:00
+  resources: []
+- id: 1
+  idea_id: 1
+  title: Zanzibar
+  description: CccMy Idea is...
+  tags: unsorted
+  created_at: '2013-10-19 10:30:11 -0600'
+  updated_at: 2013-10-19 10:42:28.000000000 -06:00
+  resources: []
+- id: 1
+  idea_id: 1
+  title: Shoes
+  description: bada
+  tags: unsorted
+  created_at: '2013-10-19 10:30:11 -0600'
+  updated_at: 2013-10-19 11:00:41.000000000 -06:00
+  resources:
+  - www.google.com
+- id: 1
+  idea_id: 1
+  title: Shoes2
+  description: badabing
+  tags: unsorted
+  created_at: '2013-10-19 10:30:11 -0600'
+  updated_at: 2013-10-19 11:02:45.000000000 -06:00
+  resources:
+  - www.google.com, http://www.ask.com
