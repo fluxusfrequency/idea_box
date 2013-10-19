@@ -15,12 +15,12 @@ form action=("/#{idea.id if mode == 'edit'}#{'new' if mode == 'new'}") method='P
   input type='text' name='idea[resources]' placeholder="Add text or links here." value="#{idea.resources.join(", ") if mode == "edit" && idea.resources}" style=("display: inline")
   br
   br
-  ul class="button-group round even-4" style="align: middle"
+  ul class="button-group round even-3" style="margin-bottom: 10px"
     li
       a href="/" 
-        input class="small button left" type='submit' value='Previous'
+        input class="small button success left" type='submit' value='Previous' style="margin-right 20px"
     li
-      input type='submit' class="small button center" value='Submit'
+      input type='submit' class="small button success center" value='Submit'
     li
       a href="/" 
-        input class="small button right" type='submit' value='Next'
+        input class="small button success right" type='submit' value='Next'
