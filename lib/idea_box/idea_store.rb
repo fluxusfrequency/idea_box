@@ -3,6 +3,8 @@ require 'time'
 require './lib/idea_box/finders'
 require './lib/idea_box/groupers'
 require './lib/idea_box/sorters'
+require './lib/idea_box/revision'
+require './lib/idea_box/revision_store'
 
 
 class IdeaStore
@@ -52,6 +54,8 @@ class IdeaStore
     end
 
     def update(id, attributes)
+      old_idea = find(id.to_i)
+      revision = RevisionStore.create(old_idea.to_h.merge("idea_id"=>id))
       resources = split_resources(attributes['resources'])
       updated_idea = Idea.new(attributes.merge( "id" => id, 
                                                 "created_at" => find(id).created_at, 

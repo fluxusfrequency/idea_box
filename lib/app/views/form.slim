@@ -12,7 +12,7 @@ form action=("/#{idea.id if mode == 'edit'}#{'new' if mode == 'new'}") method='P
   input type='text' name='idea[tags]' placeholder="Enter comma separated tags here." value="#{idea.tags if mode == "edit"}" style=("display: inline")
   br
   | Resources
-  input type='text' name='idea[resources]' placeholder="Add text or links here." value="#{idea.resources.join(", ") if mode == "edit"}" style=("display: inline")
+  input type='text' name='idea[resources]' placeholder="Add text or links here." value="#{idea.resources.join(", ") if mode == "edit" && idea.resources}" style=("display: inline")
   br
   br
   ul class="button-group round even-4" style="align: middle"

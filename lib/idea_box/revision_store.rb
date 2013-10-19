@@ -48,29 +48,7 @@ class RevisionStore
       database.transaction do
         database['ideas'] << new_revision.to_h
       end
-    end
-
-    def update(id, attributes)
-      resources = split_resources(attributes['resources'])
-      updated_revision = Idea.new(attributes.merge( 
-        "id" => id, 
-        "created_at" => find(id).created_at, 
-        "updated_at" => Time.now.to_s, 
-        "revision" => find(id).revision + 1, 
-        "resources" => resources ))
-      database.transaction do
-        database['ideas'][id.to_i-1] = updated_revision.to_h
-      end
-    end
-
-    # TO DO: find a module to put this in
-    def split_resources(resources)
-      return if resources.nil? || resources.class == Array
-      if resources.length < 2 
-        Array(resources.split(", ")) 
-      else
-        Array(resources)
-      end
+      new_revision
     end
 
     def delete(position)
@@ -89,6 +67,10 @@ class RevisionStore
       database.transaction do |db|
         database['ideas'] ||= []
       end
+    end
+
+    def find_all_by_idea_id(id)
+      all.find_all {|revision| revision.idea_id == id}
     end
 
   end

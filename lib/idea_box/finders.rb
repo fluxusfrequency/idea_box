@@ -87,4 +87,8 @@ module Finders
     result
   end
 
+  def find_all_revisions_for_idea(id)
+    RevisionStore.find_all_by_idea_id(id)
+  end
+
 end

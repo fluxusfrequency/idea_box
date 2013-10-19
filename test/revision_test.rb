@@ -9,10 +9,12 @@ require_relative '../lib/idea_box/idea_store.rb'
 class RevisionTest < Minitest::Test
 
   def setup
+    IdeaStore.filename = 'db/test'
     RevisionStore.filename = 'db/test_revisions'
   end
 
   def teardown
+    IdeaStore.delete_all
     RevisionStore.delete_all
   end
 
@@ -25,7 +27,6 @@ class RevisionTest < Minitest::Test
       'tags' => 'bike, bus',
       'created_at' => Time.now,
       'updated_at' => Time.now,
-      'revision' => 1,
       'resources' => 'http://www.bikes.com'
       })
     assert_respond_to revision, :id
@@ -35,7 +36,6 @@ class RevisionTest < Minitest::Test
     assert_respond_to revision, :tags
     assert_respond_to revision, :created_at
     assert_respond_to revision, :updated_at
-    assert_respond_to revision, :revision
     assert_respond_to revision, :resources
   end
 
@@ -48,7 +48,6 @@ class RevisionTest < Minitest::Test
     assert_respond_to revision, :tags
     assert_respond_to revision, :created_at
     assert_respond_to revision, :updated_at
-    assert_respond_to revision, :revision
     assert_respond_to revision, :resources
     assert_equal 0, revision.idea_id
   end
@@ -61,12 +60,11 @@ class RevisionTest < Minitest::Test
           'tags' => 'bike, bus',
           'created_at' => Time.now,
           'updated_at' => Time.now,
-          'revision' => 1,
           'group' => 'home',
           'resources' => ['http://www.bikes.com']
           })
     sleep(1)
-    revision = RevisedIdea.new(idea.to_h.merge('id' => 1, 'idea_id' => idea.id))
+    revision = RevisionStore.create(idea.to_h.merge('id' => 1, 'idea_id' => idea.id))
     assert_equal 1, revision.id
     assert_equal 2, revision.idea_id
     assert_equal "Transportation", revision.title
@@ -90,25 +88,40 @@ class RevisionTest < Minitest::Test
   end
 
   def test_the_revision_store_can_find_all_by_idea_id
-    idea_1 = Idea.new({
+    idea = Idea.new({
       'title' => "Recreation",
       'description' => "Bicycles In The Park",
       'tags' => 'bike',
       })
-    revision_1 = RevisionStore.create(idea_1.to_h.merge('idea_id' => idea_1.id, 'description' => 'Motorcycles in the park'))
-    revision_2 = RevisionStore.create(idea_1.to_h.merge('idea_id' => idea_1.id, 'description' => 'Monster trucks in the park'))
+    revision_1 = RevisionStore.create(idea.to_h.merge('idea_id' => idea.id, 'description' => 'Motorcycles in the park'))
+    revision_2 = RevisionStore.create(idea.to_h.merge('idea_id' => idea.id, 'description' => 'Monster trucks in the park'))
     assert_equal 2, RevisionStore.find_all_by_idea_id(1).length
+    assert_equal 'Monster trucks in the park', RevisionStore.find_all_by_idea_id(1).last.description
   end
 
-  # def test_the_revision_store_can_find_all_by_idea_id
-  #   idea_1 = Idea.new({
-  #     'title' => "Recreation",
-  #     'description' => "Bicycles In The Park",
-  #     'tags' => 'bike',
-  #     })
-  #   revision_1 = RevisionStore.create(idea_1.to_h.merge('idea_id' => idea.id, 'description' => 'Motorcycles in the park'))
-  #   revision_2 = RevisionStore.create(idea_1.to_h.merge('idea_id' => idea.id, 'description' => 'Monster trucks in the park'))
+  def test_new_revisions_have_an_incrementing_revision_count
+    idea = Idea.new({
+      'title' => "Recreation",
+      'description' => "Bicycles In The Park",
+      'tags' => 'bike',
+      })
+    revision_1 = RevisionStore.create(idea.to_h.merge('idea_id' => idea.id, 'description' => 'Motorcycles in the park'))
+    assert_equal 1, RevisionStore.find_all_by_idea_id(idea.id).length
+    assert_equal 1, RevisionStore.find_all_by_idea_id(idea.id).first.revision
+    revision_2 = RevisionStore.create(idea.to_h.merge('idea_id' => idea.id, 'description' => 'Monster trucks in the park'))
+    assert_equal 2, RevisionStore.find_all_by_idea_id(idea.id).length
+    assert_equal 2, RevisionStore.find_all_by_idea_id(idea.id).last.revision
+  end
 
-  # end
+  def test_the_idea_store_creates_a_new_revision_when_an_idea_is_updated
+    idea = Idea.new({
+      'title' => "Recreation",
+      'description' => "Bicycles In The Park",
+      'tags' => 'bike',
+      })
+    IdeaStore.update(idea.id, idea.to_h.merge("description" => "Motorcycles in the park"))
+    IdeaStore.update(idea.id, idea.to_h.merge("description" => "Alligators in the park"))
+    assert_equal 2, RevisionStore.find_all_by_idea_id(idea.id).length
+  end
 
 end

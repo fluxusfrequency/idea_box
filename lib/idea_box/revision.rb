@@ -3,7 +3,7 @@
  class RevisedIdea
   include Comparable
 
-  attr_reader :id, :idea_id, :title, :description, :tags, :created_at, :updated_at, :revision, :resources
+  attr_reader :id, :idea_id, :title, :description, :tags, :created_at, :updated_at, :resources
 
   def initialize(attributes={})
     attributes = default_revision.merge(attributes)
@@ -14,7 +14,6 @@
     @tags        = attributes["tags"]
     @created_at  = attributes["created_at"]
     @updated_at  = Time.now
-    @revision    = attributes["revision"]
     @resources   = attributes["resources"]
   end
 
@@ -30,7 +29,6 @@
       "tags" => tags,
       "created_at" => created_at,
       "updated_at" => updated_at,
-      "revision" => revision,
       "resources" => resources
     }
   end
@@ -44,7 +42,6 @@
       "tags" => 'unsorted',
       "created_at" => Time.now.to_s,
       "updated_at" => Time.now.to_s,
-      "revision" => 1, # RevisionStore.find_last_revision_by_idea_id(1).idea_id + 1 || 1,
       "resources" => ['none']
     }
   end
@@ -59,6 +56,10 @@
 
   def all_my_tags
     Array(tags.split(", "))
+  end
+
+  def revision
+    RevisionStore.find_all_by_idea_id(idea_id).length
   end
 
 end
