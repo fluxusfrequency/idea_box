@@ -7,6 +7,12 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    capybara (2.1.0)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     chunky_png (1.2.8)
     coderay (1.0.9)
     compass (0.12.2)
@@ -21,8 +27,12 @@ GEM
     eventmachine (1.0.3)
     fssm (0.2.10)
     jsmin (1.0.1)
+    mime-types (1.25)
+    mini_portile (0.5.1)
     minitest (5.0.8)
     multi_json (1.7.9)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
@@ -54,6 +64,8 @@ GEM
       eventmachine (>= 1.0.0)
       rack (>= 1.5.0)
     tilt (1.4.1)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
     zurb-foundation (4.3.2)
       sass (>= 3.2.0)
 
@@ -63,6 +75,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
+  capybara
   compass-rails
   minitest
   rack-test

@@ -1,6 +1,7 @@
 require 'slim'
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'sinatra/assetpack'
 require 'better_errors'
 require 'sass'
 require './lib/idea_box'
@@ -46,7 +47,7 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/' do
-    @idea = IdeaStore.all.sort.first
+    @idea = IdeaStore.all.sort.first || IdeaStore.create({})
     slim :index, locals: { ideas: IdeaStore.all.sort, idea: @idea, show_resources: false }
   end
 

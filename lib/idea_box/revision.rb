@@ -6,7 +6,7 @@
   attr_reader :id, :idea_id, :title, :description, :tags, :created_at, :updated_at, :revision, :resources
 
   def initialize(attributes={})
-    attributes = default_idea.merge(attributes)
+    attributes = default_revision.merge(attributes)
     @id          = attributes["id"]
     @idea_id     = attributes["idea_id"]
     @title       = attributes["title"]
@@ -35,7 +35,7 @@
     }
   end
 
-  def default_idea
+  def default_revision
     {
       "id" => next_id,
       "idea_id" => 0,
@@ -44,7 +44,7 @@
       "tags" => 'unsorted',
       "created_at" => Time.now.to_s,
       "updated_at" => Time.now.to_s,
-      "revision" => 1,
+      "revision" => 1, # RevisionStore.find_last_revision_by_idea_id(1).idea_id + 1 || 1,
       "resources" => ['none']
     }
   end

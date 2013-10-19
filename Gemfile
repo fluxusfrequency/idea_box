@@ -18,4 +18,5 @@ group :test do
   gem 'rack-test', require: false
   gem 'minitest',  require: false
   gem 'sinatra-assetpack', require: 'sinatra/assetpack'
+  gem 'capybara'
 end

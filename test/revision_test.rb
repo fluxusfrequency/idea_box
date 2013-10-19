@@ -75,7 +75,40 @@ class RevisionTest < Minitest::Test
     refute_equal idea.updated_at, revision.updated_at
     assert_equal 1, revision.revision
     refute_respond_to revision, :group
+    refute_respond_to revision, :rank
     assert_equal 'http://www.bikes.com', revision.resources.first
   end
+
+  def test_the_revision_actually_revises_content
+    idea = Idea.new({
+      'title' => "Recreation",
+      'description' => "Bicycles In The Park",
+      'tags' => 'bike',
+      })
+    revision = RevisedIdea.new(idea.to_h.merge('idea_id' => idea.id, 'description' => 'Motorcycles in the park'))
+    assert_equal "Motorcycles in the park", revision.description
+  end
+
+  def test_the_revision_store_can_find_all_by_idea_id
+    idea_1 = Idea.new({
+      'title' => "Recreation",
+      'description' => "Bicycles In The Park",
+      'tags' => 'bike',
+      })
+    revision_1 = RevisionStore.create(idea_1.to_h.merge('idea_id' => idea_1.id, 'description' => 'Motorcycles in the park'))
+    revision_2 = RevisionStore.create(idea_1.to_h.merge('idea_id' => idea_1.id, 'description' => 'Monster trucks in the park'))
+    assert_equal 2, RevisionStore.find_all_by_idea_id(1).length
+  end
+
+  # def test_the_revision_store_can_find_all_by_idea_id
+  #   idea_1 = Idea.new({
+  #     'title' => "Recreation",
+  #     'description' => "Bicycles In The Park",
+  #     'tags' => 'bike',
+  #     })
+  #   revision_1 = RevisionStore.create(idea_1.to_h.merge('idea_id' => idea.id, 'description' => 'Motorcycles in the park'))
+  #   revision_2 = RevisionStore.create(idea_1.to_h.merge('idea_id' => idea.id, 'description' => 'Monster trucks in the park'))
+
+  # end
 
 end

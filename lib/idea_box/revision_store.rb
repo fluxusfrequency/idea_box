@@ -52,11 +52,12 @@ class RevisionStore
 
     def update(id, attributes)
       resources = split_resources(attributes['resources'])
-      updated_revision = Idea.new(attributes.merge( "id" => id, 
-                                                "created_at" => find(id).created_at, 
-                                                "updated_at" => Time.now.to_s, 
-                                                "revision" => find(id).revision + 1, 
-                                                "resources" => resources ))
+      updated_revision = Idea.new(attributes.merge( 
+        "id" => id, 
+        "created_at" => find(id).created_at, 
+        "updated_at" => Time.now.to_s, 
+        "revision" => find(id).revision + 1, 
+        "resources" => resources ))
       database.transaction do
         database['ideas'][id.to_i-1] = updated_revision.to_h
       end

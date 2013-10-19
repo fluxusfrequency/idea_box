@@ -28,16 +28,16 @@ class IdeaBoxAppTest < Minitest::Test
   end
 
   def test_create_new_idea
-    post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes"}}
-    idea = IdeaStore.all.first
+    post '/new', {idea: {title: "exercise", description: "sign up for stick fighting classes"}}
+    idea = IdeaStore.all.last
     assert_equal "exercise", idea.title
     assert_equal "sign up for stick fighting classes", idea.description
   end
 
   def test_edit_idea_by_id
-    post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes"}}
+    post '/new', {idea: {title: "exercise", description: "sign up for stick fighting classes"}}
     get '/1/edit'
-    assert_equal 200, last_response.status
+    assert last_response.body.include?("exercise")
   end
 
   def test_edit_idea_by_id

@@ -48,6 +48,7 @@ class IdeaStore
       database.transaction do
         database['ideas'] << new_idea.to_h
       end
+      new_idea
     end
 
     def update(id, attributes)
