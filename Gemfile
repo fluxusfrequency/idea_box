@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'sinatra',           require: 'sinatra/base'
 gem 'sinatra-assetpack', require: 'sinatra/assetpack'
 gem 'sinatra-contrib',   require: 'sinatra/reloader'
+gem 'sinatra-flash'
 
 gem 'slim'
 gem 'thin'

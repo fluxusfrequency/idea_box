@@ -23,9 +23,13 @@ html
                 li class=""
                   a href="#" Portfolios
                 li class=""
-                  a href="#" Profile  
-                li class=""
-                  a href="#" Log Out
+                  a href="#" Profile 
+                -if session[:persona] 
+                  li class=""
+                    a href="session/logout" Log Out
+                -else
+                  li class=""
+                    a href="session/login" Log In
 
           / ul class="right"
           /   form action="/search/results" method='POST'
@@ -33,5 +37,6 @@ html
           /       input type="search" name="search_text"
           /     li 
           /       input type="submit" name="search" class="has-button small button" value="Search"
-
+      section
+        == styled_flash
       ==yield

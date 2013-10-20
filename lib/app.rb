@@ -2,17 +2,23 @@ require 'slim'
 require 'sinatra/base'
 require 'sinatra/reloader'
 require 'sinatra/assetpack'
+require 'sinatra/flash'
 require 'better_errors'
 require 'sass'
 require './lib/idea_box'
+require './lib/sinatra/auth'
 
 
 class IdeaBoxApp < Sinatra::Base
 
+  enable :sessions
+  set :session_secret, 'The magic word'
   set :method_override, true
   set :root, 'lib/app'
 
+  register Sinatra::Auth
   register Sinatra::AssetPack
+  register Sinatra::Flash
 
   assets {
     serve '/javascripts', from: 'javascripts'
@@ -52,7 +58,7 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   post '/:id' do
-    IdeaStore.create(params[:idea])
+    # flash[:notice] = "Idea successfully added" if IdeaStore.create(params[:idea])
     redirect "/"
   end
 
