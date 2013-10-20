@@ -92,10 +92,6 @@ class IdeaBoxApp < Sinatra::Base
     slim :tag_view, locals: { tag: tag }
   end
 
-  get '/foundation/home' do
-    slim :foundation_test
-  end
-
   post '/search/results' do
     results = IdeaStore.search_for(params[:search_text])
     slim :search, locals: { search: params[:search_text], time_range: nil, results: results }

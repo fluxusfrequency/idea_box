@@ -1,43 +1,51 @@
 fieldset
   div class="row"
-    div class="large-3 small-3 columns"
-      h3 Your Ideas
-      -ideas.each_with_index do |idea, index|
-        / div class="large-4 small-4 left columns"
-        div class="panel"
-          a href="/#{idea.id}/edit"
-           
-            h5 #{idea.title}
-          =idea.description
-          br
-          br
-          h7 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
-          -idea.all_my_tags.each do |tag|
-            a href="/all/tags/#{tag}" title="#{tag}" style=("display: inline; font-size: 0.8em") #{tag}   
-          br
-          ul class="button-group round even-4"
-            li
-              form action="/#{idea.id}" method="GET" style=("display: inline")
-                input class="tiny button success" type="submit" value="View"
-            li
-              form action="/#{idea.id}" method="POST" style=("display: inline")
-                input type="hidden" name="_method" value="DELETE"
-                input class="tiny button success" type="submit" value="Delete"
-            li
-              form action="/#{idea.id}/like" method='POST' style=("display: inline")
-                input class="tiny button success" type='submit' value='+'
+    div class="idea_selector"
+      div class="large-3 small-3 columns" style="border: 1px solid #ddd"
+        h3 Your Ideas
+        form action="/search/results" method='POST'
+          div class="row collapse"
+            div class="small-8 large-8 columns"
+              input type="search" name="search_text" placeholder="Find an idea"
+            div class="small-4 large-4 columns"
+              input type="submit" name="search" class="button prefix success" value="Search"
+          a href="#" class="tiny secondary button dropdown" Sort By
+        -ideas.each_with_index do |idea, index|
+          / div class="large-4 small-4 left columns"
+          div class="panel"
+            a href="/#{idea.id}/edit"
+             
+              h5 #{idea.title}
+            =idea.description
+            br
+            br
+            h7 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
+            -idea.all_my_tags.each do |tag|
+              a href="/all/tags/#{tag}" title="#{tag}" style=("display: inline; font-size: 0.8em") #{tag}   
+            br
+            br
+            ul class="button-group even-3"
+              li
+                form action="/#{idea.id}" method="GET" style=("display: inline")
+                  input class="tiny button success" type="submit" value="View"
+              li
+                form action="/#{idea.id}/like" method='POST' style=("display: inline")
+                  input class="tiny button success" type='submit' value='+'
+              li
+                form action="/#{idea.id}" method="POST" style=("display: inline")
+                  input type="hidden" name="_method" value="DELETE"
+                  input class="tiny button success" type="submit" value="Delete"
         / -if index == 3 || index == 7 || index == 11
         /   div class="row" 
-        -break if index >= 3
-    -if mode == "edit"
-      div class="large-9 small-9 columns"
+          -break if index == 3
+    div class="large-9 small-9 columns"
+      -if mode == "edit"
         h3 Editing - #{idea.title}
-        div class="columns panel" style="height: 833px;"
+        div class="columns panel" style="height: 984px;"
           ==slim :form, locals: {idea: idea, show_resources: true, mode: 'edit' }
-    -elsif mode == "new"
-      div class="large-9 small-9 columns"
+      -elsif mode == "new"
         h3 Creating A New Idea
-        div class="columns panel" style="height: 833px;"
+        div class="columns panel" style="height: 984px;"
           ==slim :form, locals: { idea: idea, mode: "new", mode: 'new' }
     
 hr
