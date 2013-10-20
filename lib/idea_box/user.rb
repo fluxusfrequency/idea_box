@@ -11,15 +11,7 @@ class User
     @password    = Digest::MD5.hexdigest(attributes["password"])
     @email       = attributes["email"]
     @portfolios  = attributes["portfolios"]
-    @created_at  = attributes["created_at"]
+    @created_at  = attributes["created_at"] || Time.now.to_s
   end
-
-  def default_user
-    {
-      "id"        => 1 # next_id
-      "username"  => "new user"
-      "password"  => Digest::MD5.hexdigest("password")
-      "email"     =>
-    }
 
 end

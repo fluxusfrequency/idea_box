@@ -34,13 +34,4 @@ class PortfolioTest < Minitest::Test
     assert_respond_to user, :created_at
   end
 
-  def test_it_can_populate_default_attrs
-    user = User.new
-    assert_respond_to user, :id
-    assert_respond_to user, :username
-    assert_respond_to user, :password
-    assert_respond_to user, :email
-    assert_respond_to user, :portfolios
-    assert_respond_to user, :created_at
-  end
 end
