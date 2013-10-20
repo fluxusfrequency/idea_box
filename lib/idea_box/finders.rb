@@ -61,8 +61,8 @@ module Finders
     end
   end
 
-  def find_all_by_group(group)
-    group_all_by_group[group]
+  def find_all_by_portfolio_id(portfolio_id)
+    group_all_by_portfolio_id[portfolio_id]
   end
 
   def find_raw_idea(id)

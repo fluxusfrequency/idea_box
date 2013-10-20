@@ -1,10 +1,10 @@
 module Sorters
-  def sort_by_rank(group)
-    find_all_by_group(group).sort_by(&:rank).reverse
+  def sort_portfolio_by_rank(portfolio_id)
+    find_all_by_portfolio_id(portfolio_id).sort_by(&:rank).reverse
   end
 
-  def sort_by_group(group)
-    find_all_by_group(group).sort_by(&:id)
+  def sort_by_portfolio_id(portfolio_id)
+    find_all_by_portfolio_id(portfolio_id).sort_by(&:id)
   end
 
   def sort_all_by_tags

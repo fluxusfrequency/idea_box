@@ -3,20 +3,20 @@
  class Idea
   include Comparable
 
-  attr_reader :id, :title, :description, :rank, :tags, :created_at, :updated_at, :revision, :group, :resources
+  attr_reader :id, :title, :description, :rank, :tags, :created_at, :updated_at, :revision, :portfolio_id, :resources
 
   def initialize(attributes={})
     attributes = default_idea.merge(attributes)
-    @id          = attributes["id"]
-    @title       = attributes["title"]
-    @description = attributes["description"]
-    @rank        = attributes["rank"]
-    @tags        = attributes["tags"]
-    @created_at  = attributes["created_at"]
-    @updated_at  = attributes["updated_at"]
-    @revision    = attributes["revision"]
-    @group       = attributes["group"]
-    @resources   = attributes["resources"]
+    @id           = attributes["id"]
+    @title        = attributes["title"]
+    @description  = attributes["description"]
+    @rank         = attributes["rank"]
+    @tags         = attributes["tags"]
+    @created_at   = attributes["created_at"]
+    @updated_at   = attributes["updated_at"]
+    @revision     = attributes["revision"]
+    @portfolio_id = attributes["portfolio_id"]
+    @resources    = attributes["resources"]
   end
 
   def save
@@ -32,7 +32,7 @@
       "created_at" => created_at,
       "updated_at" => updated_at,
       "revision" => revision,
-      "group" => group.scan(/\w+/).first,
+      "portfolio_id" => portfolio_id,
       "resources" => resources
     }
   end
@@ -55,7 +55,7 @@
       "created_at" => Time.now.to_s,
       "updated_at" => Time.now.to_s,
       "revision" => 1,
-      "group" => 'work',
+      "portfolio_id" => 1,
       "resources" => ['none']
     }
   end

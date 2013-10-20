@@ -33,3 +33,27 @@ ideas:
   created_at: '2013-10-19 21:39:38 -0600'
   updated_at: 2013-10-19 21:42:54.000000000 -06:00
   resources: []
+- id: 1
+  idea_id: 1
+  title: Love Life
+  description: Watching movies alone at home
+  tags: love
+  created_at: '2013-10-20 13:54:43 -0600'
+  updated_at: 2013-10-20 13:54:43.000000000 -06:00
+  resources: []
+- id: 1
+  idea_id: 1
+  title: Love Life
+  description: Watching movies alone at home
+  tags: love
+  created_at: '2013-10-20 13:56:59 -0600'
+  updated_at: 2013-10-20 13:56:59.000000000 -06:00
+  resources: []
+- id: 1
+  idea_id: 1
+  title: Love Life
+  description: Watching movies alone at home
+  tags: love
+  created_at: '2013-10-20 13:57:20 -0600'
+  updated_at: 2013-10-20 13:57:20.957427000 -06:00
+  resources: []

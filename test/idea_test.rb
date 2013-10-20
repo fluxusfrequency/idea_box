@@ -5,15 +5,15 @@ class IdeaTest < Minitest::Test
 
   def test_it_can_set_up_attrs
     idea = Idea.new({
-      'id' => 1,
-      'title' => "Transporation",
-      'description' => "Bicycles and busses",
-      'tags' => 'bike, bus',
-      'created_at' => Time.now,
-      'updated_at' => Time.now,
-      'revision' => 1,
-      'group' => 'home',
-      'resources' => 'http://www.bikes.com'
+      'id'           => 1,
+      'title'        => "Transporation",
+      'description'  => "Bicycles and busses",
+      'tags'         => 'bike, bus',
+      'created_at'   => Time.now,
+      'updated_at'   => Time.now,
+      'revision'     => 1,
+      'portfolio_id' => 1,
+      'resources'    => 'http://www.bikes.com'
       })
     assert_respond_to idea, :id
     assert_respond_to idea, :title
@@ -23,7 +23,7 @@ class IdeaTest < Minitest::Test
     assert_respond_to idea, :created_at
     assert_respond_to idea, :updated_at
     assert_respond_to idea, :revision
-    assert_respond_to idea, :group
+    assert_respond_to idea, :portfolio_id
     assert_respond_to idea, :resources
   end
 
@@ -37,7 +37,7 @@ class IdeaTest < Minitest::Test
     assert_respond_to idea, :created_at
     assert_respond_to idea, :updated_at
     assert_respond_to idea, :revision
-    assert_respond_to idea, :group
+    assert_respond_to idea, :portfolio_id
     assert_respond_to idea, :resources
   end
 

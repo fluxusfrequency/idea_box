@@ -20,9 +20,9 @@ module Groupers
     end
   end
 
-  def group_all_by_group
+  def group_all_by_portfolio_id
     all.group_by do |idea|
-      idea.group
+      idea.portfolio_id
     end
   end
 
