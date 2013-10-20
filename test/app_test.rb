@@ -1,11 +1,5 @@
-
-gem 'minitest'
-require 'minitest/autorun'
-require 'minitest/pride'
-require 'sinatra'
-require 'sinatra/assetpack'
-require 'rack/test'
-require_relative '../lib/app'
+require './test/helpers/unit_helper.rb'
+require './lib/idea_box'
 
 class IdeaBoxAppTest < Minitest::Test
   include Rack::Test::Methods

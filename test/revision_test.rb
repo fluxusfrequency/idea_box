@@ -1,10 +1,5 @@
-gem 'minitest'
-require 'minitest/autorun'
-require 'minitest/pride'
-require_relative '../lib/idea_box/revision.rb'
-require_relative '../lib/idea_box/revision_store.rb'
-require_relative '../lib/idea_box/idea.rb'
-require_relative '../lib/idea_box/idea_store.rb'
+require './test/helpers/unit_helper.rb'
+require './lib/idea_box'
 
 class RevisionTest < Minitest::Test
 
@@ -97,6 +92,7 @@ class RevisionTest < Minitest::Test
     revision_2 = RevisionStore.create(idea.to_h.merge('idea_id' => idea.id, 'description' => 'Monster trucks in the park'))
     assert_equal 2, RevisionStore.find_all_by_idea_id(1).length
     assert_equal 'Monster trucks in the park', RevisionStore.find_all_by_idea_id(1).last.description
+    RevisionStore.delete_all
   end
 
   def test_new_revisions_have_an_incrementing_revision_count

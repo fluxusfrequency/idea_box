@@ -58,7 +58,7 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   post '/:id' do
-    # flash[:notice] = "Idea successfully added" if IdeaStore.create(params[:idea])
+    flash[:notice] = "Idea successfully added" if IdeaStore.create(params[:idea])
     redirect "/"
   end
 

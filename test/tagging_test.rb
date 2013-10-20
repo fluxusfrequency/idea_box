@@ -1,8 +1,5 @@
-gem 'minitest'
-require 'minitest/autorun'
-require 'minitest/pride'
-require_relative '../lib/idea_box/idea_store.rb'
-require_relative '../lib/idea_box/idea.rb'
+require './test/helpers/unit_helper.rb'
+require './lib/idea_box'
 
 class TaggingTest < Minitest::Test
 
