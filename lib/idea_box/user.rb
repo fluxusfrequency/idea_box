@@ -5,13 +5,24 @@ class User
   attr_accessor :username, :password, :email, :portfolios
 
   def initialize(attributes={})
-    # attributes = default_user.merge(attributes)
+    attributes = default_user.merge(attributes)
     @id          = attributes["id"]
     @username    = attributes["username"]
     @password    = Digest::MD5.hexdigest(attributes["password"])
     @email       = attributes["email"]
     @portfolios  = attributes["portfolios"]
-    @created_at  = attributes["created_at"] || Time.now.to_s
+    @created_at  = attributes["created_at"]
+  end
+
+  def default_user
+    {
+      "id"         => 1, # next_id
+      "username"   => "new user",
+      "password"   => Digest::MD5.hexdigest("password"),
+      "email"      => "johndoe@example.com",
+      "portfolios" => { 1 => 'work'},
+      "created_at" => Time.now.to_s
+    }
   end
 
 end
