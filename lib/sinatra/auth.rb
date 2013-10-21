@@ -34,7 +34,7 @@ module Sinatra
         if user && user.password == login_try
           session[:persona] = params[:username]
           flash[:notice] = "You are now logged in as #{session[:persona]}."
-          redirect to("/")
+          redirect to("/"), locals: {user: user}
         else
           flash[:error] = "The username or password you entered was incorrect."
           redirect to('/session/login')
