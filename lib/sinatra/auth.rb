@@ -29,14 +29,13 @@ module Sinatra
       end
 
       app.post '/session/login' do
-        user = UserStore.find_by_username(params[:username].downcase) || "none"
+        user = UserStore.find_by_username(params[:username].downcase)
         login_try = Digest::MD5.hexdigest(params[:password])
-        if user.password == login_try
+        if user && user.password == login_try
           session[:persona] = params[:username]
           flash[:notice] = "You are now logged in as #{session[:persona]}."
           redirect to("/")
         else
-          flash[:notice] = "#{params[:password]} ::: #{login_try} ::: #{params[:username]} ::: #{UserStore.find_by_username(params[:username]).password.inspect}"
           flash[:error] = "The username or password you entered was incorrect."
           redirect to('/session/login')
         end
@@ -62,8 +61,9 @@ module Sinatra
           redirect '/session/create'
         else
           UserStore.create({'username' => params[:username].downcase, 'password' => Digest::MD5::hexdigest(params[:password]), 'email' => params[:email]})
+          flash[:notice] = "Your account was successfully created."
+          redirect '/session/login'
         end
-        redirect '/session/login'
       end
 
     end
