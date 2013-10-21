@@ -6,7 +6,7 @@ module Sinatra
     module Helpers
 
       def authorized?
-        session[:admin]
+        session[:persona]
       end
 
       def protected!
@@ -28,10 +28,9 @@ module Sinatra
 
       app.post '/session/login' do
         if params[:username] == settings.username && params[:password] == settings.password
-          session[:admin] = true
           session[:persona] = params[:username]
           flash[:notice] = "You are now logged in as #{settings.username}."
-          redirect to('/')
+          redirect to("/")
         else
           flash[:notice] = "The username or password you entered was incorrect."
           redirect to('/session/login')
@@ -39,7 +38,6 @@ module Sinatra
       end
 
       app.get '/session/logout' do
-        session[:admin] = nil
         session[:persona] = nil
         flash[:notice] = "You have now logged out."
         redirect to ('/')

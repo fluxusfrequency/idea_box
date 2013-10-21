@@ -53,15 +53,6 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   get '/' do
-    if session[:persona]
-      @idea = IdeaStore.all.sort.first || IdeaStore.create({})
-      slim :index, locals: { ideas: IdeaStore.all.sort, idea: @idea, show_resources: false, mode: 'new' }
-    else
-      slim :login
-    end
-  end
-
-  get '/' do
     @idea = IdeaStore.all.sort.first || IdeaStore.create({})
     slim :index, locals: { ideas: IdeaStore.all.sort, idea: @idea, show_resources: false, mode: 'new' }
   end

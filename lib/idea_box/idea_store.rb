@@ -45,7 +45,13 @@ class IdeaStore
     end
 
     def create(attributes)
-      new_idea = Idea.new(attributes.merge("resources" => Array(attributes['resources'])))
+      if attributes['resources']
+        merge_hash = {"resources" => Array(attributes['resources'])}
+      else
+        merge_hash = attributes
+      end
+
+      new_idea = Idea.new(attributes.merge(merge_hash))
       database.transaction do
         database['ideas'] << new_idea.to_h
       end
