@@ -1,7 +1,7 @@
 fieldset
   div class="row"
     div class="idea_selector"
-      div class="large-3 small-3 columns" style="border: 1px solid #ddd"
+      div class="large-3 small-3 columns"
         h3 Your Ideas
         form action="/search/results" method='POST'
           div class="row collapse"
@@ -9,9 +9,8 @@ fieldset
               input type="search" name="search_text" placeholder="Find an idea"
             div class="small-4 large-4 columns"
               input type="submit" name="search" class="button prefix success" value="Search"
-          a href="#" class="tiny secondary button dropdown" Sort By
+          a href="#" class="large-12 tiny secondary button dropdown" Sort By
         -ideas.each_with_index do |idea, index|
-          / div class="large-4 small-4 left columns"
           div class="panel"
             a href="/#{idea.id}/edit"
              
@@ -39,13 +38,12 @@ fieldset
         /   div class="row" 
           -break if index == 3
     div class="large-9 small-9 columns"
-      -if mode == "edit"
-        h3 Editing - #{idea.title}
-        div class="columns panel" style="height: 984px;"
+      div class="columns panel" style="height: 1069px;"
+        -if mode == "edit"
+          h3 Editing - #{idea.title}
           ==slim :form, locals: {idea: idea, show_resources: true, mode: 'edit' }
-      -elsif mode == "new"
-        h3 Creating A New Idea
-        div class="columns panel" style="height: 984px;"
+        -elsif mode == "new"
+          h3 Creating A New Idea
           ==slim :form, locals: { idea: idea, mode: "new", mode: 'new' }
     
 hr
