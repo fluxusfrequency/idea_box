@@ -3,6 +3,16 @@ require './lib/idea_box'
 
 class IdeaTest < Minitest::Test
 
+  def setup
+    IdeaStore.filename = 'db/test'
+    RevisionStore.filename = 'db/test_revisions'
+  end
+
+  def teardown
+    IdeaStore.delete_all
+    RevisionStore.delete_all
+  end
+
   def test_it_can_set_up_attrs
     idea = Idea.new({
       'id'           => 1,

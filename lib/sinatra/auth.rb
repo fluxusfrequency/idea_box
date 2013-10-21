@@ -21,8 +21,8 @@ module Sinatra
 
       app.enable :sessions
 
-      app.set :username => 'ben',
-              :password => 'password'
+      # app.set :username => 'ben',
+      #         :password => 'password'
 
       app.get '/session/login' do
         slim :login

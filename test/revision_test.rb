@@ -141,7 +141,7 @@ class RevisionTest < Minitest::Test
     sleep(1)
     IdeaStore.update(1, 'title' => 'Friday Night')
     assert_equal 'Friday Night', IdeaStore.find(1).title
-    assert_equal 2, IdeaStore.find(1).revision
+    assert_equal 1, IdeaStore.find(1).revision
     refute_equal IdeaStore.find(1).created_at, IdeaStore.find(1).updated_at
   end
 

@@ -10,36 +10,3 @@ ideas:
   revision: 2
   group: work
   resources: []
-- id: 4
-  title: Sleep
-  description: On a feather bed
-  rank: 0
-  tags: sleep
-  created_at: '2013-10-19 21:13:01 -0600'
-  updated_at: '2013-10-19 21:13:01 -0600'
-  revision: 1
-  group: work
-  resources:
-  - tempurpedic
-- id: 5
-  title: Fishing
-  description: Bring worms.
-  rank: 0
-  tags: dinner
-  created_at: '2013-10-19 21:39:38 -0600'
-  updated_at: '2013-10-19 21:42:54 -0600'
-  revision: 3
-  group: work
-  resources:
-  - the garden
-- id: 4
-  title: Lunch
-  description: Eat at Chipotle
-  rank: 0
-  tags: full
-  created_at: '2013-10-20 13:42:07 -0600'
-  updated_at: '2013-10-20 13:42:07 -0600'
-  revision: 1
-  group: work
-  resources:
-  - guacamole

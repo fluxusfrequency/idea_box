@@ -27,7 +27,7 @@ class User
   def default_user
     { "id"         => next_id,
       "username"   => "new user",
-      "password"   => "password",
+      "password"   => Digest::MD5.hexdigest("password"),
       "email"      => "johndoe@example.com",
       "portfolios" => { 1 => 'work'},
       "created_at" => Time.now.to_s
