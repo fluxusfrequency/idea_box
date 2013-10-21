@@ -49,6 +49,7 @@ class UserStore
       database.transaction do
         database['users'] << new_user.to_h
       end
+      load_databases_for(new_user.id)
       new_user
     end
 
@@ -120,5 +121,29 @@ class UserStore
       end
     end
 
+    def load_databases_for(user_id)
+      load_ideas_for(user_id)
+      load_revisions_for(user_id)
+    end
+
+    def load_ideas_for(user_id)
+      IdeaStore.filename = "db/user/#{user_id}_ideas"
+    end
+
+    def load_revisions_for(user_id)
+      RevisionStore.filename = "db/user/#{user_id}_revisions"
+    end
+
+    def load_portfolio_for(user_id, portfolio)
+      user = find(user_id)
+      IdeaStore.current_portfolio = user.portfolios.key(portfolio)
+    end
+
+    def delete_portfolio(user_id, portfolio_id)
+      IdeaStore.delete_portfolio(portfolio_id)
+      user = find(user_id)
+      new_portfolio = user.portfolios.values.first
+      load_portfolio_for(user_id, new_portfolio)
+    end
   end
 end

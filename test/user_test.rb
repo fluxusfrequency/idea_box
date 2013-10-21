@@ -4,8 +4,6 @@ require './lib/idea_box'
 class UserTest < Minitest::Test
 
   def setup
-    IdeaStore.filename = 'db/test'
-    RevisionStore.filename = 'db/test_revisions'
     UserStore.filename = 'db/test_users'
   end
 
@@ -45,6 +43,18 @@ class UserTest < Minitest::Test
     assert_respond_to user, :email
     assert_respond_to user, :portfolios
     assert_respond_to user, :created_at
+  end
+
+  def test_it_can_load_its_idea_db
+    user = User.new
+    user.load_ideas
+    assert_equal "db/user/#{user.id}_ideas", IdeaStore.filename
+  end
+
+  def test_it_can_load_its_idea_db
+    user = User.new
+    user.load_revisions
+    assert_equal "db/user/#{user.id}_revisions", RevisionStore.filename
   end
 
   def test_the_user_store_can_create_new_users
@@ -125,5 +135,33 @@ class UserTest < Minitest::Test
       })
     assert_equal 3, UserStore.find_portfolios_for_user(1).keys.length
   end
+
+  def test_the_user_store_loads_a_users_databases_upon_creation
+    UserStore.create({
+      'id'           => 1,
+      'username'     => 'ben',
+      'password'     => 'secret',
+      'email'        => 'bennlewis@gmail.com',
+      'portfolios'    => { 1 => 'work', 2 => 'home', 3 => 'school' },
+      'created_at'   => Time.now
+      })
+    assert_equal 'db/user/1_ideas', IdeaStore.filename
+    assert_equal 'db/user/1_revisions', RevisionStore.filename
+  end
+
+  def test_the_user_store_has_a_load_users_databases_method
+    UserStore.create({
+      'id'           => 1,
+      'username'     => 'ben',
+      'password'     => 'secret',
+      'email'        => 'bennlewis@gmail.com',
+      'portfolios'    => { 1 => 'work', 2 => 'home', 3 => 'school' },
+      'created_at'   => Time.now
+      })
+    UserStore.load_databases_for(1)
+    assert_equal 'db/user/1_ideas', IdeaStore.filename
+    assert_equal 'db/user/1_revisions', RevisionStore.filename
+  end
+
 
 end

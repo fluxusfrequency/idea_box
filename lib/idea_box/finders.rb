@@ -1,8 +1,12 @@
 module Finders
 
+  def select_current_portfolio_only(array)
+    array.select {|idea| idea.portfolio_id == current_portfolio}
+  end
+
   def find(id)
     raw_idea = find_raw_idea(id)
-    Idea.new(raw_idea.to_h)
+    Idea.new(raw_idea.to_h) if raw_idea.to_h['portfolio_id'] == current_portfolio
   end
 
   def search_for(query="")
@@ -22,9 +26,10 @@ module Finders
           found << result
         end
       end
-      found.flatten.compact.collect do |raw|
+      found = found.flatten.compact.collect do |raw|
         Idea.new(raw)
       end
+      select_current_portfolio_only(found)
     rescue
       []
     end
@@ -34,9 +39,10 @@ module Finders
     raw_ideas = tags.collect do |tag|
       find_raw_idea_by_tag(tag)
     end
-    raw_ideas.compact.flatten.collect do |raw_idea|
+    found = raw_ideas.compact.flatten.collect do |raw_idea|
       Idea.new(raw_idea)
     end
+    select_current_portfolio_only(found)
   end
 
   def find_resources_for_idea(id)
@@ -88,7 +94,8 @@ module Finders
   end
 
   def find_all_revisions_for_idea(id)
-    RevisionStore.find_all_by_idea_id(id)
+    revisions = RevisionStore.find_all_by_idea_id(id)
+    select_current_portfolio_only(revisions)
   end
 
 end

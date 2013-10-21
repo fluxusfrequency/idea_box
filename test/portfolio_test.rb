@@ -11,7 +11,7 @@ class PortfolioTest < Minitest::Test
     IdeaStore.delete_all
   end
 
-  def test_ideas_are_grouped_by_work_by_default
+  def test_ideas_are_given_a_portfolio_id_of_1_by_default
     IdeaStore.create({
       "title" => "Love Life",
       "description" => "Watching movies alone at home",

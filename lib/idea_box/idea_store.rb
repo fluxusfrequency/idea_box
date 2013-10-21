@@ -32,12 +32,28 @@ class IdeaStore
       @filename = name
     end
 
+    def current_portfolio
+      @current_portfolio
+    end
+
+    def current_portfolio=(portfolio_id)
+      @current_portfolio = portfolio_id
+    end
+
     def all
+      all_ideas.select {|idea| idea.portfolio_id == current_portfolio }
+    end
+
+    def all_ideas
       ideas = []
       raw_ideas.each_with_index do |data, id|
         ideas << Idea.new(data.merge("id" => id+1))
       end
       ideas
+    end
+
+    def portfolio_size
+      all.length
     end
 
     def size
@@ -66,11 +82,15 @@ class IdeaStore
         "id" => id, 
         "created_at" => find(id).created_at, 
         "updated_at" => Time.now.to_s, 
-        "revision" => find(id).revision + 1, 
+        "revision" => revision.revision, 
         "resources" => resources ))
       database.transaction do
         database['ideas'][id.to_i-1] = updated_idea.to_h
       end
+    end
+
+    def change_portfolio_for_idea(id, portfolio_id)
+      update(id, {'portfolio_id' => portfolio_id})
     end
 
     # TO DO: find a module to put this
@@ -92,6 +112,14 @@ class IdeaStore
     def delete_all
       database.transaction do
         database['ideas'] = []
+      end
+    end
+
+    def delete_portfolio(id)
+      current_portfolio = id
+      current_ideas = all.collect(&:to_h)
+      database.transaction do
+        database['ideas'] = database['ideas'] - current_ideas
       end
     end
 
