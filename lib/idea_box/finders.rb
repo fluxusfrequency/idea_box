@@ -42,7 +42,6 @@ module Finders
     found = raw_ideas.compact.flatten.collect do |raw_idea|
       Idea.new(raw_idea)
     end
-    select_current_portfolio_only(found)
   end
 
   def find_resources_for_idea(id)
@@ -95,7 +94,6 @@ module Finders
 
   def find_all_revisions_for_idea(id)
     revisions = RevisionStore.find_all_by_idea_id(id)
-    select_current_portfolio_only(revisions)
   end
 
 end

@@ -33,7 +33,7 @@ class IdeaStore
     end
 
     def current_portfolio
-      @current_portfolio
+      @current_portfolio || 1
     end
 
     def current_portfolio=(portfolio_id)
@@ -62,7 +62,7 @@ class IdeaStore
 
     def create(attributes)
       if attributes['resources']
-        merge_hash = {"resources" => Array(attributes['resources'])}
+        merge_hash = {"resources" => Array(attributes['resources']), "portfolio_id" => current_portfolio}
       else
         merge_hash = attributes
       end

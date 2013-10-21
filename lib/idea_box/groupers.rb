@@ -21,7 +21,7 @@ module Groupers
   end
 
   def group_all_by_portfolio_id
-    all.group_by do |idea|
+    all_ideas.group_by do |idea|
       idea.portfolio_id
     end
   end

@@ -5,6 +5,7 @@ class RevisionTest < Minitest::Test
 
   def setup
     IdeaStore.filename = 'db/test'
+    IdeaStore.current_portfolio = 1
     RevisionStore.filename = 'db/test_revisions'
   end
 
@@ -70,6 +71,7 @@ class RevisionTest < Minitest::Test
     refute_respond_to revision, :group
     refute_respond_to revision, :rank
     assert_equal 'http://www.bikes.com', revision.resources.first
+    RevisionStore.delete_all
   end
 
   def test_the_revision_actually_revises_content
@@ -80,6 +82,7 @@ class RevisionTest < Minitest::Test
       })
     revision = RevisedIdea.new(idea.to_h.merge('idea_id' => idea.id, 'description' => 'Motorcycles in the park'))
     assert_equal "Motorcycles in the park", revision.description
+    RevisionStore.delete_all
   end
 
   def test_the_revision_store_can_find_all_by_idea_id
@@ -107,17 +110,21 @@ class RevisionTest < Minitest::Test
     revision_2 = RevisionStore.create(idea.to_h.merge('idea_id' => idea.id, 'description' => 'Monster trucks in the park'))
     assert_equal 2, RevisionStore.find_all_by_idea_id(idea.id).length
     assert_equal 2, RevisionStore.find_all_by_idea_id(idea.id).last.revision
+    RevisionStore.delete_all
   end
 
   def test_the_idea_store_creates_a_new_revision_when_an_idea_is_updated
-    idea = Idea.new({
+    IdeaStore.current_portfolio = 1
+    idea = IdeaStore.create({
+      'id' => 2,
       'title' => "Recreation",
       'description' => "Bicycles In The Park",
       'tags' => 'bike',
       })
-    IdeaStore.update(idea.id, idea.to_h.merge("description" => "Motorcycles in the park"))
-    IdeaStore.update(idea.id, idea.to_h.merge("description" => "Alligators in the park"))
+    IdeaStore.update(2, idea.to_h.merge("description" => "Motorcycles in the park"))
+    IdeaStore.update(2, idea.to_h.merge("description" => "Alligators in the park"))
     assert_equal 2, RevisionStore.find_all_by_idea_id(idea.id).length
+    RevisionStore.delete_all
   end
 
   def test_it_can_destroy_all_db_entries
@@ -129,6 +136,7 @@ class RevisionTest < Minitest::Test
       })
     IdeaStore.delete_all
     assert_equal 0, IdeaStore.all.count
+    IdeaStore.delete_all
   end
 
   def test_it_can_edit_ideas
@@ -143,6 +151,7 @@ class RevisionTest < Minitest::Test
     assert_equal 'Friday Night', IdeaStore.find(1).title
     assert_equal 1, IdeaStore.find(1).revision
     refute_equal IdeaStore.find(1).created_at, IdeaStore.find(1).updated_at
+    RevisionStore.delete_all
   end
 
 end

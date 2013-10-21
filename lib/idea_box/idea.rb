@@ -52,7 +52,7 @@
       "tags" => 'unsorted',
       "created_at" => Time.now.to_s,
       "updated_at" => Time.now.to_s,
-      "portfolio_id" => 1,
+      "portfolio_id" => IdeaStore.current_portfolio,
       "resources" => ['none']
     }
   end

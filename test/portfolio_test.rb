@@ -11,7 +11,8 @@ class PortfolioTest < Minitest::Test
     IdeaStore.delete_all
   end
 
-  def test_ideas_are_given_a_portfolio_id_of_1_by_default
+  def test_ideas_are_given_a_the_current_portfolio_id_by_default
+    IdeaStore.current_portfolio = 1
     IdeaStore.create({
       "title" => "Love Life",
       "description" => "Watching movies alone at home",
@@ -27,6 +28,7 @@ class PortfolioTest < Minitest::Test
       "tags" => "love",
       "portfolio_id" => 3
       })
+    IdeaStore.current_portfolio = 3
     assert_equal 3, IdeaStore.find(1).portfolio_id
   end
 
@@ -47,13 +49,15 @@ class PortfolioTest < Minitest::Test
   end
 
   def test_an_idea_can_only_belong_to_a_single_portfolio_id
+    IdeaStore.current_portfolio = 2
     idea = IdeaStore.create({
       "title" => "Love Life",
       "description" => "Watching movies alone at home",
-      "tags" => "love",
-      "portfolio_id" => 2
+      "tags" => "love"
       })
-    IdeaStore.update(idea.id, {"portfolio_id" => 3})
+    assert_equal 2, IdeaStore.find(idea.id).portfolio_id
+    IdeaStore.change_portfolio_for_idea(idea.id, 3)
+    IdeaStore.current_portfolio = 3
     assert_equal 3, IdeaStore.find(idea.id).portfolio_id
   end
 
@@ -78,7 +82,6 @@ class PortfolioTest < Minitest::Test
       "rank" => 2,
       "portfolio_id" => 2
       })
-    IdeaStore.sort_portfolio_by_rank(1).inspect
     assert_equal 2, IdeaStore.sort_portfolio_by_rank(1).first.id
   end
 
