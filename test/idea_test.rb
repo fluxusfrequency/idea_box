@@ -11,7 +11,6 @@ class IdeaTest < Minitest::Test
       'tags'         => 'bike, bus',
       'created_at'   => Time.now,
       'updated_at'   => Time.now,
-      'revision'     => 1,
       'portfolio_id' => 1,
       'resources'    => 'http://www.bikes.com'
       })
@@ -22,7 +21,6 @@ class IdeaTest < Minitest::Test
     assert_respond_to idea, :tags
     assert_respond_to idea, :created_at
     assert_respond_to idea, :updated_at
-    assert_respond_to idea, :revision
     assert_respond_to idea, :portfolio_id
     assert_respond_to idea, :resources
   end
@@ -36,9 +34,13 @@ class IdeaTest < Minitest::Test
     assert_respond_to idea, :tags
     assert_respond_to idea, :created_at
     assert_respond_to idea, :updated_at
-    assert_respond_to idea, :revision
     assert_respond_to idea, :portfolio_id
     assert_respond_to idea, :resources
+  end
+
+  def test_it_knows_its_revision_number
+    idea = Idea.new
+    assert_equal 0, idea.revision
   end
 
 end
