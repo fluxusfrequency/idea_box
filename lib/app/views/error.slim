@@ -4,14 +4,16 @@ h3 Params
 table
   tr
     th Request Verb
-    td = request.request_method
+    td 
+      =request.request_method
 
   tr
     th Request Path
-    td = request.path
+    td 
+      =request.path
 
   tr
-    th colspan=2  Parameters
+    th colspan=2 | Parameters
 
   - request.params.each do |key, value|
     tr

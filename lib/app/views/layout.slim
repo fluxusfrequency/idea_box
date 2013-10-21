@@ -15,21 +15,21 @@ html
               h1 style="font-size: 2.75em"
                 a href="/" IdeaBox
               li class="divider"
-
-          ul class="right"
-            li class="name has-dropdown not-click"
-              a href="#" User
-              ul class="dropdown"
-                li class=""
-                  a href="#" Portfolios
-                li class=""
-                  a href="#" Profile 
-                -if session[:persona] 
+          -if authorized?
+            ul class="right"
+              li class="name has-dropdown not-click"
+                a href="#" User
+                ul class="dropdown"
                   li class=""
-                    a href="session/logout" Log Out
-                -else
+                    a href="#" Portfolios
                   li class=""
-                    a href="session/login" Log In
+                    a href="#" Profile 
+                  -if session[:persona] 
+                    li class=""
+                      a href="session/logout" Log Out
+                  -else
+                    li class=""
+                      a href="session/login" Log In
 
           / ul class="right"
           /   form action="/search/results" method='POST'

@@ -1,5 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/flash'
+require 'digest/md5'
+require './lib/idea_box'
 
 module Sinatra
   module Auth
@@ -10,7 +12,7 @@ module Sinatra
       end
 
       def protected!
-        halt 401,slim(:unauthorized) unless authorized?
+        halt 401, slim(:unauthorized) unless authorized?
       end
     end
 
@@ -27,12 +29,15 @@ module Sinatra
       end
 
       app.post '/session/login' do
-        if params[:username] == settings.username && params[:password] == settings.password
+        user = UserStore.find_by_username(params[:username].downcase) || "none"
+        login_try = Digest::MD5.hexdigest(params[:password])
+        if user.password == login_try
           session[:persona] = params[:username]
-          flash[:notice] = "You are now logged in as #{settings.username}."
+          flash[:notice] = "You are now logged in as #{session[:persona]}."
           redirect to("/")
         else
-          flash[:notice] = "The username or password you entered was incorrect."
+          flash[:notice] = "#{params[:password]} ::: #{login_try} ::: #{params[:username]} ::: #{UserStore.find_by_username(params[:username]).password.inspect}"
+          flash[:error] = "The username or password you entered was incorrect."
           redirect to('/session/login')
         end
       end
@@ -42,6 +47,25 @@ module Sinatra
         flash[:notice] = "You have now logged out."
         redirect to ('/')
       end
+
+      app.get '/session/create' do
+        slim :create_user
+      end
+
+      app.post '/session/create' do 
+        if params[:password] != params[:password_confirmation]
+          flash[:error] = "Your password did not match your password confirmation. Please try again."
+          redirect '/session/create'
+        elsif
+          UserStore.find_by_username(params[:username].downcase)
+          flash[:error] = "Sorry, that username has already been taken. Please try again."
+          redirect '/session/create'
+        else
+          UserStore.create({'username' => params[:username].downcase, 'password' => Digest::MD5::hexdigest(params[:password]), 'email' => params[:email]})
+        end
+        redirect '/session/login'
+      end
+
     end
 
   end

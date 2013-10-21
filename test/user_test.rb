@@ -56,6 +56,23 @@ class UserTest < Minitest::Test
       'portfolios'    => { 1 => 'work', 2 => 'home', 3 => 'school' },
       'created_at'   => Time.now
       })
+    assert UserStore.all.length == 1
+    assert_equal 'ben', UserStore.find(1).username
+  end
+
+  def test_the_user_store_can_create_new_users_with_only_some_attrs
+    UserStore.create({
+      'username'     => 'ben',
+      'password'     => 'hello',
+      'email'        => 'bennlewis@gmail.com',
+      })
+    assert UserStore.all.length == 1
+    user = UserStore.find(1)
+    assert_equal 1, user.id
+    assert_equal 'ben', user.username
+    # assert_equal Digest::MD5.hexdigest('hello'), user.password
+    assert_equal 'bennlewis@gmail.com', user.email
+    assert_kind_of Hash, user.portfolios
   end
 
   def test_the_user_store_can_find_a_user

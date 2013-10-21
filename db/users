@@ -1,0 +1,16 @@
+---
+users:
+- id: 1
+  username: jane_doe
+  password: b5c0b187fe309af0f4d35982fd961d7e
+  email: jane@example.com
+  portfolios:
+    1: work
+  created_at: '2013-10-20 20:14:54 -0600'
+- id: 2
+  username: ben
+  password: fa348efcd3bb1a1fc6ba5c2c912cf402
+  email: ben@test.com
+  portfolios:
+    1: work
+  created_at: '2013-10-20 20:48:46 -0600'

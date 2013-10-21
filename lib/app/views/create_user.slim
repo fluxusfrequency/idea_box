@@ -1,0 +1,20 @@
+fieldset
+  div class="row"
+    div class="large-12 small-12 columns"
+      h1 Sign Up
+      br
+      h3 Please Enter Your Desired Account Information: 
+  div class="row"
+    div class="large-12 small-12 columns"
+      div class="panel"
+        form action="/session/create" method="POST"
+          label for="username" Username:
+          input#username type="text" name="username"
+          label for="password" Password:
+          input#password type="text" name="password"
+          label for="password" Password Confirmation:
+          input#password type="text" name="password_confirmation"
+          label for="username" Email:
+          input#username type="text" name="email"
+          br
+          input type="submit" value="Sign Up"

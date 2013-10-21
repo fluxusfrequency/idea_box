@@ -87,6 +87,11 @@ class UserStore
       User.new(raw_user.to_h)
     end
 
+    def find_by_username(username)
+      raw_user = find_raw_user_by_username(username)
+      User.new(raw_user.to_h.merge('password' => raw_user['password'])) if raw_user
+    end
+
     def find_portfolios_for_user(id)
       find(1).portfolios
     end
@@ -96,6 +101,18 @@ class UserStore
         begin
           database['users'].find do |user|
             user['id'] == id
+          end
+        rescue
+          return
+        end
+      end
+    end
+
+    def find_raw_user_by_username(username)
+      database.transaction do
+        begin
+          database['users'].find do |user|
+            user['username'] == username
           end
         rescue
           return

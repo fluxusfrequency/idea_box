@@ -1,7 +1,22 @@
-form action="/session/login" method="POST"
-  label for="username" Username:
-  input#username type="text" name="username"
-  label for="password" Password:
-  input#password type="text" name="password"
-  br
-  input type="submit" value="Log In"
+div class="row"
+  div class="large-12 small-12 columns"
+    h1 Welcome To IdeaBox!
+    h3 Your Online Idea Recording Solution
+hr
+
+div class="row"
+  div class="large-6 small-6 columns"
+    div class="panel"
+      p Already signed up? Please log in below.
+      br
+      form action="/session/login" method="POST"
+        label for="username" Username:
+        input#username type="text" name="username"
+        label for="password" Password:
+        input#password type="text" name="password"
+        br
+        input type="submit" value="Log In"
+  div class="large-6 small-6 columns"
+    div class="panel"
+      p Not a member yet? 
+      a href="/session/create" Sign up today!
