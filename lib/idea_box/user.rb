@@ -14,11 +14,20 @@ class User
     @created_at  = attributes["created_at"]
   end
 
+  def to_h
+    { "id" => id,
+      "username" => username,
+      "password" => password,
+      "email" => email,
+      "portfolios" => portfolios,
+      "created_at" => created_at,
+    }
+  end
+
   def default_user
-    {
-      "id"         => 1, # next_id
+    { "id"         => 1, # next_id
       "username"   => "new user",
-      "password"   => Digest::MD5.hexdigest("password"),
+      "password"   => "password",
       "email"      => "johndoe@example.com",
       "portfolios" => { 1 => 'work'},
       "created_at" => Time.now.to_s

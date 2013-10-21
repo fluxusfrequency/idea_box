@@ -3,8 +3,7 @@ require 'time'
 require './lib/idea_box/finders'
 require './lib/idea_box/groupers'
 require './lib/idea_box/sorters'
-require './lib/idea_box/revision'
-require './lib/idea_box/revision_store'
+require './lib/idea_box'
 
 
 class IdeaStore

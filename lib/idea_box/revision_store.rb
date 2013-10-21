@@ -46,26 +46,26 @@ class RevisionStore
     def create(attributes)
       new_revision = RevisedIdea.new(attributes.merge("resources" => Array(attributes['resources'])))
       database.transaction do
-        database['ideas'] << new_revision.to_h
+        database['revisions'] << new_revision.to_h
       end
       new_revision
     end
 
     def delete(position)
       database.transaction do
-        database['ideas'].delete_at(position-1)
+        database['revisions'].delete_at(position-1)
       end
     end
 
     def delete_all
       database.transaction do
-        database['ideas'] = []
+        database['revisions'] = []
       end
     end
 
     def raw_revisions
       database.transaction do |db|
-        database['ideas'] ||= []
+        database['revisions'] ||= []
       end
     end
 
