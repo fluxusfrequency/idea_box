@@ -145,5 +145,12 @@ class UserStore
       new_portfolio = user.portfolios.values.first
       load_portfolio_for(user_id, new_portfolio)
     end
+
+    def rename_portfolio(user_id, portfolio_id, new_portfolio_name)
+      user = find(user_id)
+      user.portfolios[portfolio_id] = new_portfolio_name
+      UserStore.update(user.id, user.to_h)
+      IdeaStore.current_portfolio = user.portfolios.key(new_portfolio_name)
+    end
   end
 end

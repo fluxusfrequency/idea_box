@@ -196,8 +196,31 @@ class UsersPortfoliosTest < Minitest::Test
       })
     UserStore.load_portfolio_for(2, 'secrets')
     UserStore.delete_portfolio(2, 3)
-    assert_equal 1, IdeaStore.current_portfoliogaa
-    
+    assert_equal 1, IdeaStore.current_portfolio
+  end
+
+  def test_the_user_store_can_change_the_name_of_a_portfolio
+    user = UserStore.create({
+      'id'           => 2,
+      'username'     => 'ben',
+      'password'     => 'secret',
+      'email'        => 'bennlewis@gmail.com',
+      'portfolios'    => { 1 => 'work', 2 => 'school', 3 => 'secrets' },
+      'created_at'   => Time.now
+      })
+    UserStore.load_portfolio_for(2, 'secrets')
+    IdeaStore.create({
+      'title' => "Sundays",
+      'description' => "In the park with George",
+      'tags' => 'gerschwin',
+      'portfolio_id' => 3,
+      'created_at' => "2013-10-17 10:29:00 -0600"
+      })
+    assert_equal 3, IdeaStore.current_portfolio
+    assert_equal 1, IdeaStore.portfolio_size
+    UserStore.rename_portfolio(2, 3, 'musicals')
+    assert_equal 3, IdeaStore.current_portfolio
+    assert_equal 1, IdeaStore.portfolio_size
   end
 
 
