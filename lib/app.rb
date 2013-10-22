@@ -71,7 +71,7 @@ class IdeaBoxApp < Sinatra::Base
     end
   end
 
-  get '/sms'
+  get '/sms' do
     messages = SMSStore.all || []
     slim :sms, locals: { messages: messages}
   end

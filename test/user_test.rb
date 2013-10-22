@@ -51,7 +51,7 @@ class UserTest < Minitest::Test
     assert_equal "db/user/#{user.id}_ideas", IdeaStore.filename
   end
 
-  def test_it_can_load_its_idea_db
+  def test_it_can_load_its_revisions_db
     user = User.new
     user.load_revisions
     assert_equal "db/user/#{user.id}_revisions", RevisionStore.filename
