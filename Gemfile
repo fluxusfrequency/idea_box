@@ -6,6 +6,7 @@ gem 'sinatra-contrib',   require: 'sinatra/reloader'
 gem 'sinatra-flash'
 
 gem 'slim'
+gem 'twilio-ruby'
 gem 'thin'
 gem 'compass-rails'
 gem 'zurb-foundation'

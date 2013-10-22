@@ -71,6 +71,25 @@ class IdeaBoxApp < Sinatra::Base
     end
   end
 
+  get '/sms'
+    messages = SMSStore.all || []
+    slim :sms, locals: { messages: messages}
+  end
+
+  post '/sms/:message' do
+    twiml = Twilio::TwiML::Response.new do |r|
+      r.Message "Recieved your idea!"
+    end
+    if params[:from] && params[:body]
+      from = params[:From]
+      body = params[:Body]
+    else
+      from = 'Sender'
+      body = 'Message'
+    end
+    slim :sms, locals: { from: from, body: body}
+  end
+
   get '/sorted_tags' do
     ideas = IdeaStore.sort_all_by_tags.values.flatten
     slim :index, locals: { ideas: ideas, user: user, idea: ideas.first, show_resources: false, mode: 'new' }
