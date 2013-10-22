@@ -11,6 +11,7 @@ class User
     @password    = attributes["password"]
     @email       = attributes["email"]
     @portfolios  = attributes["portfolios"]
+    @phone       = attributes["phone"]
     @created_at  = attributes["created_at"]
   end
 
@@ -20,6 +21,7 @@ class User
       "password" => password,
       "email" => email,
       "portfolios" => portfolios,
+      "phone"      => phone,
       "created_at" => created_at,
     }
   end
@@ -29,7 +31,8 @@ class User
       "username"   => "new user",
       "password"   => Digest::MD5.hexdigest("password"),
       "email"      => "johndoe@example.com",
-      "portfolios" => { 1 => 'work'},
+      "portfolios" => { 1 => 'work', 6 => 'texts'},
+      "phone"      => "+10000000000",
       "created_at" => Time.now.to_s
     }
   end
@@ -40,6 +43,18 @@ class User
     rescue
       1
     end
+  end
+
+  def phone
+    phone = @phone.scan(/[0-9]/).join
+    if phone.length == 11 && phone.start_with?("1")
+      phone = "+1#{phone[1..-1]}"
+    elsif phone.length != 10
+      phone = "+10000000000"
+    else
+      return "+1#{phone}"
+    end
+    phone
   end
 
   def load_databases

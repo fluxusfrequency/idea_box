@@ -5,7 +5,6 @@ require './lib/idea_box'
 module Sinatra
   module Sms
     module Helpers
-
       def twilio_account_sid
         "ACa1631d5e7fc967cfec655880d9c4b979"
       end
@@ -21,32 +20,37 @@ module Sinatra
       def twilio_number
         "(719) 375-2176"
       end
+
+      def user
+        @user ||= UserStore.find_by_username(session[:persona])
+      end
+
     end
 
     def self.registered(app)
       app.helpers Helpers
 
       app.get '/sms' do
-        SMSStore.filename = "db/user/#{user.id}_ideas"
-        messages = SMSStore.all || []
-        slim :sms, locals: { messages: messages}
+        text_user = UserStore.all.find{|user| user.phone == params[:From].to_s}
+        if params[:From] && params[:Body]
+          IdeaStore.filename = "db/user/#{text_user.id}_ideas"
+          parts = params[:Body].scan(/\S+/)
+          IdeaStore.create({"title" => parts.first, "description" => parts[1..parts.length].join(" "), "portfolio_id" => 6})
+        end   
       end
 
-      app.post '/sms/?' do
-        SMSStore.filename = "db/user/#{user.id}_ideas"
-        # twiml = Twilio::TwiML::Response.new do |r|
-        #   r.Message "Recieved your idea!"
-        # end
-        if params[:from] && params[:body]
-          from = params[:From]
-          body = params[:Body]
-          SMSStore.create({"from" => from, "body" => body})
-        else
-          from = 'Sender'
-          body = 'Message'
-        end
-        slim :sms, locals: { from: from, body: body}
-      end
+      # app.get '/texts' do
+      #   protected!
+      #   raw_messages = twilio_client.account.sms.messages.list
+      #   my_messages = raw_messages.select {|message| message.from == user.phone }
+      #   slim :texts, locals: { messages: my_messages }
+      # end
+
+      # app.get '/all_texts' do
+      #   messages = twilio_client.account.sms.messages.list
+      #   slim :texts, locals: { messages: messages }
+      # end
+
     end
   end
   register Sms

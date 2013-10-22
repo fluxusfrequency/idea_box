@@ -1,0 +1,17 @@
+fieldset
+  div class="panel radius"
+    h1 Texts Receieved:
+    br
+    -if messages
+      -messages.each do |sms|
+        h3 class="subheader" Idea:
+        -parts = sms.body.scan(/\S+/)
+        | Title: #{parts.first}
+        br
+        br
+        | Body: #{parts[1..parts.length].join(" ")}
+        br
+        br
+        | Sent On: #{sms.date_created}
+        br
+        hr

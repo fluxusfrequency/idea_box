@@ -7,7 +7,7 @@ require 'better_errors'
 require 'sass'
 require './lib/idea_box'
 require './lib/sinatra/auth'
-
+require './lib/twilio'
 
 class IdeaBoxApp < Sinatra::Base
 
@@ -17,6 +17,7 @@ class IdeaBoxApp < Sinatra::Base
   set :root, 'lib/app'
 
   register Sinatra::Auth
+  register Sinatra::Sms
   register Sinatra::AssetPack
   register Sinatra::Flash
 
@@ -74,11 +75,13 @@ end
   end
 
   get '/sorted_tags' do
+    protected!
     ideas = IdeaStore.sort_all_by_tags.values.flatten
     slim :index, locals: { ideas: ideas, user: user, idea: ideas.first, show_resources: false, mode: 'new' }
   end
 
   get '/sorted_days' do
+    protected!
     ideas = IdeaStore.group_all_by_day_created.values.flatten
     slim :index, locals: { ideas: ideas, user: user, idea: ideas.first, show_resources: false, mode: 'new' }
   end

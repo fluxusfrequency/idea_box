@@ -1,70 +1,32 @@
 ---
 ideas:
 - id: 1
-  title: My Idea
-  description: Is to win!
-  rank: 1
-  tags: winning
-  created_at: '2013-10-21 20:05:11 -0600'
-  updated_at: '2013-10-21 20:28:36 -0600'
-  portfolio_id: 1
-  resources: 
+  title: Testing
+  description: testing texts
+  rank: 0
+  tags: unsorted
+  created_at: '2013-10-22 13:19:19 -0600'
+  updated_at: '2013-10-22 13:19:19 -0600'
+  portfolio_id: 6
+  resources:
+  - none
+- id: 2
+  title: SMS
+  description: It's the wave of the future!
+  rank: 0
+  tags: unsorted
+  created_at: '2013-10-22 13:28:02 -0600'
+  updated_at: '2013-10-22 13:28:02 -0600'
+  portfolio_id: 6
+  resources:
+  - none
 - id: 3
-  title: Run
-  description: For fun in the hot hot sun
+  title: Hello
+  description: Hello, world!
   rank: 0
-  tags: exercise
-  created_at: '2013-10-21 20:07:02 -0600'
-  updated_at: '2013-10-21 20:07:02 -0600'
-  portfolio_id: 2
+  tags: unsorted
+  created_at: '2013-10-22 13:30:05 -0600'
+  updated_at: '2013-10-22 13:30:05 -0600'
+  portfolio_id: 6
   resources:
-  - Dr. Seuss
-- id: 4
-  title: Learn
-  description: Reading, riting, rrrithmatic.
-  rank: 0
-  tags: education
-  created_at: '2013-10-21 20:07:26 -0600'
-  updated_at: '2013-10-21 20:07:26 -0600'
-  portfolio_id: 3
-  resources:
-  - www.google.com
-- id: 4
-  title: Music
-  description: Michael Eisensmith
-  rank: 4
-  tags: trance
-  created_at: '2013-10-21 20:28:34 -0600'
-  updated_at: '2013-10-21 20:30:48 -0600'
-  portfolio_id: 1
-  resources: 
-- id: 5
-  title: Don't
-  description: Wake Up
-  rank: 0
-  tags: adderol
-  created_at: '2013-10-21 20:58:39 -0600'
-  updated_at: '2013-10-21 20:58:39 -0600'
-  portfolio_id: 1
-  resources:
-  - ''
-- id: 6
-  title: Buddha
-  description: Sat on a lotus
-  rank: 0
-  tags: religion
-  created_at: '2013-10-21 20:58:51 -0600'
-  updated_at: '2013-10-21 20:58:51 -0600'
-  portfolio_id: 1
-  resources:
-  - ''
-- id: 8
-  title: Breakfast
-  description: Quesadillas
-  rank: 0
-  tags: cheese!
-  created_at: '2013-10-21 21:11:01 -0600'
-  updated_at: '2013-10-21 21:11:01 -0600'
-  portfolio_id: 1
-  resources:
-  - ''
+  - none
