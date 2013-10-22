@@ -5,8 +5,7 @@ module Finders
   end
 
   def find(id)
-    raw_idea = find_raw_idea(id)
-    Idea.new(raw_idea.to_h) if raw_idea.to_h['portfolio_id'] == current_portfolio
+    all.find {|idea| idea.id == id.to_i}
   end
 
   def search_for(query="")

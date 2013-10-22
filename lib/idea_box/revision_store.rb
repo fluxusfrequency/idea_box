@@ -44,7 +44,7 @@ class RevisionStore
     end
 
     def create(attributes)
-      new_revision = RevisedIdea.new(attributes.merge("resources" => Array(attributes['resources'])))
+      new_revision = RevisedIdea.new(attributes.merge("id" => all.length+1, "updated_at" => Time.now.to_s, "resources" => Array(attributes['resources'])))
       database.transaction do
         database['revisions'] << new_revision.to_h
       end

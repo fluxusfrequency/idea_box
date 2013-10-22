@@ -1,12 +1,10 @@
-form action=("/#{idea.id if mode == 'edit'}#{'new' if mode == 'new'}") method='POST'
-  -if mode == "edit"
-    input type="hidden" name="_method" value="PUT" style=("display: inline")
+form action=("/ideas/#{idea.id if mode == 'edit'}#{'/new' if mode == 'new'}") method='POST'
   br
   | Title
   input type='text' name='idea[title]' placeholder="Title" value="#{idea.title if mode == "edit"}" style=("display: inline")
   br
   | Description
-  textarea name='idea[description]' style="height: 450px" placeholder="Type your idea here." #{idea.description if mode == "edit"}
+  textarea name='idea[description]' style="height: 375px; resize:none" placeholder="Type your idea here." #{idea.description if mode == "edit"}
   br
   | Tags 
   input type='text' name='idea[tags]' placeholder="Enter comma separated tags here." value="#{idea.tags if mode == "edit"}" style=("display: inline")
@@ -15,12 +13,6 @@ form action=("/#{idea.id if mode == 'edit'}#{'new' if mode == 'new'}") method='P
   input type='text' name='idea[resources]' placeholder="Add text or links here." value="#{idea.resources.join(", ") if mode == "edit" && idea.resources}" style=("display: inline")
   br
   br
-  ul class="button-group round even-3" style="margin-bottom: 10px"
-    li
-      a href="/" 
-        input class="small button success left" type='submit' value='Previous' style="margin-right 20px"
-    li
-      input type='submit' class="small button success center" value='Submit'
-    li
-      a href="/" 
-        input class="small button success right" type='submit' value='Next'
+  -if mode == "edit"
+    input type="hidden" name="_method" value="PUT" style=("display: inline")
+  input class="small button success center" type='submit' value='Submit' style="margin-bottom: 10px"

@@ -33,8 +33,9 @@ module Sinatra
         login_try = Digest::MD5.hexdigest(params[:password])
         if user && user.password == login_try
           session[:persona] = params[:username]
+          user.load_databases
           flash[:notice] = "You are now logged in as #{session[:persona]}."
-          redirect to("/"), locals: {user: user}
+          redirect to("/")
         else
           flash[:error] = "The username or password you entered was incorrect."
           redirect to('/session/login')

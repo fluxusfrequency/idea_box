@@ -43,9 +43,11 @@ class IdeaBoxApp < Sinatra::Base
   }
 
   def user
-    if session[:persona]
-      @user = UserStore.find_by_username(session[:persona])
-    end
+    @user ||= UserStore.find_by_username(session[:persona])
+  end
+
+  def set_dbs
+    user.load_databases
   end
 
   configure :development do
@@ -60,14 +62,25 @@ class IdeaBoxApp < Sinatra::Base
 
   get '/' do
     if session[:persona]
-      @idea = IdeaStore.all.sort.first || IdeaStore.create({})
+      set_dbs
+      @idea = IdeaStore.all.sort.first
       slim :index, locals: { ideas: IdeaStore.all.sort, user: user, idea: @idea, show_resources: false, mode: 'new' }
     else
       slim :login
     end
   end
 
-  post '/:id' do
+  get '/sorted_tags' do
+    ideas = IdeaStore.sort_all_by_tags.values.flatten
+    slim :index, locals: { ideas: ideas, user: user, idea: ideas.first, show_resources: false, mode: 'new' }
+  end
+
+  get '/sorted_days' do
+    ideas = IdeaStore.group_all_by_day_created.values.flatten
+    slim :index, locals: { ideas: ideas, user: user, idea: ideas.first, show_resources: false, mode: 'new' }
+  end
+
+  post '/ideas/:id' do
     protected!
     flash[:notice] = "Idea successfully added" if IdeaStore.create(params[:idea])
     redirect "/"
@@ -78,32 +91,32 @@ class IdeaBoxApp < Sinatra::Base
     slim :index, locals: { ideas: IdeaStore.all.sort, user: user, idea: Idea.new, show_resources: false, mode: 'new' }
   end
 
-  get '/:id' do |id|
+  get '/ideas/:id' do |id|
     protected!
-    idea = IdeaStore.find(id.to_i)
+    idea = IdeaStore.find(id)
     history = RevisionStore.find_all_by_idea_id(id.to_i)
     slim :show, locals: { idea: idea, user: user, show_resources: true, history: history }
   end
 
-  get '/:id/edit' do |id|
+  get '/ideas/:id/edit' do |id|
     protected!
     idea = IdeaStore.find(id.to_i)
-    slim :index, locals: { idea: idea, user: user, ideas: IdeaStore.all.sort, show_resources: false, mode: 'edit' }
+    slim :index, locals: { idea: idea, user: user, ideas: IdeaStore.all.sort, show_resources: false, mode: "edit" }
   end
 
-  put '/:id' do |id|
+  put '/ideas/:id' do |id|
     protected!
     IdeaStore.update(id.to_i, params[:idea])
     redirect '/'
   end
 
-  delete '/:id' do |id|
+  delete '/ideas/:id' do |id|
     protected!
     IdeaStore.delete(id.to_i)
     redirect '/'
   end
 
-  post '/:id/like' do |id|
+  post '/ideas/:id/like' do |id|
     protected!
     idea = IdeaStore.find(id.to_i)
     idea.like!
@@ -144,7 +157,7 @@ class IdeaBoxApp < Sinatra::Base
   get '/portfolios/:value' do |value|
     protected!
     UserStore.load_portfolio_for(user.id, value)
-    flash[:notice] = "Successfully loaded your #{value} repository."
+    flash[:notice] = "Successfully loaded your #{value.capitalize} repository."
     redirect '/'
   end
 

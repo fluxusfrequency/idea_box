@@ -17,7 +17,7 @@ html
             -if authorized?
               li class="divider"
               li class="has-dropdown not-click" 
-                a href="#" Portfolios
+                a href="#" #{user.portfolios[IdeaStore.current_portfolio].capitalize}
                 ul class="dropdown"
                   -user.portfolios.each do |key, value|
                     li class="#{"active" if IdeaStore.current_portfolio == key }"

@@ -3,7 +3,7 @@
  class RevisedIdea
   include Comparable
 
-  attr_reader :id, :idea_id, :title, :description, :tags, :created_at, :updated_at, :resources
+  attr_reader :id, :idea_id, :title, :description, :tags, :rank, :created_at, :updated_at, :resources
 
   def initialize(attributes={})
     attributes = default_revision.merge(attributes)
@@ -12,8 +12,9 @@
     @title       = attributes["title"]
     @description = attributes["description"]
     @tags        = attributes["tags"]
+    @rank        = attributes["rank"]
     @created_at  = attributes["created_at"]
-    @updated_at  = Time.now
+    @updated_at  = attributes["updated_at"]
     @resources   = attributes["resources"]
   end
 
@@ -22,14 +23,15 @@
   end
 
   def to_h
-    { "id" => id,
-      "idea_id" => idea_id,
-      "title" => title,
+    { "id"          => id,
+      "idea_id"     => idea_id,
+      "title"       => title,
       "description" => description,
-      "tags" => tags,
-      "created_at" => created_at,
-      "updated_at" => updated_at,
-      "resources" => resources
+      "tags"        => tags,
+      "rank"        => rank,
+      "created_at"  => created_at,
+      "updated_at"  => updated_at,
+      "resources"   => resources
     }
   end
 
@@ -40,9 +42,10 @@
       "title" => 'New Idea',
       "description" => 'My Idea is...',
       "tags" => 'unsorted',
-      "created_at" => Time.now.to_s,
-      "updated_at" => Time.now.to_s,
-      "resources" => ['none']
+      "rank"        => 0,
+      "created_at"  => Time.now.to_s,
+      "updated_at"  => Time.now.to_s,
+      "resources"   => ['none']
     }
   end
 

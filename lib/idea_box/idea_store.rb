@@ -78,12 +78,9 @@ class IdeaStore
       old_idea = find(id.to_i)
       revision = RevisionStore.create(old_idea.to_h.merge("idea_id"=>id))
       resources = split_resources(attributes['resources'])
-      updated_idea = Idea.new(attributes.merge( 
-        "id" => id, 
-        "created_at" => find(id).created_at, 
-        "updated_at" => Time.now.to_s, 
-        "revision" => revision.revision, 
-        "resources" => resources ))
+      updated_idea = Idea.new(old_idea.to_h.merge(attributes.merge(
+        "updated_at" => Time.now.to_s,
+        "resources"  => resources )))
       database.transaction do
         database['ideas'][id.to_i-1] = updated_idea.to_h
       end

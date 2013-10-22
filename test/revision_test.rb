@@ -21,6 +21,7 @@ class RevisionTest < Minitest::Test
       'title' => "Transporation",
       'description' => "Bicycles and busses",
       'tags' => 'bike, bus',
+      'rank' => 1,
       'created_at' => Time.now,
       'updated_at' => Time.now,
       'resources' => 'http://www.bikes.com'
@@ -30,6 +31,7 @@ class RevisionTest < Minitest::Test
     assert_respond_to revision, :title
     assert_respond_to revision, :description
     assert_respond_to revision, :tags
+    assert_respond_to revision, :rank
     assert_respond_to revision, :created_at
     assert_respond_to revision, :updated_at
     assert_respond_to revision, :resources
@@ -41,6 +43,7 @@ class RevisionTest < Minitest::Test
     assert_respond_to revision, :idea_id
     assert_respond_to revision, :title
     assert_respond_to revision, :description
+    assert_respond_to revision, :tags
     assert_respond_to revision, :tags
     assert_respond_to revision, :created_at
     assert_respond_to revision, :updated_at
@@ -54,6 +57,7 @@ class RevisionTest < Minitest::Test
           'title' => "Transportation",
           'description' => "Bicycles and busses",
           'tags' => 'bike, bus',
+          'rank' => 0,
           'created_at' => Time.now,
           'updated_at' => Time.now,
           'group' => 'home',
@@ -69,7 +73,6 @@ class RevisionTest < Minitest::Test
     refute_equal idea.updated_at, revision.updated_at
     assert_equal 1, revision.revision
     refute_respond_to revision, :group
-    refute_respond_to revision, :rank
     assert_equal 'http://www.bikes.com', revision.resources.first
     RevisionStore.delete_all
   end
@@ -91,6 +94,7 @@ class RevisionTest < Minitest::Test
       'description' => "Bicycles In The Park",
       'tags' => 'bike',
       })
+    RevisionStore.filename = 'db/test_revisions'
     revision_1 = RevisionStore.create(idea.to_h.merge('idea_id' => idea.id, 'description' => 'Motorcycles in the park'))
     revision_2 = RevisionStore.create(idea.to_h.merge('idea_id' => idea.id, 'description' => 'Monster trucks in the park'))
     assert_equal 2, RevisionStore.find_all_by_idea_id(1).length
@@ -124,6 +128,7 @@ class RevisionTest < Minitest::Test
     IdeaStore.update(2, idea.to_h.merge("description" => "Motorcycles in the park"))
     IdeaStore.update(2, idea.to_h.merge("description" => "Alligators in the park"))
     assert_equal 2, RevisionStore.find_all_by_idea_id(idea.id).length
+    IdeaStore.delete_all
     RevisionStore.delete_all
   end
 

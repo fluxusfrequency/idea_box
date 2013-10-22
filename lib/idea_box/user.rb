@@ -42,6 +42,11 @@ class User
     end
   end
 
+  def load_databases
+    load_ideas
+    load_revisions
+  end
+
   def load_ideas
     IdeaStore.filename = "db/user/#{id}_ideas"
   end
