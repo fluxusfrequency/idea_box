@@ -6,7 +6,7 @@ require 'sinatra/flash'
 require 'better_errors'
 require 'sass'
 require './lib/idea_box'
-require './lib/sinatra/auth'
+require './lib/auth'
 require './lib/twilio'
 
 class IdeaBoxApp < Sinatra::Base

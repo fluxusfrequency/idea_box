@@ -1,2 +1,22 @@
 ---
-revisions: []
+revisions:
+- id: 1
+  idea_id: 2
+  title: SMS
+  description: It's the wave of the future!
+  tags: unsorted
+  rank: 0
+  created_at: '2013-10-22 13:28:02 -0600'
+  updated_at: '2013-10-22 13:39:33 -0600'
+  resources:
+  - none
+- id: 2
+  idea_id: 2
+  title: SMS
+  description: It's the wave of the future!
+  tags: unsorted
+  rank: 0
+  created_at: '2013-10-22 13:28:02 -0600'
+  updated_at: '2013-10-22 13:46:39 -0600'
+  resources:
+  - www.google.com

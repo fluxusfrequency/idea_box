@@ -22,6 +22,7 @@ class IdeaTest < Minitest::Test
       'created_at'   => Time.now,
       'updated_at'   => Time.now,
       'portfolio_id' => 1,
+      'uploads'      => 'this_is_how_we_do_it.mp3',
       'resources'    => 'http://www.bikes.com'
       })
     assert_respond_to idea, :id
@@ -32,6 +33,7 @@ class IdeaTest < Minitest::Test
     assert_respond_to idea, :created_at
     assert_respond_to idea, :updated_at
     assert_respond_to idea, :portfolio_id
+    assert_respond_to idea, :uploads
     assert_respond_to idea, :resources
   end
 
@@ -45,6 +47,7 @@ class IdeaTest < Minitest::Test
     assert_respond_to idea, :created_at
     assert_respond_to idea, :updated_at
     assert_respond_to idea, :portfolio_id
+    assert_respond_to idea, :uploads
     assert_respond_to idea, :resources
   end
 

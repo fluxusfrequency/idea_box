@@ -3,7 +3,7 @@
  class Idea
   include Comparable
 
-  attr_reader :id, :title, :description, :rank, :tags, :created_at, :updated_at, :portfolio_id, :resources
+  attr_reader :id, :title, :description, :rank, :tags, :created_at, :updated_at, :portfolio_id, :uploads, :resources
 
   def initialize(attributes={})
     attributes = default_idea.merge(attributes)
@@ -15,6 +15,7 @@
     @created_at   = attributes["created_at"]
     @updated_at   = attributes["updated_at"]
     @portfolio_id = attributes["portfolio_id"]
+    @uploads      = attributes["uploads"]
     @resources    = attributes["resources"]
   end
 
@@ -23,15 +24,16 @@
   end
 
   def to_h
-    { "id" => id,
-      "title" => title,
+    { "id"          => id,
+      "title"       => title,
       "description" => description,
-      "rank" => rank,
-      "tags" => tags,
-      "created_at" => created_at,
-      "updated_at" => updated_at,
-      "portfolio_id" => portfolio_id,
-      "resources" => resources
+      "rank"        => rank,
+      "tags"        => tags,
+      "created_at"  => created_at,
+      "updated_at"  => updated_at,
+      "portfolio_id"=> portfolio_id,
+      "uploads"     => uploads,
+      "resources"   => resources
     }
   end
 
@@ -53,6 +55,7 @@
       "created_at" => Time.now.to_s,
       "updated_at" => Time.now.to_s,
       "portfolio_id" => IdeaStore.current_portfolio,
+      "uploads" => "none",
       "resources" => ['none']
     }
   end

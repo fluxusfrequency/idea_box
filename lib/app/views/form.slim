@@ -12,6 +12,8 @@ form action=("/ideas/#{idea.id if mode == 'edit'}#{'/new' if mode == 'new'}") me
   | Resources
   input type='text' name='idea[resources]' placeholder="Add text or links here." value="#{idea.resources.join(", ") if mode == "edit" && idea.resources}" style=("display: inline")
   br
+  | Upload a file:
+  input type="file" accept="audio/*|video/*|image/*" name='idea[uploads]' placeholder="Select a file to upload." style=("display: inline")
   br
   -if mode == "edit"
     input type="hidden" name="_method" value="PUT" style=("display: inline")
