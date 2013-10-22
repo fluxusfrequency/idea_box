@@ -88,7 +88,10 @@ end
 
   post '/ideas/:id' do
     protected!
-    flash[:notice] = "Idea successfully added" if IdeaStore.create(params[:idea])
+    File.open("db/user/#{user.id}_uploads/" + params['uploads'][:filename], "w") do |f|
+      f.write(params['uploads'][:tempfile].read)
+    end
+    flash[:notice] = "Idea successfully added" if IdeaStore.create(params[:idea].merge({'uploads' => params['uploads'][:filename]}))
     redirect "/"
   end
 

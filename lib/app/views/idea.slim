@@ -15,6 +15,9 @@ br
     -else 
       p style=("display: inline; font-size: 0.8em") #{resource} #{", " unless resource == idea.resources.last}
 br
+-if idea.uploads
+  h7 class="subheader" style=("display: inline; font-size: 0.8em")  Uploads: 
+  a href="./db/user/#{user.id}_uploads" + "#{idea.uploads.to_s}" title=resource style=("display: block; font-size: 0.8em") #{idea.uploads}#{", " unless uploads == idea.uploads.last}
 h7 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
 -idea.all_my_tags.each do |tag|
   a href="/all/tags/#{tag}" title="#{tag}" style=("display: inline; font-size: 0.8em") #{tag} 

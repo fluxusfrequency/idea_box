@@ -20,3 +20,13 @@ revisions:
   updated_at: '2013-10-22 13:46:39 -0600'
   resources:
   - www.google.com
+- id: 3
+  idea_id: 4
+  title: Adding a file
+  description: Sounds good to me.
+  tags: files
+  rank: 0
+  created_at: '2013-10-22 14:20:49 -0600'
+  updated_at: '2013-10-22 14:29:38 -0600'
+  resources:
+  - ''

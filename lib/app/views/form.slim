@@ -1,4 +1,4 @@
-form action=("/ideas/#{idea.id if mode == 'edit'}#{'/new' if mode == 'new'}") method='POST'
+form action=("/ideas/#{idea.id if mode == 'edit'}#{'new' if mode == 'new'}") enctype='multipart/form-data' method='POST'
   br
   | Title
   input type='text' name='idea[title]' placeholder="Title" value="#{idea.title if mode == "edit"}" style=("display: inline")
@@ -13,7 +13,7 @@ form action=("/ideas/#{idea.id if mode == 'edit'}#{'/new' if mode == 'new'}") me
   input type='text' name='idea[resources]' placeholder="Add text or links here." value="#{idea.resources.join(", ") if mode == "edit" && idea.resources}" style=("display: inline")
   br
   | Upload a file:
-  input type="file" accept="audio/*|video/*|image/*" name='idea[uploads]' placeholder="Select a file to upload." style=("display: inline")
+  input type="file" accept="audio/*|video/*|image/*" name='uploads' style=("display: inline")
   br
   -if mode == "edit"
     input type="hidden" name="_method" value="PUT" style=("display: inline")
