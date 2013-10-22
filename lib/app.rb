@@ -64,7 +64,8 @@ class IdeaBoxApp < Sinatra::Base
     if session[:persona]
       set_dbs
       @idea = IdeaStore.all.sort.first
-      slim :index, locals: { ideas: IdeaStore.all.sort, user: user, idea: @idea, show_resources: false, mode: 'new' }
+      @index ||= 0
+      slim :index, locals: { ideas: IdeaStore.all.sort, user: user, idea: @idea, show_resources: false, mode: 'new', index: @index }
     else
       slim :login
     end
