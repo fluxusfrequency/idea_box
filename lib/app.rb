@@ -213,4 +213,8 @@ end
     redirect '/'
   end
 
+  get '/template/show'
+    slim :template
+  end
+
 end
