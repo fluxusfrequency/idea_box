@@ -1,34 +1,32 @@
-h3 All Ideas Tagged With: #{tag} 
+fieldset
+  div class="panel"
+    h3 All Ideas Tagged With: #{tag.capitalize} 
 
-p
--IdeaStore.sort_all_by_tags[tag].each do |idea|
-  | Id:
-  =idea.id
-  br
-  | Title:
-  =idea.title
-  br
-  | Rank:
-  =idea.rank
-  br
-  | Tags:
-  -idea.all_my_tags.each do |tag|
-    a href="/all/tags/#{tag}" title="#{tag}" #{tag} 
-    | - 
-  br
-  | Group:
-  =idea.group
-  br
-  | Created At:
-  =idea.created_at
-  br
-  | Updated At:
-  =idea.updated_at
-  br
-  | Revision Number:
-  =idea.revision
-  br
-  | Description:
-  =idea.description
-  br
-  br
+    p
+    -IdeaStore.sort_all_by_tags[tag].each do |idea|
+      | Id: 
+      =idea.id
+      br
+      | Title: 
+      =idea.title
+      br
+      | Rank: 
+      =idea.rank
+      br
+      | Tags: 
+      -idea.all_my_tags.each do |tag|
+        a href="/all/tags/#{tag}" title="#{tag}" #{tag}#{", " unless idea.all_my_tags.length == 1}
+      br
+      | Created On: 
+      =idea.created_at
+      br
+      | Updated On: 
+      =idea.updated_at
+      br
+      | Revision Number: 
+      =idea.revision
+      br
+      | Description: 
+      =idea.description
+      br
+      br

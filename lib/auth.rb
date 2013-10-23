@@ -31,7 +31,7 @@ module Sinatra
         if user && user.password == login_try
           session[:persona] = params[:username]
           user.load_databases
-          flash[:notice] = "You are now logged in as #{session[:persona]}."
+          flash[:notice] = "You are now logged in as #{session[:persona].capitalize}."
           redirect to("/")
         else
           flash[:error] = "The username or password you entered was incorrect."

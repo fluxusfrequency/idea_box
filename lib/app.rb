@@ -48,7 +48,7 @@ class IdeaBoxApp < Sinatra::Base
 
 helpers do
   def user
-    @user ||= UserStore.find_by_username(session[:persona])
+    @user ||= UserStore.find_by_username(session[:persona].downcase)
   end
 
   def set_dbs
@@ -97,9 +97,12 @@ end
 
   post '/ideas/:id' do
     protected!
-    tempfile = params['uploads'][:tempfile]
-    filename = params['uploads'][:filename]
-    copy_file(tempfile, filename)
+    if params['uploads']
+      tempfile = params['uploads'][:tempfile] if params['uploads']
+      filename = params['uploads'][:filename] if params['uploads']
+      copy_file(tempfile, filename)
+      params[:idea] = params[:idea].merge({'uploads' => filename})
+    end
     flash[:notice] = "Idea successfully added" if IdeaStore.create(params[:idea].merge({'uploads' => filename}))
     redirect "/"
   end
@@ -124,10 +127,13 @@ end
 
   put '/ideas/:id' do |id|
     protected!
-    tempfile = params['uploads'][:tempfile]
-    filename = params['uploads'][:filename]
-    copy_file(tempfile, filename)
-    IdeaStore.update(id.to_i, params[:idea].merge({'uploads' => filename}))
+    if params['uploads']
+      tempfile = params['uploads'][:tempfile] if params['uploads']
+      filename = params['uploads'][:filename] if params['uploads']
+      copy_file(tempfile, filename)
+      params[:idea] = params[:idea].merge({'uploads' => filename})
+    end
+    IdeaStore.update(id.to_i, params[:idea])
     redirect '/'
   end
 

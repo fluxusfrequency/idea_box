@@ -1,2 +1,13 @@
 ---
-revisions: []
+revisions:
+- id: 1
+  idea_id: 1
+  title: Hello
+  description: Hello, World!
+  tags: '123'
+  rank: 0
+  uploads: gravatar.jpeg
+  created_at: Oct 22,  9:28 PM
+  updated_at: Oct 22,  9:28 PM
+  resources:
+  - asd

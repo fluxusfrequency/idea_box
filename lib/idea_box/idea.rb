@@ -3,7 +3,7 @@
  class Idea
   include Comparable
 
-  attr_reader :id, :title, :description, :rank, :tags, :created_at, :updated_at, :portfolio_id, :uploads, :resources
+  attr_reader :id, :title, :description, :rank, :tags, :portfolio_id, :uploads, :resources
 
   def initialize(attributes={})
     attributes = default_idea.merge(attributes)
@@ -66,6 +66,14 @@
     rescue
       1
     end
+  end
+
+  def created_at
+    Time.parse(@created_at).strftime("%b %e, %l:%M %p")
+  end
+
+  def updated_at
+    Time.parse(@updated_at).strftime("%b %e, %l:%M %p")
   end
 
   def revision
