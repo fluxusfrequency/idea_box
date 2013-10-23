@@ -5,11 +5,14 @@ require 'sinatra/assetpack'
 require 'sinatra/flash'
 require 'better_errors'
 require 'sass'
+require 'fileutils'
 require './lib/idea_box'
 require './lib/auth'
 require './lib/twilio'
 
 class IdeaBoxApp < Sinatra::Base
+
+  include FileUtils
 
   enable :sessions
   set :session_secret, 'The magic word'
@@ -51,6 +54,12 @@ helpers do
   def set_dbs
     user.load_databases
   end
+
+  def copy_file(tempfile, filename)
+    FileUtils.mkdir("./lib/app/public/images/user/#{user.id}_uploads/") unless File.directory?("./lib/app/public/images/user/#{user.id}_uploads/")
+    FileUtils.copy(tempfile.path, "./lib/app/public/images/user/#{user.id}_uploads/#{filename}")
+  end
+
 end
 
   configure :development do
@@ -88,10 +97,10 @@ end
 
   post '/ideas/:id' do
     protected!
-    File.open("db/user/#{user.id}_uploads/" + params['uploads'][:filename], "w") do |f|
-      f.write(params['uploads'][:tempfile].read)
-    end
-    flash[:notice] = "Idea successfully added" if IdeaStore.create(params[:idea].merge({'uploads' => params['uploads'][:filename]}))
+    tempfile = params['uploads'][:tempfile]
+    filename = params['uploads'][:filename]
+    copy_file(tempfile, filename)
+    flash[:notice] = "Idea successfully added" if IdeaStore.create(params[:idea].merge({'uploads' => filename}))
     redirect "/"
   end
 
@@ -115,7 +124,10 @@ end
 
   put '/ideas/:id' do |id|
     protected!
-    IdeaStore.update(id.to_i, params[:idea])
+    tempfile = params['uploads'][:tempfile]
+    filename = params['uploads'][:filename]
+    copy_file(tempfile, filename)
+    IdeaStore.update(id.to_i, params[:idea].merge({'uploads' => filename}))
     redirect '/'
   end
 
@@ -167,6 +179,12 @@ end
     protected!
     UserStore.load_portfolio_for(user.id, value)
     flash[:notice] = "Successfully loaded your #{value.capitalize} repository."
+    redirect '/'
+  end
+
+  get '/download/:filename' do |filename|
+    protected!
+    send_file "./lib/app/public/images/user/#{user.id}_uploads/#{filename}", :filename => filename, :type => 'Application/octet-stream'
     redirect '/'
   end
 

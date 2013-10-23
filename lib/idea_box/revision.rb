@@ -3,7 +3,7 @@
  class RevisedIdea
   include Comparable
 
-  attr_reader :id, :idea_id, :title, :description, :tags, :rank, :created_at, :updated_at, :resources
+  attr_reader :id, :idea_id, :title, :description, :tags, :rank, :uploads, :created_at, :updated_at, :resources
 
   def initialize(attributes={})
     attributes = default_revision.merge(attributes)
@@ -13,6 +13,7 @@
     @description = attributes["description"]
     @tags        = attributes["tags"]
     @rank        = attributes["rank"]
+    @uploads     = attributes["uploads"]
     @created_at  = attributes["created_at"]
     @updated_at  = attributes["updated_at"]
     @resources   = attributes["resources"]
@@ -29,6 +30,7 @@
       "description" => description,
       "tags"        => tags,
       "rank"        => rank,
+      "uploads"     => uploads,
       "created_at"  => created_at,
       "updated_at"  => updated_at,
       "resources"   => resources
@@ -43,6 +45,7 @@
       "description" => 'My Idea is...',
       "tags" => 'unsorted',
       "rank"        => 0,
+      "uploads"     => "none",
       "created_at"  => Time.now.to_s,
       "updated_at"  => Time.now.to_s,
       "resources"   => ['none']

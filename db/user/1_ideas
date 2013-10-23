@@ -32,46 +32,25 @@ ideas:
   portfolio_id: 6
   resources:
   - none
-- id: 4
-  title: Adding a file
-  description: Sounds good to me.
+- id: 9
+  title: Well
+  description: I guess
   rank: 0
-  tags: files
-  created_at: '2013-10-22 14:20:49 -0600'
-  updated_at: '2013-10-22 14:29:38 -0600'
+  tags: I'll
+  created_at: '2013-10-22 20:30:27 -0600'
+  updated_at: '2013-10-22 20:30:27 -0600'
   portfolio_id: 1
-  uploads: 01 - Moon.mp3
-  resources: []
+  uploads: Ben_gschool_headshot.jpg
+  resources:
+  - try again
 - id: 5
-  title: HEllo
-  description: nurse
+  title: Hello
+  description: Sire
   rank: 0
-  tags: animaniacs
-  created_at: '2013-10-22 15:36:38 -0600'
-  updated_at: '2013-10-22 15:36:38 -0600'
+  tags: Hello
+  created_at: '2013-10-22 20:49:57 -0600'
+  updated_at: '2013-10-22 20:56:37 -0600'
   portfolio_id: 1
-  uploads: none
+  uploads: ferry3.jpg
   resources:
-  - ''
-- id: 6
-  title: Go
-  description: Check your email
-  rank: 0
-  tags: fool
-  created_at: '2013-10-22 15:38:02 -0600'
-  updated_at: '2013-10-22 15:38:02 -0600'
-  portfolio_id: 1
-  uploads: none
-  resources:
-  - ''
-- id: 7
-  title: Check
-  description: yoself
-  rank: 0
-  tags: before, you, wreck, yourself
-  created_at: '2013-10-22 15:48:38 -0600'
-  updated_at: '2013-10-22 15:48:38 -0600'
-  portfolio_id: 1
-  uploads: AllBusiness.JPG
-  resources:
-  - ''
+  - world

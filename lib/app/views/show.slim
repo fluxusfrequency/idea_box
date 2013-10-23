@@ -36,6 +36,9 @@ fieldset
             h7 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
             p style=("display: inline; font-size: 0.8em") #{revision.tags}
             br
+            h7 class="subheader" style=("display: inline; font-size: 0.8em") Uploads: 
+            p style=("display: inline; font-size: 0.8em") #{revision.uploads}
+            br
             h7 class="subheader" style=("display: inline; font-size: 0.8em")  Resources: 
             p style=("display: inline; font-size: 0.8em") #{"none" if revision.resources.empty?}
             -revision.resources.each do |resource|

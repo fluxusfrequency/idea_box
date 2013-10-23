@@ -1,0 +1,12 @@
+development:
+  adapter:  postgresql
+  database: idea-box-dev
+  username: ben
+  password: 
+  host:     localhost
+test:
+  adapter:  postgresql
+  database: idea-box-test
+  username: ben
+  password: 
+  host:     localhost
