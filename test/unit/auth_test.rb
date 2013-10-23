@@ -1,17 +1,17 @@
 require './test/helpers/unit_helper.rb'
 require './lib/app'
-require './lib/sinatra/auth'
+require './lib/auth'
 
 class IdeaBoxAuthTest < Minitest::Test
   include Rack::Test::Methods
 
-  # def setup
-  #   IdeaStore.filename = 'db/test'
-  # end
+  def setup
+    IdeaStore.filename = 'db/test'
+  end
 
-  # def teardown
-  #   IdeaStore.delete_all
-  # end
+  def teardown
+    IdeaStore.delete_all
+  end
 
   def app
     @app ||= IdeaBoxApp.new

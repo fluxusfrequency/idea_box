@@ -146,8 +146,9 @@ class UserStore
 
     def delete_portfolio(user_id, portfolio_id)
       IdeaStore.delete_portfolio(portfolio_id)
-      user = find(user_id)
-      UserStore.update(user_id, user.to_h[:portfolios].delete(portfolio_id.to_i)) 
+      user = UserStore.find(user_id)
+      user.portfolios.delete(portfolio_id.to_i)
+      UserStore.update(user_id, user.to_h) 
       load_portfolio_for(user_id, user.portfolios.values.first)
     end
 

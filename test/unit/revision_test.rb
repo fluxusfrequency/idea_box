@@ -58,8 +58,8 @@ class RevisionTest < Minitest::Test
           'description' => "Bicycles and busses",
           'tags' => 'bike, bus',
           'rank' => 0,
-          'created_at' => Time.now,
-          'updated_at' => Time.now,
+          'created_at' => Time.now.to_s,
+          'updated_at' => Time.now.to_s,
           'group' => 'home',
           'resources' => ['http://www.bikes.com']
           })

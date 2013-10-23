@@ -35,14 +35,14 @@ class StatisticsTest < Minitest::Test
       'title' => "Water",
       'description' => "Drink from the creek",
       'tags' => 'giardia',
-      'created_at' => Time.now
+      'created_at' => Time.now.to_s
       })
     IdeaStore.create({
       'id' => 6,
       'title' => "Monday",
       'description' => "Pancakes for breakfast",
       'tags' => 'obesity',
-      'created_at' => Time.now
+      'created_at' => Time.now.to_s
       })
     assert_kind_of Hash, IdeaStore.group_all_by_day_created
   end

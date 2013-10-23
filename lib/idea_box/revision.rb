@@ -3,7 +3,7 @@
  class RevisedIdea
   include Comparable
 
-  attr_reader :id, :idea_id, :title, :description, :tags, :rank, :uploads, :resources
+  attr_reader :id, :idea_id, :title, :description, :tags, :rank, :uploads, :created_at, :updated_at, :resources
 
   def initialize(attributes={})
     attributes = default_revision.merge(attributes)
@@ -52,11 +52,11 @@
     }
   end
 
-  def created_at
+  def created_at_parsed
     Time.parse(@created_at).strftime("%b %e, %l:%M %p")
   end
 
-  def updated_at
+  def updated_at_parsed
     Time.parse(@updated_at).strftime("%b %e, %l:%M %p")
   end
 

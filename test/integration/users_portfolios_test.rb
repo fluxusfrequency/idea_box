@@ -192,7 +192,7 @@ class UsersPortfoliosTest < Minitest::Test
       'password'     => 'secret',
       'email'        => 'bennlewis@gmail.com',
       'portfolios'    => { 1 => 'work', 2 => 'school', 3 => 'secrets' },
-      'created_at'   => Time.now
+      'created_at'   => Time.now.to_s
       })
     UserStore.load_portfolio_for(2, 'secrets')
     UserStore.delete_portfolio(2, 3)
