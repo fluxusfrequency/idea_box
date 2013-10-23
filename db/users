@@ -6,10 +6,8 @@ users:
   email: jane@example.com
   portfolios:
     1: work
-    2: play
-    3: school
-    6: texts
-  phone: '17192907974'
+    2: Beer!
+  phone: '+17192907974'
   created_at: '2013-10-20 20:14:54 -0600'
 - id: 2
   username: benjamin

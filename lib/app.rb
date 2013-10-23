@@ -181,10 +181,29 @@ end
     slim :search, locals: { search: "All Ideas Sorted By Day", results: results, user: user }
   end
 
+  post '/portfolios/create/' do
+    protected!
+    name = params[:new_portfolio].to_s
+    if UserStore.create_portfolio(user.id, name)
+      flash[:notice] = "Successfully created your #{name.capitalize} portfolio." 
+      UserStore.load_portfolio_for(user.id, name)
+    end
+    redirect '/'
+  end
+
+  post '/portfolios/delete/:name' do |name|
+    protected!
+    value = name.to_s
+    if UserStore.delete_portfolio(user.id, user.portfolios.key(value))
+      flash[:notice] = "Successfully deleted your #{value.capitalize} portfolio." 
+    end
+    redirect '/session/profile'
+  end
+
   get '/portfolios/:value' do |value|
     protected!
     UserStore.load_portfolio_for(user.id, value)
-    flash[:notice] = "Successfully loaded your #{value.capitalize} repository."
+    flash[:notice] = "Successfully loaded your #{value.capitalize} portfolio."
     redirect '/'
   end
 

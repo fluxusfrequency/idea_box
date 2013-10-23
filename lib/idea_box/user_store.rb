@@ -134,6 +134,11 @@ class UserStore
       RevisionStore.filename = "db/user/#{user_id}_revisions"
     end
 
+    def create_portfolio(user_id, portfolio_name)
+      user = find(user_id)
+      UserStore.update(user_id, user.to_h.merge({'portfolios' => user.portfolios.merge({user.portfolios.keys.max.to_i + 1 => portfolio_name})}))
+    end
+
     def load_portfolio_for(user_id, portfolio)
       user = find(user_id)
       IdeaStore.current_portfolio = user.portfolios.key(portfolio)
@@ -142,8 +147,8 @@ class UserStore
     def delete_portfolio(user_id, portfolio_id)
       IdeaStore.delete_portfolio(portfolio_id)
       user = find(user_id)
-      new_portfolio = user.portfolios.values.first
-      load_portfolio_for(user_id, new_portfolio)
+      UserStore.update(user_id, user.to_h[:portfolios].delete(portfolio_id.to_i)) 
+      load_portfolio_for(user_id, user.portfolios.values.first)
     end
 
     def rename_portfolio(user_id, portfolio_id, new_portfolio_name)

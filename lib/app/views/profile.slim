@@ -1,0 +1,40 @@
+fieldset
+  div class="panel"
+    h1 Your User Profile
+  div class="row"
+    div class="large-12 small-12 columns"
+      div class="panel"
+        h3 Update Account Information: 
+        form action="/session/create" method="POST" value="#{user.username}"
+          label for="username" Username:
+          input#username type="text" name="username"
+          label for="password" Password:
+          input#password type="password" name="password"
+          label for="password" Password Confirmation:
+          input#password_confirmation type="password" name="password_confirmation"
+          label for="phone" Phone:
+          input#phone type="text" name="phone" value="#{user.phone}"
+          label for="username" Email:
+          input#username type="text" name="email" value="#{user.email}"
+          br
+          input type="submit" value="Update"
+  div class="row"
+    div class="large-12 small-12 columns"
+      div class="panel"
+        h3 Porfolios: 
+        -user.portfolios.each do |key, value|
+          a href="/portfolios/#{value}" #{value.capitalize} 
+          form action="/portfolios/delete/#{value}" value="#{value}" method="POST"        
+            input type="submit" value="Delete" class="display:inline"
+          br
+        form action="/portfolios/create/" value="new_portfolio" method="POST"
+          input type="text" placeholder="Name of your new portfolio" name="new_portfolio"
+          input type="submit" value="Create New"
+  div class="row"
+    div class="large-12 small-12 columns"
+      div class="panel"
+        h3 Creative Search: 
+        h5 Search for ideas by time of day:
+        form action="/search/time/results" method='POST'
+          input type="search" name="time_range" placeholder="1:00PM-1:45PM"
+          input type="submit" name="time_seach_submit" class="has-button tiny button success" value="Search"

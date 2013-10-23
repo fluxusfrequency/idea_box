@@ -43,14 +43,3 @@ ideas:
   uploads: ferry3.jpg
   resources:
   - world
-- id: 5
-  title: Photos
-  description: Pictures are worth 1000 words.
-  rank: 0
-  tags: photo
-  created_at: Oct 22,  9:12 PM
-  updated_at: Oct 22,  9:12 PM
-  portfolio_id: 1
-  uploads: Ben_gschool_headshot.jpg
-  resources:
-  - ''

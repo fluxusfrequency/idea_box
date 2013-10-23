@@ -64,6 +64,10 @@ module Sinatra
         end
       end
 
+      app.get '/session/profile' do
+        slim :profile, locals: {user: user}
+      end
+
     end
 
   end
