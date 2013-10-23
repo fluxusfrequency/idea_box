@@ -85,14 +85,14 @@ end
 
   get '/sorted_tags' do
     protected!
-    ideas = IdeaStore.sort_all_by_tags.values.flatten
-    slim :index, locals: { ideas: ideas, user: user, idea: ideas.first, show_resources: false, mode: 'new' }
+    sorted_ideas = IdeaStore.sort_all_by_tags
+    slim :tags, locals: { sorted_ideas: sorted_ideas, user: user, idea: sorted_ideas.first, show_resources: false, mode: 'new' }
   end
 
   get '/sorted_days' do
     protected!
-    ideas = IdeaStore.group_all_by_day_created.values.flatten
-    slim :index, locals: { ideas: ideas, user: user, idea: ideas.first, show_resources: false, mode: 'new' }
+    sorted_ideas = IdeaStore.group_all_by_day_created
+    slim :days, locals: { sorted_ideas: sorted_ideas, user: user, idea: sorted_ideas.first, show_resources: false, mode: 'new' }
   end
 
   post '/ideas/:id' do

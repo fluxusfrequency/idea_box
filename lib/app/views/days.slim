@@ -1,0 +1,50 @@
+fieldset
+  div class="row"      
+    div class="idea_selector"
+      div class="large-3 small-3 columns"
+        div class="panel radius"
+          h3 Your Ideas
+        a href="/" class="large-4 tiny secondary button radius" Sort By Rank
+        a href="/sorted_tags" class="large-4 tiny secondary button radius" Sort Tags
+        a href="/sorted_days" class="large-4 tiny secondary button radius" Sort Days
+        
+        -sorted_ideas.keys.flatten.each do |day|
+          div class="panel radius"
+            h5 #{day}
+          -sorted_ideas[day].each do |idea|
+            div class="panel radius"
+              a href="/ideas/#{idea.id}/edit"
+                h5 #{idea.title}
+              =idea.description
+              br
+              br
+              h7 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
+              -idea.all_my_tags.each do |tag|
+                a href="/all/tags/#{tag}" title="#{tag}" style=("display: inline; font-size: 0.8em") #{tag}   
+              br
+              br
+              ul class="button-group even-3"
+                li
+                  form action="/ideas/#{idea.id}" method="GET" style=("display: inline")
+                    input class="tiny button success" type="submit" value="View"
+                li
+                  form action="/ideas/#{idea.id}/like" method='POST' style=("display: inline")
+                    input class="tiny button success" type='submit' value='+'
+                li
+                  form action="/ideas/#{idea.id}" method="POST" style=("display: inline")
+                    input type="hidden" name="_method" value="DELETE"
+                    input class="tiny button success" type="submit" value="Delete"
+
+    div class="large-9 small-9 columns"
+      div class="columns panel radius" 
+        -if mode == "edit"
+          h3 Editing - #{idea.title}
+          ==slim :form, locals: {idea: IdeaStore.find(idea.id), show_resources: true, mode: 'edit' }
+        -elsif mode == "new"
+          h3 Creating A New Idea
+          ==slim :form, locals: { idea: idea, mode: "new", mode: 'new' }
+
+h5 Search for ideas created between:
+form action="/search/time/results" method='POST'
+  input type="search" name="time_range" placeholder="1:00PM-1:45PM"
+  input type="submit" name="time_seach_submit" class="has-button tiny button success" value="Search"
