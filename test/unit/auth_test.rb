@@ -7,6 +7,7 @@ class IdeaBoxAuthTest < Minitest::Test
 
   def teardown
     IdeaStore.delete_all
+    RevisionStore.delete_all
   end
 
   def app

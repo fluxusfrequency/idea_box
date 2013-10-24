@@ -5,6 +5,7 @@ class TaggingTest < Minitest::Test
 
   def teardown
     IdeaStore.delete_all
+    RevisionStore.delete_all
   end
 
   def test_it_can_create_and_find_ideas

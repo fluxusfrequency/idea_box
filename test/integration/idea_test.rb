@@ -3,6 +3,11 @@ require './lib/idea_box'
 
 class IdeaTest < Minitest::Test
 
+  def teardown
+    IdeaStore.delete_all
+    RevisionStore.delete_all
+  end
+
   def test_it_can_set_up_attrs
     idea = Idea.new({
       'id'           => 1,
@@ -43,7 +48,7 @@ class IdeaTest < Minitest::Test
 
   def test_it_knows_its_revision_number
     idea = Idea.new
-    assert_equal 0, idea.revision
+    assert_equal 1, idea.revision
   end
 
 end
