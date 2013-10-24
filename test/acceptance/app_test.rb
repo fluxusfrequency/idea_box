@@ -7,35 +7,27 @@ class IdeaBoxAppTest < Minitest::Test
   include Capybara::DSL
 
  def setup
-    IdeaStore.filename = 'db/test'
-    RevisionStore.filename = 'db/test_revisions'
     visit '/'
-    within("un") do
-      fill_in("username", :with => 'admin')
-    end
-    within("input#login_password") do
-      fill_in("password", :with => 'password')
-    end
+    fill_in("username", :with => 'admin')
+    fill_in("password", :with => 'password')
     click_on 'Log In'
   end
 
   def teardown
-    IdeaStore.delete_all
-    RevisionStore.delete_all
-    # visit '/'
-    # within("user_button") do
-    #   click_on 'logout'
-    # end
+    visit '/'
+    within("#logout") do
+      click_on 'Log Out'
+    end
   end
 
   def app
     @app ||= IdeaBoxApp.new
   end
 
-  # def test_it_exists
-  #   visit '/'
-  #   assert page.has_content?("Your Ideas")
-  # end
+  def test_it_exists
+    visit '/'
+    assert page.has_content?("You are now logged in as Admin.")
+  end
 
   # def test_the_get_root_method_returns_the_index
   #   get '/'
