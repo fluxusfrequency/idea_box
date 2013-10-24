@@ -5,10 +5,6 @@ require './lib/auth'
 class IdeaBoxAuthTest < Minitest::Test
   include Rack::Test::Methods
 
-  def setup
-    IdeaStore.filename = 'db/test'
-  end
-
   def teardown
     IdeaStore.delete_all
   end

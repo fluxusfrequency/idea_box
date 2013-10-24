@@ -1,6 +1,6 @@
 ENV['RACK_ENV'] = 'test'
 
-require_relative '../../lib/app'
+require './lib/app'
 
 require 'bundler'
 Bundler.require
@@ -10,6 +10,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require 'capybara'
 require 'capybara/dsl'
+require 'sinatra'
 require 'sinatra/assetpack'
 
 Capybara.app = IdeaBoxApp

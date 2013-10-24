@@ -17,7 +17,11 @@ class UserStore
     end
 
     def filename
-      @filename || 'db/users'
+      if ENV['RACK_ENV'] == 'test'
+        @filename || 'db/test_users'
+      else
+        @filename || 'db/users'
+      end
     end
 
     def filename=(name)

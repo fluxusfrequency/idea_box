@@ -3,10 +3,6 @@ require './lib/idea_box'
 
 class TaggingTest < Minitest::Test
 
-  def setup
-    IdeaStore.filename = 'db/test'
-  end
-
   def teardown
     IdeaStore.delete_all
   end
