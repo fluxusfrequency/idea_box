@@ -88,6 +88,8 @@ class IdeaBoxAppTest < Minitest::Test
 
   def test_liking_an_idea
     create_stub
+    visit '/'
+    # click_on ''
   end
 
   # def test_it_shows_an_idea

@@ -4,11 +4,14 @@ div class="row"
       div class="large-4 small-6 columns left"
         a href="/ideas/#{idea.id}/edit" id="#{idea.title}_panel" class="no_hover"
           div class="image_container_#{rand(4)+1}"
-            =idea.description
+            ==idea.description
+            br
+            p style="font-size:0.6em" (click to edit)
 
         div class="panel"
           a href="/ideas/#{idea.id}"
             h4 #{idea.title}
+          p style="font-size:0.6em" (click to view)
           h6 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
           -idea.all_my_tags.each do |tag|
             a href="/all/tags/#{tag}" title="#{tag}" style=("display: inline; font-size: 0.8em") #{tag} 
