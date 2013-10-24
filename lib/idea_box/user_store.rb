@@ -1,17 +1,9 @@
 require 'yaml/store'
 require 'time'
 require './lib/idea_box'
-# require './lib/idea_box/finders'
-# require './lib/idea_box/groupers'
-# require './lib/idea_box/sorters'
-
 
 class UserStore
   class << self
-    # include Finders
-    # include Groupers
-    # include Sorters
-
     def database
       @database ||= initialize_database
     end

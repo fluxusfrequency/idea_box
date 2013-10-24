@@ -1,5 +1,6 @@
 require './test/helpers/unit_helper.rb'
 require './lib/idea_box'
+require 'pry'
 
 class RevisionTest < Minitest::Test
 
