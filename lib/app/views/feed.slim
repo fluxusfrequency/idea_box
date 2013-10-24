@@ -1,0 +1,41 @@
+div class="row" style="padding-top: 20px"
+  div class="row"
+    -ideas.each_with_index do |idea, i|
+      div class="large-4 small-6 columns left" 
+        a href="/ideas/#{idea.id}/edit" class="no_hover"
+          div class="image_container_#{rand(4)+1}"
+            =idea.description
+
+        div class="panel"
+          h4 #{idea.title}
+          h6 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
+          -idea.all_my_tags.each do |tag|
+            a href="/all/tags/#{tag}" title="#{tag}" style=("display: inline; font-size: 0.8em") #{tag}#{", " unless idea == ideas.last}  
+      -break if i == 11
+      -if i == 2 || i == 5 || i == 8
+        div class="row"
+       
+
+        / -ideas.each do |idea|
+        /   div class="panel radius"
+        /     a href="/ideas/#{idea.id}/edit"
+        /       h5 #{idea.title}
+        /     =idea.description
+        /     br
+        /     br
+        /     h7 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
+        /     -idea.all_my_tags.each do |tag|
+        /       a href="/all/tags/#{tag}" title="#{tag}" style=("display: inline; font-size: 0.8em") #{tag}   
+        /     br
+        /     br
+        /     ul class="button-group even-3"
+              li
+                form action="/ideas/#{idea.id}" method="GET" style=("display: inline")
+                  input class="tiny button success" type="submit" value="View"
+              li
+                form action="/ideas/#{idea.id}/like" method='POST' style=("display: inline")
+                  input class="tiny button success" type='submit' value='+'
+              li
+                form action="/ideas/#{idea.id}" method="POST" style=("display: inline")
+                  input type="hidden" name="_method" value="DELETE"
+                  input class="tiny button success" type="submit" value="Delete"

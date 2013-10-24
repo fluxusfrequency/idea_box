@@ -25,21 +25,21 @@ class IdeaBoxApp < Sinatra::Base
   register Sinatra::Flash
 
   assets {
-    serve '/javascripts', from: 'javascripts'
+    serve '/js', :from => 'javascripts'
     js :foundation, [
-      'javascripts/foundation/foundation.js',
-      'javascripts/foundation/foundation.*.js'
+      '/js/foundation/foundation.js',
+      '/js/foundation/foundation.*.js'
     ]
 
     js :application, [
-      '/javascripts/vendor/*.js',
-      '/javascripts/app.js'
+      '/js/vendor/*.js',
+      '/js/app.js'
     ]
 
-    serve '/stylesheets', from: 'stylesheets'
+    serve '/css', :from => 'stylesheets'
     css :application, [
-      '/stylesheets/normalize.css',
-      '/stylesheets/app.css'
+      '/css/normalize.css',
+      '/css/app.css'
     ]
 
     js_compression :jsmin
@@ -77,7 +77,7 @@ end
       set_dbs
       @idea = IdeaStore.all.sort.first
       @index ||= 0
-      slim :index, locals: { ideas: IdeaStore.all.sort, user: user, idea: @idea, show_resources: false, mode: 'new', index: @index }
+      slim :index, locals: { ideas: IdeaStore.all.sort, user: user, idea: @idea, show_resources: false, mode: 'new' }
     else
       slim :login
     end
@@ -211,10 +211,6 @@ end
     protected!
     send_file "./lib/app/public/images/user/#{user.id}_uploads/#{filename}", :filename => filename, :type => 'Application/octet-stream'
     redirect '/'
-  end
-
-  get '/template/show'
-    slim :template
   end
 
 end

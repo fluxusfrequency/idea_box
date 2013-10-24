@@ -1,0 +1,54 @@
+fieldset
+  h3 Viewing: #{idea.title}
+  div class="panel"
+    h5 #{idea.title}
+    ==slim :idea, locals: { idea: idea, show_resources: true, history: history }
+    / div class="small-6 large-6 column"
+    ul class="button-group round even-6"
+      li
+        form action="/ideas/#{idea.id}/edit" method="GET" style=("display: inline")
+          input class="tiny button success" type="submit" value="Edit"
+      li
+        form action="/ideas/#{idea.id}" method="POST" style=("display: inline")
+          input type="hidden" name="_method" value="DELETE"
+          input class="tiny button success" type="submit" value="Delete"
+      li
+        form action="/ideas/#{idea.id}/like" method='POST' style=("display: inline")
+          input class="tiny button success" type='submit' value='+'
+    fieldset
+      -if history
+        h6 style=("display: inline") History: 
+        br
+        -history.each_with_index do |revision, i|
+            br
+            h7 class="subheader" style=("display: inline; font-size: 0.8em") Revision number: 
+            p style=("display: inline; font-size: 0.8em") #{i+1}
+            br
+            h7 class="subheader" style=("display: inline; font-size: 0.8em") Title: 
+            p style=("display: inline; font-size: 0.8em") #{revision.title}
+            br
+            h7 class="subheader" style=("display: inline; font-size: 0.8em") Description: 
+            p style=("display: inline; font-size: 0.8em") #{revision.description}
+            br
+            h7 class="subheader" style=("display: inline; font-size: 0.8em") Rank: 
+            p style=("display: inline; font-size: 0.8em") #{revision.rank}
+            br
+            h7 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
+            p style=("display: inline; font-size: 0.8em") #{revision.tags}
+            br
+            h7 class="subheader" style=("display: inline; font-size: 0.8em") Uploads: 
+            p style=("display: inline; font-size: 0.8em") #{revision.uploads}
+            br
+            h7 class="subheader" style=("display: inline; font-size: 0.8em")  Resources: 
+            p style=("display: inline; font-size: 0.8em") #{"none" if revision.resources.empty?}
+            -revision.resources.each do |resource|
+              -if resource.match(/(http:\/\/)?www\..+\..+/)
+                a href="http://#{resource}" title=resource style=("display: inline; font-size: 0.8em") #{resource}#{", " unless resource == revision.resources.last}
+              -elsif resource.match(/(http:\/\/)www\..+\..+/)
+                a href="#{resource}" title=resource style=("display: inline; font-size: 0.8em") #{resource}#{", " unless resource == revision.resources.last}
+              -else 
+                p style=("display: inline; font-size: 0.8em") #{resource} #{", " unless resource == revision.resources.last}
+            br
+            h7 class="subheader" style=("display: inline; font-size: 0.8em") Updated on: 
+            p style=("display: inline; font-size: 0.8em") #{revision.updated_at_parsed}
+            br
