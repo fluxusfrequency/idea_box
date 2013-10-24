@@ -5,6 +5,7 @@ class SearchingTest < Minitest::Test
 
   def teardown
     IdeaStore.delete_all
+    RevisionStore.delete_all
   end
 
   def test_it_can_search_for_ideas_between_hours_of_the_day

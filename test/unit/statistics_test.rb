@@ -5,6 +5,7 @@ class StatisticsTest < Minitest::Test
 
   def teardown
     IdeaStore.delete_all
+    RevisionStore.delete_all
   end
 
   def test_it_can_show_ideas_broken_down_by_hour_of_day

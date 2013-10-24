@@ -3,10 +3,9 @@ require './lib/idea_box'
 
 class IdeaTest < Minitest::Test
 
-  def setup
-  end
-
   def teardown
+    IdeaStore.delete_all
+    RevisionStore.delete_all
   end
 
   def test_it_can_set_up_attrs
