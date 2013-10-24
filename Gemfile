@@ -21,4 +21,5 @@ group :test do
   gem 'minitest',  require: false
   gem 'sinatra-assetpack', require: 'sinatra/assetpack'
   gem 'capybara'
+  gem 'pry', require: 'pry'
 end

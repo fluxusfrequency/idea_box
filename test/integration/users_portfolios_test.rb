@@ -4,7 +4,9 @@ require './lib/idea_box'
 class UsersPortfoliosTest < Minitest::Test
 
   def setup
+    IdeaStore.filename = 'db/test'
     UserStore.filename = 'db/test_users'
+    RevisionStore.filename = 'db/test_revisions'
   end
 
   def teardown

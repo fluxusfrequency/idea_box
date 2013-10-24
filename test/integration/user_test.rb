@@ -4,7 +4,9 @@ require './lib/idea_box'
 class UserTest < Minitest::Test
 
   def setup
+    IdeaStore.filename = 'db/test'
     UserStore.filename = 'db/test_users'
+    RevisionStore.filename = 'db/test_revisions'
   end
 
   def teardown
@@ -16,7 +18,7 @@ class UserTest < Minitest::Test
   def test_it_exists
     assert User
     assert UserStore
-  end
+  end 
 
   def test_it_can_set_up_attrs
     user = User.new({
@@ -50,7 +52,7 @@ class UserTest < Minitest::Test
 
   def test_it_can_clean_phone_numbers
     user = User.new({'phone' => '7192907974'})
-    assert_equal '+17192907974', user.phone
+    assert_equal '7192907974', user.phone
   end
 
   def test_it_can_load_its_idea_db
@@ -84,6 +86,7 @@ class UserTest < Minitest::Test
       'password'     => 'hello',
       'email'        => 'bennlewis@gmail.com',
       })
+    
     assert UserStore.all.length == 1
     user = UserStore.find(1)
     assert_equal 1, user.id

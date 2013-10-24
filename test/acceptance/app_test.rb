@@ -71,7 +71,7 @@ class IdeaBoxAppTest < Minitest::Test
   def test_view_idea
     create_stub
     visit '/'
-    click_on 'test'
+    click_on 'test_edit'
     assert page.has_content?("Viewing: test")
   end
 

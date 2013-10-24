@@ -5,10 +5,12 @@ class PortfolioTest < Minitest::Test
 
   def setup
     IdeaStore.filename = 'db/test'
+    RevisionStore.filename = 'db/test_revisions'
   end
 
   def teardown
     IdeaStore.delete_all
+    RevisionStore.delete_all
   end
 
   def test_ideas_are_given_a_the_current_portfolio_id_by_default
