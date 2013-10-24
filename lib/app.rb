@@ -213,7 +213,7 @@ end
     redirect '/'
   end
 
-  get '/template/show'
+  get '/template/show' do
     slim :template
   end
 
