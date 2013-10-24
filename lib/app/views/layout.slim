@@ -32,14 +32,14 @@ html
             ul class="inline-list right"
               li class="admin"
                 a href="/session/profile" Profile 
-              li class="admin"
+              li class="admin" id="logout"
                 a href="/session/logout" Log Out    
     -if authorized?
       div class="row"
         -sort ||= 'rank'
         div class="large-9 small-9 columns" style="padding: 0px"
           div class="small-3 large-3 columns" style="padding: 0px"
-            a href="/new" class="button prefix alert" New Idea
+            a href="/new" class="button prefix alert" id="new_idea" New Idea
           div class="small-3 large-3 columns" style="padding: 0px"
             a href="/" class="button prefix #{'success' if sort!='rank'} #{'secondary' if sort=='rank'}" Sort By Rank
           div class="small-3 large-3 columns" style="padding: 0px"

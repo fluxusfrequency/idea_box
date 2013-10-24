@@ -7,7 +7,6 @@ users:
   portfolios:
     1: work
     2: Beer!
-    3: Zanzibar
     6: texts
   phone: '7192907974'
   created_at: '2013-10-20 20:14:54 -0600'

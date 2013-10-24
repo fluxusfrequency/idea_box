@@ -21,7 +21,7 @@ div class="row"
     h3 Porfolios: 
     -user.portfolios.each do |key, value|
       a href="/portfolios/#{value}" #{value.capitalize} 
-      form action="/portfolios/delete/#{value}" value="#{value}" method="POST"        
+      form action="/portfolios/delete/#{value}" value="#{value}" method="POST" id="#{value}_delete"
         input type="submit" value="Delete" class="display:inline"
       br
     form action="/portfolios/create/" value="new_portfolio" method="POST"

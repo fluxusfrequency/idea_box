@@ -11,13 +11,30 @@ class IdeaBoxAppTest < Minitest::Test
     fill_in("username", :with => 'admin')
     fill_in("password", :with => 'password')
     click_on 'Log In'
+    click_on 'Profile'
+    fill_in('new_portfolio', :with => 'Zanzibar')
+    click_on 'Create New'
+    visit '/'
+    click_on 'Zanzibar'
   end
 
   def teardown
     visit '/'
+    click_on 'Profile'
+    within '#Zanzibar_delete' do
+      click_on 'Delete'
+    end
     within("#logout") do
       click_on 'Log Out'
     end
+  end
+
+  def create_stub
+    visit '/'
+    click_on 'new_idea'
+    fill_in('idea[title]', :with => 'test_edit')
+    fill_in('idea[description]', :with => 'test_body')
+    click_on 'Submit'
   end
 
   def app
@@ -26,47 +43,52 @@ class IdeaBoxAppTest < Minitest::Test
 
   def test_it_exists
     visit '/'
-    assert page.has_content?("You are now logged in as Admin.")
+    assert page.has_content?("New Idea")
   end
 
-  # def test_the_get_root_method_returns_the_index
-  #   get '/'
-  #   assert_equal 200, last_response.status
-  # end
+  def test_create_new_idea
+    visit '/'
+    click_on 'new_idea'
+    fill_in('idea[title]', :with => 'Capybara') 
+    fill_in('idea[description]', :with => 'Let robots visit my website.') 
+    fill_in('idea[tags]', :with => 'tdd')
+    fill_in('idea[resources]', :with => 'Capybara')
+    click_on 'Submit'
+    assert page.has_content?("Tags: tdd")
+  end
 
-  # def test_create_new_idea
-  #   post '/new', {idea: {title: "exercise", description: "sign up for stick fighting classes"}}
-  #   idea = IdeaStore.all.last
-  #   assert_equal "exercise", idea.title
-  #   assert_equal "sign up for stick fighting classes", idea.description
-  # end
+  def test_create_empty_idea
+    visit '/'
+    click_on 'new_idea'
+    fill_in('idea[title]', :with => '') 
+    fill_in('idea[description]', :with => '') 
+    fill_in('idea[tags]', :with => '')
+    fill_in('idea[resources]', :with => '')
+    click_on 'Submit'
+    assert page.has_content?("Tags: ")
+  end
 
-  # def test_edit_idea_by_id
-  #   post '/new', {idea: {title: "exercise", description: "sign up for stick fighting classes"}}
-  #   get '/1/edit'
-  #   assert last_response.body.include?("exercise")
-  # end
+  def test_view_idea
+    create_stub
+    visit '/'
+    click_on 'test'
+    assert page.has_content?("Viewing: test")
+  end
 
-  # def test_edit_idea_by_id
-  #   post '/1', {idea: { title: "exercise", description: "sign up for stick fighting classes"}}
-  #   put '/1', {idea: { title: "exercise", description: "sign up for capoeria classes"}}
-  #   assert_equal "sign up for capoeria classes", IdeaStore.find(1).description
-  #   assert_equal 302, last_response.status
-  # end
+  def test_edit_idea
+    create_stub
+    visit '/'
+    click_on 'test_edit_panel'
+    assert page.has_content?("Editing - test_edit")
+    fill_in('idea[description]', :with => 'Hello, world!')
+    click_on 'Submit'
+    visit '/'
+    assert page.has_content?("Hello, world!")
+  end
 
-  # # def test_delete_idea_by_id
-  # #   post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes"}}
-  # #   delete '/1'
-  # #   assert_equal nil, IdeaStore.find(1)
-  # #   assert_equal 302, last_response.status
-  # # end
-
-  # def test_liking_an_idea
-  #   post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes"}}
-  #   post '/1/like'
-  #   assert_equal 1, IdeaStore.find(1).rank
-  #   assert_equal 302, last_response.status
-  # end
+  def test_liking_an_idea
+    create_stub
+  end
 
   # def test_it_shows_an_idea
   #   post '/', {idea: {title: "exercise", description: "sign up for stick fighting classes"}}

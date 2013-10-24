@@ -140,3 +140,14 @@ revisions:
   created_at: '2013-10-22 20:49:57 -0600'
   updated_at: '2013-10-23 22:20:37 -0600'
   resources: []
+- id: 13
+  idea_id: 17
+  title: test_edit
+  description: test_body
+  tags: ''
+  rank: 0
+  uploads: 
+  created_at: '2013-10-24 09:06:02 -0600'
+  updated_at: '2013-10-24 09:06:04 -0600'
+  resources:
+  - ''
