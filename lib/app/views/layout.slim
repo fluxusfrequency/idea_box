@@ -14,45 +14,43 @@ html
         div class="large-4 small-12 columns logo_cont"
           h1 style="font-size: 2.75em"
             a href="/" id="ib_logo" IdeaBox
-        div class="large-4 small-6 columns portfolios"
-          -if authorized?
+        -if authorized?
+          div class="large-4 small-6 columns portfolios"
             -i = 0
             -user.portfolios.each do |key, value|
               a href="/portfolios/#{value}" id="#{'active' if IdeaStore.current_portfolio == key }" #{value.capitalize}
               -i += 1
               -break if i == 4
-        div class="large-4 small-8 columns right nav_links" 
-          ul class="inline-list right"
-            li class="admin"
-              a href="/session/profile" Profile 
-            li class="admin"
-              a href="/session/logout" Log Out    
-    
-    div class="row"
-      div class="large-9 small-9 columns" style="padding: 0px"
-        div class="small-3 large-3 columns" style="padding: 0px"
-          a href="/new" class="button prefix alert" New Idea
-        div class="small-3 large-3 columns" style="padding: 0px"
-          a href="/" class="button prefix secondary" Sort By Rank
-        div class="small-3 large-3 columns" style="padding: 0px"
-          a href="/sorted_tags" class="button prefix success" Sort Tags
-        div class="small-3 large-3 columns left" style="padding: 0px"
-          a href="/sorted_days" class="button prefix success" Sort Days
- 
-      div class="large-3 small-3 columns right search_spot" style="padding: 0px"
-        -if authorized?
+          div class="large-4 small-8 columns right nav_links" 
+            ul class="inline-list right"
+              li class="admin"
+                a href="/session/profile" Profile 
+              li class="admin"
+                a href="/session/logout" Log Out    
+    -if authorized?
+      div class="row"
+        -sort ||= 'rank'
+        div class="large-9 small-9 columns" style="padding: 0px"
+          div class="small-3 large-3 columns" style="padding: 0px"
+            a href="/new" class="button prefix alert" New Idea
+          div class="small-3 large-3 columns" style="padding: 0px"
+            a href="/" class="button prefix #{'success' if sort!='rank'} #{'secondary' if sort=='rank'}" Sort By Rank
+          div class="small-3 large-3 columns" style="padding: 0px"
+            a href="/sorted_tags" class="button prefix #{'success' if sort!='tags'} #{'secondary' if sort=='tags'}" Sort Tags
+          div class="small-3 large-3 columns left" style="padding: 0px"
+            a href="/sorted_days" class="button prefix #{'success' if sort!='days'} #{'secondary' if sort=='days'}" Sort Days
+
+        div class="large-3 small-3 columns right search_spot" style="padding: 0px"
           form action="/search/results" method='POST'
             div class="row collapse" 
               div class="small-8 large-8 columns"
                 input type="search" style="border: 1px solid black" name="search_text" placeholder="Find idea"
               div class="small-4 large-4 columns" 
-                input type="submit" name="search" class="button prefix alert" value="Go"
+                input type="submit" name="search" class="button prefix alert" value="Go"  
+    div class="row"  
+      == styled_flash             
+    section  
 
-    div class="row"
-      div class="large-12 small-12 columns" style="padding: 0px"
-        == styled_flash
-
-    section        
     ==yield
 
     footer class="row"

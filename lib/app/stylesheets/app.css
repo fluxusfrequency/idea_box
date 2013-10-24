@@ -7308,9 +7308,10 @@ a.th {
   width: 600px;
   padding: 5px;
   font-weight: bold;
-  margin-top: 5px;
+  margin-bottom: 20px;
   background: #8CBEB2;
   color: black;
+  border: 1px solid #5C4B51;
 }
 
 body {

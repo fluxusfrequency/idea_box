@@ -32,40 +32,39 @@ ideas:
   portfolio_id: 6
   resources:
   - none
-- id: 5
+- id: 4
   title: Hello
   description: Sire
-  rank: 0
+  rank: 1
   tags: Hello
   created_at: '2013-10-22 20:49:57 -0600'
-  updated_at: '2013-10-22 20:56:37 -0600'
+  updated_at: '2013-10-23 22:20:33 -0600'
   portfolio_id: 1
   uploads: ferry3.jpg
-  resources:
-  - world
-- id: 6
+  resources: 
+- id: 5
   title: Chuck ipsum
   description: Scientists in Washington have recently conceded that, if there were
     a nuclear war, all that would remain are cockroaches and Chuck Norris. Ironically,
     Chuck Norris’ hidden talent is invisibility. Chuck Norris made Ellen Degeneres
     straight. Chuck Norris doesn’t eat.
   rank: 0
-  tags: Hello
+  tags: Hello, world
   created_at: '2013-10-22 20:49:57 -0600'
-  updated_at: '2013-10-22 20:56:37 -0600'
+  updated_at: '2013-10-23 22:08:47 -0600'
   portfolio_id: 1
   uploads: 
   resources:
   - world
-- id: 7
-  title: Rather he kicks ass
+- id: 6
+  title: Rather he kicks ass!
   description: until he’s full. Chuck Norris got a perfect score on his SAT's, simply
     by writing Chuck Norris for every answer. Chuck Norris knows where Carmen Sandiego
     is. When Chuck Norris was denied
   rank: 0
   tags: Hello
   created_at: '2013-10-22 20:49:57 -0600'
-  updated_at: '2013-10-22 20:56:37 -0600'
+  updated_at: '2013-10-23 22:09:26 -0600'
   portfolio_id: 1
   uploads: 
   resources:
@@ -96,19 +95,18 @@ ideas:
   uploads: 
   resources:
   - http://idsgn.dropmark.com/107/1130450
-- id: 10
+- id: 9
   title: Chuck Norris
   description: It was more "humane". Chuck Norris is currently suing NBC, claiming
     Law and Order are trademarked names for his left and right legs. Chuck Norris
     does not hunt because the word hunting infers the probability of failure.
-  rank: 0
+  rank: 2
   tags: Hello
   created_at: '2013-10-22 20:49:57 -0600'
-  updated_at: '2013-10-22 20:56:37 -0600'
+  updated_at: '2013-10-23 22:20:38 -0600'
   portfolio_id: 1
   uploads: 
-  resources:
-  - http://idsgn.dropmark.com/107/1130450
+  resources: 
 - id: 11
   title: Chuck Norris goes killing.
   description: Chuck Norris is Luke Skywalker’s real father. The chief export of Chuck
@@ -131,6 +129,30 @@ ideas:
   tags: Hello
   created_at: '2013-10-22 20:49:57 -0600'
   updated_at: '2013-10-22 20:56:37 -0600'
+  portfolio_id: 1
+  uploads: 
+  resources:
+  - http://idsgn.dropmark.com/107/1130450
+- id: 12
+  title: New Idea
+  description: Hickenlooper
+  rank: 0
+  tags: Doo, dah
+  created_at: '2013-10-23 21:46:40 -0600'
+  updated_at: '2013-10-23 21:46:40 -0600'
+  portfolio_id: 1
+  uploads: 
+  resources:
+  - '123'
+- id: 13
+  title: Rather he kicks ass!
+  description: until he’s full. Chuck Norris got a perfect score on his SAT's, simply
+    by writing Chuck Norris for every answer. Chuck Norris knows where Carmen Sandiego
+    is. When Chuck Norris was denied
+  rank: 0
+  tags: Hello, world
+  created_at: '2013-10-23 22:09:26 -0600'
+  updated_at: '2013-10-23 22:10:27 -0600'
   portfolio_id: 1
   uploads: 
   resources:

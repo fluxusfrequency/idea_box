@@ -1,4 +1,4 @@
-div class="row" style="padding-top: 20px"
+div class="row"
   div class="row"
     -ideas.each_with_index do |idea, i|
       div class="large-4 small-6 columns left" 
@@ -10,7 +10,20 @@ div class="row" style="padding-top: 20px"
           h4 #{idea.title}
           h6 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
           -idea.all_my_tags.each do |tag|
-            a href="/all/tags/#{tag}" title="#{tag}" style=("display: inline; font-size: 0.8em") #{tag}#{", " unless idea == ideas.last}  
+            a href="/all/tags/#{tag}" title="#{tag}" style=("display: inline; font-size: 0.8em") #{tag}#{", " unless idea == ideas.last} 
+          br
+          br
+          ul class="button-group even-4"
+            li
+              form action="/ideas/#{idea.id}" method="GET" style=("display: inline")
+                input class="tiny button success" type="submit" value="View"
+            li
+              form action="/ideas/#{idea.id}/like" method='POST' style=("display: inline")
+                input class="tiny button success" type='submit' value='+'
+            li
+              form action="/ideas/#{idea.id}" method="POST" style=("display: inline")
+                input type="hidden" name="_method" value="DELETE"
+                input class="tiny button success" type="submit" value="Delete" 
       -break if i == 11
       -if i == 2 || i == 5 || i == 8
         div class="row"

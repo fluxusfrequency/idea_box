@@ -22,7 +22,7 @@ module Sinatra
       app.enable :sessions
 
       app.get '/session/login' do
-        slim :login
+        slim :login, locals: {sort: 'rank'}
       end
 
       app.post '/session/login' do
@@ -65,7 +65,12 @@ module Sinatra
       end
 
       app.get '/session/profile' do
-        slim :profile, locals: {user: user}
+        slim :profile, locals: {user: user, sort: 'rank'}
+      end
+
+      app.post '/session/update' do
+        flash[:success] = "Successfully updated your profile!" if UserStore.update(user.id, params[:registration])
+        redirect '/'
       end
 
     end

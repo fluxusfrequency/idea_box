@@ -73,26 +73,26 @@ end
   end
 
   get '/' do
-    if session[:persona]
+    if authorized?
       set_dbs
       @idea = IdeaStore.all.sort.first
       @index ||= 0
-      slim :index, locals: { ideas: IdeaStore.all.sort, user: user, idea: @idea, show_resources: false, mode: 'new' }
+      slim :index, locals: { ideas: IdeaStore.all.sort, user: user, idea: @idea, show_resources: false, mode: 'new', sort: 'rank' }
     else
-      slim :login
+      slim :login, locals: {sort: 'rank'}
     end
   end
 
   get '/sorted_tags' do
     protected!
     sorted_ideas = IdeaStore.sort_all_by_tags
-    slim :tags, locals: { sorted_ideas: sorted_ideas, user: user, idea: sorted_ideas.first, show_resources: false, mode: 'new' }
+    slim :tags, locals: { sorted_ideas: sorted_ideas, user: user, idea: sorted_ideas.first, show_resources: false, mode: 'new', sort: 'tags'  }
   end
 
   get '/sorted_days' do
     protected!
     sorted_ideas = IdeaStore.group_all_by_day_created
-    slim :days, locals: { sorted_ideas: sorted_ideas, user: user, idea: sorted_ideas.first, show_resources: false, mode: 'new' }
+    slim :days, locals: { sorted_ideas: sorted_ideas, user: user, idea: sorted_ideas.first, show_resources: false, mode: 'new', sort: 'days'  }
   end
 
   post '/ideas/:id' do
@@ -103,26 +103,26 @@ end
       copy_file(tempfile, filename)
       params[:idea] = params[:idea].merge({'uploads' => filename})
     end
-    flash[:notice] = "Idea successfully added" if IdeaStore.create(params[:idea].merge({'uploads' => filename}))
+    flash[:notice] = "Idea successfully added!" if IdeaStore.create(params[:idea].merge({'uploads' => filename}))
     redirect "/"
   end
 
   get '/new' do
     protected!
-    slim :index, locals: { ideas: IdeaStore.all.sort, user: user, idea: Idea.new, show_resources: false, mode: 'new' }
+    slim :new, locals: { ideas: IdeaStore.all.sort, user: user, idea: Idea.new, show_resources: false, mode: 'new', sort: 'rank' }
   end
 
   get '/ideas/:id' do |id|
     protected!
     idea = IdeaStore.find(id)
     history = RevisionStore.find_all_by_idea_id(id.to_i)
-    slim :show, locals: { idea: idea, user: user, show_resources: true, history: history }
+    slim :show, locals: { idea: idea, user: user, show_resources: true, history: history, sort: 'rank' }
   end
 
   get '/ideas/:id/edit' do |id|
     protected!
     idea = IdeaStore.find(id.to_i)
-    slim :index, locals: { idea: idea, user: user, ideas: IdeaStore.all.sort, show_resources: false, mode: "edit" }
+    slim :edit, locals: { idea: idea, user: user, ideas: IdeaStore.all.sort, show_resources: false, mode: "edit", sort: "rank" }
   end
 
   put '/ideas/:id' do |id|
@@ -133,7 +133,7 @@ end
       copy_file(tempfile, filename)
       params[:idea] = params[:idea].merge({'uploads' => filename})
     end
-    IdeaStore.update(id.to_i, params[:idea])
+    flash[:notice] = "Idea successfully updated!" if IdeaStore.update(id.to_i, params[:idea])
     redirect '/'
   end
 
@@ -153,32 +153,32 @@ end
 
   get '/all/tags/:tag' do |tag|
     protected!
-    slim :tag_view, locals: { tag: tag, user: user }
+    slim :tag_view, locals: { tag: tag, user: user, sort: 'rank' }
   end
 
   post '/search/results' do
     protected!
     results = IdeaStore.search_for(params[:search_text])
-    slim :search, locals: { search: params[:search_text], user: user, time_range: nil, results: results }
+    slim :search, locals: { search: params[:search_text], user: user, time_range: nil, results: results, sort: 'rank' }
   end
 
   post '/search/time/results' do
     protected!
     time_range = params[:time_range].split("-")
     results = IdeaStore.find_all_by_time_created(time_range[0], time_range[1])
-    slim :search, locals: { search: "All Ideas Created Between #{time_range[0]} and #{time_range[1]}", results: results, user: user }
+    slim :search, locals: { search: "All Ideas Created Between #{time_range[0]} and #{time_range[1]}", results: results, user: user, sort: 'rank' }
   end
 
   post '/search/tags/results' do
     protected!
     results = IdeaStore.sort_all_by_tags
-    slim :search, locals: { search: "All Ideas Sorted By Tags", results: results, user: user }
+    slim :search, locals: { search: "All Ideas Sorted By Tags", results: results, user: user, sort: 'rank' }
   end
 
   post '/search/day/results' do
     protected!
     results = IdeaStore.group_all_by_day_created
-    slim :search, locals: { search: "All Ideas Sorted By Day", results: results, user: user }
+    slim :search, locals: { search: "All Ideas Sorted By Day", results: results, user: user, sort: 'rank' }
   end
 
   post '/portfolios/create/' do
