@@ -1,4 +1,4 @@
-fieldset
+div class="row"
   div class="panel"
     h3 All Ideas Tagged With: #{tag.capitalize} 
 
@@ -6,6 +6,7 @@ fieldset
     -IdeaStore.sort_all_by_tags[tag].each do |idea|
       | Id: 
       =idea.id
+      d
       br
       | Title: 
       =idea.title
@@ -18,10 +19,10 @@ fieldset
         a href="/all/tags/#{tag}" title="#{tag}" #{tag}#{", " unless idea.all_my_tags.length == 1}
       br
       | Created On: 
-      =idea.created_at
+      =idea.created_at_parsed
       br
       | Updated On: 
-      =idea.updated_at
+      =idea.updated_at_parsed
       br
       | Revision Number: 
       =idea.revision

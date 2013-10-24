@@ -10,7 +10,7 @@ div class="row"
           h4 #{idea.title}
           h6 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
           -idea.all_my_tags.each do |tag|
-            a href="/all/tags/#{tag}" title="#{tag}" style=("display: inline; font-size: 0.8em") #{tag}#{", " unless idea == ideas.last} 
+            a href="/all/tags/#{tag}" title="#{tag}" style=("display: inline; font-size: 0.8em") #{tag} 
           br
           br
           ul class="button-group even-4"

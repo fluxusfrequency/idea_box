@@ -69,11 +69,11 @@
   end
 
   def created_at_parsed
-    Time.parse(@created_at).strftime("%b %e, %l:%M %p")
+    Time.parse(@created_at).strftime("%A, %b %e, %l:%M %p")
   end
 
   def updated_at_parsed
-    Time.parse(@updated_at).strftime("%b %e, %l:%M %p")
+    Time.parse(@updated_at).strftime("%A, %b %e, %l:%M %p")
   end
 
   def revision

@@ -50,7 +50,9 @@ module Sinatra
       end
 
       app.post '/session/create' do 
-        if params[:password] != params[:password_confirmation]
+        if params[:password].nil?
+          flash[:error] = "You must enter a password!"
+        elsif params[:password] != params[:password_confirmation]
           flash[:error] = "Your password did not match your password confirmation. Please try again."
           redirect '/session/create'
         elsif
@@ -69,7 +71,18 @@ module Sinatra
       end
 
       app.post '/session/update' do
-        flash[:success] = "Successfully updated your profile!" if UserStore.update(user.id, params[:registration])
+        if params[:registration][:password] != params[:registration][:password_confirmation]
+          flash[:error] = "Your password did not match your password confirmation. Please try again."
+          redirect '/session/profile'
+        elsif params[:registration][:password].empty?
+          flash[:error] = "You must enter a password!"
+        elsif params[:registration][:password]
+          UserStore.update(user.id, params[:registration])
+          flash[:success] = "Successfully updated your profile!"
+        else
+          flash[:error] = "Sorry, there was a problem processing your request."
+        end
+
         redirect '/'
       end
 

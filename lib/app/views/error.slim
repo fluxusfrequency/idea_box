@@ -1,23 +1,6 @@
-h1 An Error Occured
-
-h3 Params
-table
-  tr
-    th Request Verb
-    td 
-      =request.request_method
-
-  tr
-    th Request Path
-    td 
-      =request.path
-
-  tr
-    th colspan=2 | Parameters
-
-  - request.params.each do |key, value|
-    tr
-      td
-      =key
-      td
-      =value
+div class="row"
+  div class="panel"
+    h2 Error
+    h5 Sorry, there was a problem with something that you clicked or the address in the status bar. 
+    a href="/" 
+      p style="text-decoration: underline; color: red" Please click here to return to your ideas.
