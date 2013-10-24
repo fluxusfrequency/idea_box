@@ -1,3 +1,4 @@
-fieldset
-  h1 Editing: #{idea.title}
-  ==slim :form, locals: {idea: idea, show_resources: true, mode: 'edit' }
+div class="row"
+  div class="panel"
+    h3 Editing - #{idea.title}
+    ==slim :form, locals: {idea: IdeaStore.find(idea.id), show_resources: true, mode: 'edit' }

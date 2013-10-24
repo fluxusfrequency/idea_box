@@ -21,6 +21,8 @@ br
     img src="/images/user/#{user.id}_uploads/#{idea.uploads.to_s}" width="300px" height="200px"
     br
   a href="/download/#{idea.uploads.to_s}" title="#{idea.uploads.to_s}" style=("display: inline; font-size: 0.8em") #{idea.uploads}
+  audio controls
+  source src="/images/user/1_uploads" type="audio/mpeg"
 br
 h7 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
 -idea.all_my_tags.each do |tag|

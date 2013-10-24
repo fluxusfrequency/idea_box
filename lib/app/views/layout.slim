@@ -2,46 +2,67 @@ html
   head
     meta name="viewport" content="width=device-width" 
     title IdeaBox
-    ==js :foundation
-    ==js :application
     ==css :application
+    ==js :application
+    ==js :foundation
+    link href='http://fonts.googleapis.com/css?family=Belleza' rel='stylesheet' type='text/css'
+    link href='http://fonts.googleapis.com/css?family=Merriweather+Sans:800' rel='stylesheet' type='text/css'
+    / link rel="stylesheet" href="http://basehold.it/24"
   body
-  div class="row"
-    div class="large-12 columns"
-      nav class="top-bar"
+    div class="row"
+      div class="large-12 columns ib_nav"
+        div class="large-4 small-12 columns logo_cont"
+          h1 style="font-size: 2.75em"
+            a href="/" id="ib_logo" IdeaBox
+        -if authorized?
+          div class="large-4 small-6 columns portfolios"
+            -i = 0
+            -user.portfolios.each do |key, value|
+              a href="/portfolios/#{value}" id="#{'active' if IdeaStore.current_portfolio == key }" #{value.capitalize}
+              -i += 1
+              -break if i == 4
+          div class="large-4 small-8 columns right nav_links" 
+            ul class="inline-list right"
+              li class="admin"
+                a href="/session/profile" Profile 
+              li class="admin"
+                a href="/session/logout" Log Out    
+    -if authorized?
+      div class="row"
+        -sort ||= 'rank'
+        div class="large-9 small-9 columns" style="padding: 0px"
+          div class="small-3 large-3 columns" style="padding: 0px"
+            a href="/new" class="button prefix alert" New Idea
+          div class="small-3 large-3 columns" style="padding: 0px"
+            a href="/" class="button prefix #{'success' if sort!='rank'} #{'secondary' if sort=='rank'}" Sort By Rank
+          div class="small-3 large-3 columns" style="padding: 0px"
+            a href="/sorted_tags" class="button prefix #{'success' if sort!='tags'} #{'secondary' if sort=='tags'}" Sort Tags
+          div class="small-3 large-3 columns left" style="padding: 0px"
+            a href="/sorted_days" class="button prefix #{'success' if sort!='days'} #{'secondary' if sort=='days'}" Sort Days
 
-        section class="top-bar-section logo"
-          ul class="left"
-            li class="name has-dropdown not-click"
-              h1 style="font-size: 2.75em"
-                a href="/" IdeaBox
-            -if authorized?
-              li class="divider"
-              li class="has-dropdown not-click" 
-                a href="#" #{user.portfolios[IdeaStore.current_portfolio].capitalize}
-                ul class="dropdown"
-                  -user.portfolios.each do |key, value|
-                    li class="#{"active" if IdeaStore.current_portfolio == key }"
-                      a href="/portfolios/#{value}" #{value.capitalize}
+        div class="large-3 small-3 columns right search_spot" style="padding: 0px"
+          form action="/search/results" method='POST'
+            div class="row collapse" 
+              div class="small-8 large-8 columns"
+                input type="search" style="border: 1px solid black" name="search_text" placeholder="Find idea"
+              div class="small-4 large-4 columns" 
+                input type="submit" name="search" class="button prefix alert" value="Go"  
+    div class="row"  
+      == styled_flash             
+    section  
 
-          -if authorized?
-            ul class="right"
-              li class="name has-dropdown not-click" id="user_button"
-                a href="#" #{user.username.capitalize}
-                ul class="dropdown"
-                  li class=""
-                    a href="/session/profile" Profile 
-                  li class="logout"
-                    a href="/session/logout" Log Out
-            ul class="right" style="margin-right: 15px"
-              li class="search"
-                form action="/search/results" method='POST'
-                  div class="row collapse" 
-                    div class="small-8 large-8 columns"
-                      input type="search" name="search_text" placeholder="Find an idea"
-                    div class="small-4 large-4 columns" 
-                      input type="submit" name="search" class="button prefix success" value="Search" 
+    ==yield
 
-      section
-        == styled_flash
-      ==yield
+    footer class="row"
+      div class="large-12 columns" 
+        div class="row" 
+
+          div class="large-6 columns" 
+            ul class="inline-list left"
+              li
+          
+          div class="large-6 small-6 columns"
+            ul class="inline-list right"
+              li
+              li
+          
