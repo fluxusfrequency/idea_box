@@ -1,1 +1,1 @@
-==slim :feed, locals: { ideas: IdeaStore.all.sort, user: user, idea: @idea, show_resources: false, mode: 'new', sort: 'tags' }
+==slim :feed, locals: { ideas: sorted_ideas.values.flatten, user: user, idea: @idea, show_resources: false, mode: 'new', sort: 'tags' }

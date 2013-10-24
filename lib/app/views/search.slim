@@ -1,38 +1,17 @@
-fieldset
-  div class="large-12 small-12 columns"
-    div class="panel"
-      h1 Search Results:
-      h5 class="subheader" style="display: inline" You searched for: 
-      br
-      p style="display: inline" "#{search}"
-      hr
-      h5 class="subheader" Ideas Found:
-      -if search == "All Ideas Sorted By Tags"
-        -results.keys.flatten.each do |tag|
+div class="row"
+  div class="panel"
+    h1 Search Results:
+    h5 class="subheader" style="display: inline" You searched for: 
+    br
+    p style="display: inline" "#{search}"
+    hr
+    h3 Ideas Found:
+    -if results && results.length > 0 
+      -results.each do |idea|
+        div class="row"
           fieldset
-            h5 #{tag}
-            -results[tag].each do |idea|
-              div class="large-3 left columns"
-                div class="panel"
-                  a href="/#{idea.id}" 
-                    h5 #{idea.title}
-                  ==slim :idea, locals: { idea: idea }
-      -elsif search == "All Ideas Sorted By Day"
-        -results.keys.flatten.each do |tag|
-          fieldset
-            h5 #{tag}
-            -results[tag].each do |idea|
-              div class="large-3 left columns"
-                div class="panel"
-                  a href="/#{idea.id}" 
-                    h5 #{idea.title}
-                  ==slim :idea, locals: { idea: idea }
-      -elsif results && results.length > 0 
-        -results.each do |idea|
-          div class="large-3 left columns"
-            div class="panel"
-              a href="/#{idea.id}" 
-                h5 #{idea.title}
-              ==slim :idea, locals: { idea: idea }
-      -else
-        p Sorry, your search did not return any results. 
+            a href="/#{idea.id}" 
+              h5 #{idea.title}
+            ==slim :idea, locals: { idea: idea }
+    -else
+      p Sorry, your search did not return any results. 

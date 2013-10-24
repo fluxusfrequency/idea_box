@@ -1,10 +1,9 @@
-fieldset
-  div class="panel radius"
+div class="row"
+  div class="panel"
     h1 Texts Receieved:
     br
     -if messages
-      -messages.each do |sms|
-        h3 class="subheader" Idea:
+      -messages.each do |sms, |
         -parts = sms.body.scan(/\S+/)
         | Title: #{parts.first}
         br
@@ -14,4 +13,7 @@ fieldset
         br
         | Sent On: #{sms.date_created}
         br
+        | Sent From: #{sms.from}
+        br
         hr
+

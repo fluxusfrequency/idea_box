@@ -10,20 +10,25 @@ html
     link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"
     link rel="icon" href="/favicon.ico" type="image/x-icon"
     / link rel="stylesheet" href="http://basehold.it/24"
+
+
   body
-    div class="row"
-      div class="large-12 columns ib_nav"
+    div class="row" 
+      div class="large-12 columns ib_nav" 
         div class="large-4 small-12 columns logo_cont"
           h1 style="font-size: 2.75em"
             a href="/" id="ib_logo" IdeaBox
         -if authorized?
-          div class="large-4 small-6 columns portfolios"
+          div class="large-5 small-6 columns portfolios"
             -i = 0
+            a href="#" Portfolios:
             -user.portfolios.each do |key, value|
-              a href="/portfolios/#{value}" id="#{'active' if IdeaStore.current_portfolio == key }" #{value.capitalize}
-              -i += 1
               -break if i == 4
-          div class="large-4 small-8 columns right nav_links" 
+              a href="/portfolios/#{value}" id="#{'active' if IdeaStore.current_portfolio == key }" 
+                =value.capitalize
+              -i += 1
+              
+          div class="large-3 small-6 columns right nav_links" 
             ul class="inline-list right"
               li class="admin"
                 a href="/session/profile" Profile 

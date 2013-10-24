@@ -48,11 +48,11 @@ class User
   def phone
     phone = @phone.scan(/[0-9]/).join
     if phone.length == 11 && phone.start_with?("1")
-      phone = "+1#{phone[1..-1]}"
+      phone = phone[1..-1]
     elsif phone.length != 10
-      phone = "+10000000000"
+      phone = "0000000000"
     else
-      return "+1#{phone}"
+      return phone
     end
     phone
   end

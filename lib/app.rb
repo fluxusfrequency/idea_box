@@ -75,6 +75,7 @@ end
   get '/' do
     if authorized?
       set_dbs
+      IdeaStore.current_portfolio ||= 1
       @idea = IdeaStore.all.sort.first
       @index ||= 0
       slim :index, locals: { ideas: IdeaStore.all.sort, user: user, idea: @idea, show_resources: false, mode: 'new', sort: 'rank' }
@@ -164,9 +165,14 @@ end
 
   post '/search/time/results' do
     protected!
-    time_range = params[:time_range].split("-")
-    results = IdeaStore.find_all_by_time_created(time_range[0], time_range[1])
-    slim :search, locals: { search: "All Ideas Created Between #{time_range[0]} and #{time_range[1]}", results: results, user: user, sort: 'rank' }
+    if params[:time_range].empty?
+      flash[:error] = "Please enter a valid time search (see the example)!"
+      redirect '/session/profile'
+    else
+      time_range = params[:time_range].split("-")
+      results = IdeaStore.find_all_by_time_created(time_range[0], time_range[1])
+      slim :search, locals: { search: "All Ideas Created Between #{time_range[0]} and #{time_range[1]}", results: results, user: user, sort: 'rank' }
+    end
   end
 
   post '/search/tags/results' do
@@ -183,12 +189,15 @@ end
 
   post '/portfolios/create/' do
     protected!
-    name = params[:new_portfolio].to_s
-    if UserStore.create_portfolio(user.id, name)
-      flash[:notice] = "Successfully created your #{name.capitalize} portfolio." 
+    if params[:new_portfolio].empty?
+      flash[:error] = "Please enter a name for your new portfolio!"
+      redirect '/session/profile'
+    else
+      name = params[:new_portfolio].to_s
+      flash[:notice] = "Successfully created your #{name.capitalize} portfolio." if UserStore.create_portfolio(user.id, name)
       UserStore.load_portfolio_for(user.id, name)
+      redirect '/'
     end
-    redirect '/'
   end
 
   post '/portfolios/delete/:name' do |name|

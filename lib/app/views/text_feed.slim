@@ -1,0 +1,14 @@
+div class="row"
+  div class="row"
+    -ideas.each_with_index do |idea, i|
+      div class="large-4 small-6 columns left" 
+        div class="image_container_#{rand(4)+1}"
+          =idea.description
+
+        div class="panel"
+          h4 #{idea.title}
+          br
+      -break if i == 60
+      -if (i+1) % 3 == 0
+        div class="row"
+       
