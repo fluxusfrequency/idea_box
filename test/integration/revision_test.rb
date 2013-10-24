@@ -5,9 +5,7 @@ require 'pry'
 class RevisionTest < Minitest::Test
 
   def setup
-    IdeaStore.filename = 'db/test'
     IdeaStore.current_portfolio = 1
-    RevisionStore.filename = 'db/test_revisions'
   end
 
   def teardown
@@ -75,7 +73,6 @@ class RevisionTest < Minitest::Test
     assert_equal 1, revision.revision
     refute_respond_to revision, :group
     assert_equal 'http://www.bikes.com', revision.resources.first
-    RevisionStore.delete_all
   end
 
   def test_the_revision_actually_revises_content
@@ -86,7 +83,6 @@ class RevisionTest < Minitest::Test
       })
     revision = RevisedIdea.new(idea.to_h.merge('idea_id' => idea.id, 'description' => 'Motorcycles in the park'))
     assert_equal "Motorcycles in the park", revision.description
-    RevisionStore.delete_all
   end
 
   def test_the_revision_store_can_find_all_by_idea_id
@@ -100,7 +96,6 @@ class RevisionTest < Minitest::Test
     revision_2 = RevisionStore.create(idea.to_h.merge('idea_id' => idea.id, 'description' => 'Monster trucks in the park'))
     assert_equal 2, RevisionStore.find_all_by_idea_id(1).length
     assert_equal 'Monster trucks in the park', RevisionStore.find_all_by_idea_id(1).last.description
-    RevisionStore.delete_all
   end
 
   def test_new_revisions_have_an_incrementing_revision_count
@@ -115,7 +110,6 @@ class RevisionTest < Minitest::Test
     revision_2 = RevisionStore.create(idea.to_h.merge('idea_id' => idea.id, 'description' => 'Monster trucks in the park'))
     assert_equal 2, RevisionStore.find_all_by_idea_id(idea.id).length
     assert_equal 2, RevisionStore.find_all_by_idea_id(idea.id).last.revision
-    RevisionStore.delete_all
   end
 
   def test_the_idea_store_creates_a_new_revision_when_an_idea_is_updated
@@ -130,7 +124,6 @@ class RevisionTest < Minitest::Test
     IdeaStore.update(2, idea.to_h.merge("description" => "Alligators in the park"))
     assert_equal 2, RevisionStore.find_all_by_idea_id(idea.id).length
     IdeaStore.delete_all
-    RevisionStore.delete_all
   end
 
   def test_it_can_destroy_all_db_entries
@@ -157,7 +150,6 @@ class RevisionTest < Minitest::Test
     assert_equal 'Friday Night', IdeaStore.find(1).title
     assert_equal 1, IdeaStore.find(1).revision
     refute_equal IdeaStore.find(1).created_at, IdeaStore.find(1).updated_at
-    RevisionStore.delete_all
   end
 
 end

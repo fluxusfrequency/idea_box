@@ -3,6 +3,12 @@ require './lib/idea_box'
 
 class IdeaTest < Minitest::Test
 
+  def setup
+  end
+
+  def teardown
+  end
+
   def test_it_can_set_up_attrs
     idea = Idea.new({
       'id'           => 1,

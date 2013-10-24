@@ -22,4 +22,5 @@ group :test do
   gem 'sinatra-assetpack', require: 'sinatra/assetpack'
   gem 'capybara'
   gem 'pry', require: 'pry'
+  gem 'launchy'
 end

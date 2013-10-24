@@ -17,7 +17,11 @@ class RevisionStore
     end
 
     def filename
-      @filename || 'db/revisions'
+      if ENV['RACK_ENV'] == 'test'
+        @filename || 'db/test_revisions'
+      else
+        @filename || 'db/revisions'
+      end
     end
 
     def filename=(name)

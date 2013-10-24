@@ -25,7 +25,11 @@ class IdeaStore
     end
 
     def filename
-      @filename || 'db/ideabox'
+      if ENV['RACK_ENV'] == 'test'
+        @filename || 'db/test'
+      else
+        @filename || 'db/ideabox'
+      end
     end
 
     def filename=(name)

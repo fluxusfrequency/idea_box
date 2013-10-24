@@ -3,12 +3,6 @@ require './lib/idea_box'
 
 class UserTest < Minitest::Test
 
-  def setup
-    IdeaStore.filename = 'db/test'
-    UserStore.filename = 'db/test_users'
-    RevisionStore.filename = 'db/test_revisions'
-  end
-
   def teardown
     IdeaStore.delete_all
     RevisionStore.delete_all

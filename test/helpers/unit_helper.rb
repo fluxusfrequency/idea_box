@@ -1,6 +1,6 @@
 ENV['RACK_ENV'] = 'test'
 
-require_relative '../../lib/app'
+require './lib/app'
 
 require 'bundler'
 Bundler.require
