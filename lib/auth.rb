@@ -50,17 +50,17 @@ module Sinatra
       end
 
       app.post '/session/create' do 
-        if params[:password].nil?
+        if params[:signup]['password'].nil?
           flash[:error] = "You must enter a password!"
-        elsif params[:password] != params[:password_confirmation]
+        elsif params[:signup]['password'] != params[:signup]['password_confirmation']
           flash[:error] = "Your password did not match your password confirmation. Please try again."
           redirect '/session/create'
         elsif
-          UserStore.find_by_username(params[:username].downcase)
+          UserStore.find_by_username(params[:signup]['username'].downcase)
           flash[:error] = "Sorry, that username has already been taken. Please try again."
           redirect '/session/create'
         else
-          UserStore.create({'username' => params[:username].downcase, 'password' => Digest::MD5::hexdigest(params[:password]), 'email' => params[:email]})
+          UserStore.create({'username' => params[:signup]['username'].downcase, 'password' => Digest::MD5::hexdigest(params[:signup]['password'].to_s), 'phone' => params[:signup]['phone'], 'email' => params[:signup]['email']})
           flash[:notice] = "Your account was successfully created."
           redirect '/session/login'
         end
@@ -77,7 +77,7 @@ module Sinatra
         elsif params[:registration][:password].empty?
           flash[:error] = "You must enter a password!"
         elsif params[:registration][:password]
-          UserStore.update(user.id, params[:registration])
+          UserStore.update(user.id, params[:registration].merge({'password' => Digest::MD5::hexdigest(params[:password].to_s)}))
           flash[:success] = "Successfully updated your profile!"
         else
           flash[:error] = "Sorry, there was a problem processing your request."

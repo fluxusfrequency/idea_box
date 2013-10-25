@@ -44,7 +44,7 @@ div class="row"
             -revision.resources.each do |resource|
               -if resource.match(/(http:\/\/)?www\..+\..+/)
                 a href="http://#{resource}" title=resource style=("display: inline; font-size: 0.8em") #{resource}#{", " unless resource == revision.resources.last}
-              -elsif resource.match(/(http:\/\/)www\..+\..+/)
+              -elsif resource.match(/(http:\/\/)\..+\..+/)
                 a href="#{resource}" title=resource style=("display: inline; font-size: 0.8em") #{resource}#{", " unless resource == revision.resources.last}
               -else 
                 p style=("display: inline; font-size: 0.8em") #{resource} #{", " unless resource == revision.resources.last}

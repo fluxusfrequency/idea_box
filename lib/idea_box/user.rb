@@ -16,10 +16,10 @@ class User
   end
 
   def to_h
-    { "id" => id,
-      "username" => username,
-      "password" => password,
-      "email" => email,
+    { "id"         => id,
+      "username"   => username,
+      "password"   => password,
+      "email"      => email,
       "portfolios" => portfolios,
       "phone"      => phone,
       "created_at" => created_at,
@@ -45,14 +45,14 @@ class User
     end
   end
 
-  def phone
-    phone = @phone.scan(/[0-9]/).join
+  def clean_phone
+    phone = @phone.to_s.scan(/\d+/).join
     if phone.length == 11 && phone.start_with?("1")
       phone = phone[1..-1]
     elsif phone.length != 10
       phone = "0000000000"
     else
-      return phone
+      phone
     end
     phone
   end
