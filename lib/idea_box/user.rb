@@ -45,7 +45,7 @@ class User
     end
   end
 
-  def clean_phone
+  def phone
     phone = @phone.to_s.scan(/\d+/).join
     if phone.length == 11 && phone.start_with?("1")
       phone = phone[1..-1]
