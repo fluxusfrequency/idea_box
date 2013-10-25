@@ -9,9 +9,8 @@ div class="row"
             p style="font-size:0.6em" (click to edit)
 
         div class="panel"
-          a href="/ideas/#{idea.id}" id="#{idea.title}_title"
-            h4 #{idea.title}
-          p style="font-size:0.6em" (click to view)
+          h4 #{idea.title}
+          p style="font-size:0.6em"
           h6 class="subheader" style=("display: inline; font-size: 0.8em") Tags: 
           -idea.all_my_tags.each do |tag|
             a href="/all/tags/#{tag}" title="#{tag}" style=("display: inline; font-size: 0.8em") #{tag} 
@@ -22,6 +21,9 @@ div class="row"
 
           br
           ul class="button-group even-4"
+            li
+              form action="/ideas/#{idea.id}" method='GET' style=("display: inline") 
+                input class="tiny button secondary" type='submit' value='View' id="#{idea.title}_title" 
             li
               form action="/ideas/#{idea.id}/like" method='POST' style=("display: inline")
                 input class="tiny button secondary" type='submit' value='Like'

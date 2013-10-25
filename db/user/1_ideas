@@ -36,19 +36,6 @@ ideas:
   uploads: 
   resources:
   - world
-- id: 6
-  title: Rather he kicks ass!
-  description: until he’s full. Chuck Norris got a perfect score on his SAT's, simply
-    by writing Chuck Norris for every answer. Chuck Norris knows where Carmen Sandiego
-    is. When Chuck Norris was denied
-  rank: 0
-  tags: Hello
-  created_at: '2013-10-22 20:49:57 -0600'
-  updated_at: '2013-10-23 22:09:26 -0600'
-  portfolio_id: 1
-  uploads: 
-  resources:
-  - http://idsgn.dropmark.com/107/1130450
 - id: 8
   title: Bacon McMuffin at McDonalds
   description: because it was 10:35, he roundhouse kicked the store so hard it became
@@ -63,27 +50,26 @@ ideas:
   uploads: 
   resources:
   - http://idsgn.dropmark.com/107/1130450
-- id: 9
+- id: 5
   title: He then trank three kegs
   description: After much debate, President Truman decided to drop the atomic bomb
     on Hiroshima rather than the alternative of sending
-  rank: 0
+  rank: 4
   tags: Hello
   created_at: '2013-10-22 20:49:57 -0600'
-  updated_at: '2013-10-22 20:56:37 -0600'
+  updated_at: '2013-10-24 16:00:34 -0600'
   portfolio_id: 1
   uploads: 
-  resources:
-  - http://idsgn.dropmark.com/107/1130450
-- id: 9
+  resources: 
+- id: 6
   title: Chuck Norris
   description: It was more "humane". Chuck Norris is currently suing NBC, claiming
     Law and Order are trademarked names for his left and right legs. Chuck Norris
     does not hunt because the word hunting infers the probability of failure.
-  rank: 2
+  rank: 3
   tags: Hello
   created_at: '2013-10-22 20:49:57 -0600'
-  updated_at: '2013-10-23 22:20:38 -0600'
+  updated_at: '2013-10-24 16:00:36 -0600'
   portfolio_id: 1
   uploads: 
   resources: 
@@ -113,19 +99,19 @@ ideas:
   uploads: 
   resources:
   - http://idsgn.dropmark.com/107/1130450
-- id: 13
+- id: 10
   title: Rather he kicks ass!
   description: until he’s full. Chuck Norris got a perfect score on his SAT's, simply
     by writing Chuck Norris for every answer. Chuck Norris knows where Carmen Sandiego
-    is. When Chuck Norris was denied
-  rank: 0
+    is. When Chuck Norris was denied!!!!!
+  rank: 1
   tags: Hello, world
   created_at: '2013-10-23 22:09:26 -0600'
-  updated_at: '2013-10-23 22:10:27 -0600'
+  updated_at: '2013-10-24 14:49:41 -0600'
   portfolio_id: 1
-  uploads: 
+  uploads: Ben_gschool_headshot.jpg
   resources:
-  - http://idsgn.dropmark.com/107/1130450
+  - www.google.com, http://www.ask.com
 - id: 14
   title: Yodel
   description: Eh hee hoo!
@@ -137,13 +123,24 @@ ideas:
   uploads: 
   resources:
   - http://phineasandferb.wikia.com/wiki/File:Buford_and_the_Yodeller.jpg
-- id: 15
-  title: Hello
-  description: Hello, world!
+- id: 13
+  title: Testing
+  description: SMS functionality!
   rank: 0
   tags: text
-  created_at: '2013-10-24 02:11:52 -0600'
-  updated_at: '2013-10-24 02:11:52 -0600'
+  created_at: '2013-10-24 14:32:13 -0600'
+  updated_at: '2013-10-24 14:32:13 -0600'
+  portfolio_id: 6
+  uploads: none
+  resources:
+  - none
+- id: 14
+  title: GATHER
+  description: hello. World!
+  rank: 0
+  tags: text
+  created_at: '2013-10-24 14:52:14 -0600'
+  updated_at: '2013-10-24 14:52:14 -0600'
   portfolio_id: 6
   uploads: none
   resources:

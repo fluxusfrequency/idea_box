@@ -11,31 +11,20 @@ users:
   phone: '7192907974'
   created_at: '2013-10-20 20:14:54 -0600'
 - id: 2
-  username: benjamin
-  password: e99a18c428cb38d5f260853678922e03
-  email: ben@test.com
+  username: '123'
+  password: 202cb962ac59075b964b07152d234b70
+  email: ''
   portfolios:
     1: work
     6: texts
-  phone: '+10000000000'
-  created_at: '2013-10-22 21:21:28 -0600'
+  phone: '7478389292'
+  created_at: '2013-10-24 18:27:16 -0600'
 - id: 3
-  username: ''
-  password: d41d8cd98f00b204e9800998ecf8427e
-  email: jane@example.com
+  username: '555'
+  password: 15de21c670ae7c3f6f3f1f37029303c9
+  email: ''
   portfolios:
     1: work
-    3: yelp
     6: texts
-  phone: '+10000000000'
-  created_at: '2013-10-23 21:04:37 -0600'
-- id: 4
-  username: jonah
-  password: 21232f297a57a5a743894a0e4a801fc3
-  email: jane@example.com
-  portfolios:
-    1: work
-    3: computers
-    6: texts
-  phone: '+10000000000'
-  created_at: '2013-10-23 21:05:59 -0600'
+  phone: 0987654321
+  created_at: '2013-10-24 18:29:49 -0600'

@@ -1,0 +1,40 @@
+---
+revisions:
+- id: 1
+  idea_id: 10
+  title: Rather he kicks ass!
+  description: until he’s full. Chuck Norris got a perfect score on his SAT's, simply
+    by writing Chuck Norris for every answer. Chuck Norris knows where Carmen Sandiego
+    is. When Chuck Norris was denied
+  tags: Hello, world
+  rank: 0
+  uploads: 
+  created_at: '2013-10-23 22:09:26 -0600'
+  updated_at: '2013-10-24 14:47:32 -0600'
+  resources:
+  - http://idsgn.dropmark.com/107/1130450
+- id: 2
+  idea_id: 10
+  title: Rather he kicks ass!
+  description: until he’s full. Chuck Norris got a perfect score on his SAT's, simply
+    by writing Chuck Norris for every answer. Chuck Norris knows where Carmen Sandiego
+    is. When Chuck Norris was denied!!!!!
+  tags: Hello, world
+  rank: 0
+  uploads: Ben_gschool_headshot.jpg
+  created_at: '2013-10-23 22:09:26 -0600'
+  updated_at: '2013-10-24 14:48:07 -0600'
+  resources:
+  - http://idsgn.dropmark.com/107/1130450
+- id: 3
+  idea_id: 10
+  title: Rather he kicks ass!
+  description: until he’s full. Chuck Norris got a perfect score on his SAT's, simply
+    by writing Chuck Norris for every answer. Chuck Norris knows where Carmen Sandiego
+    is. When Chuck Norris was denied!!!!!
+  tags: Hello, world
+  rank: 1
+  uploads: Ben_gschool_headshot.jpg
+  created_at: '2013-10-23 22:09:26 -0600'
+  updated_at: '2013-10-24 14:49:41 -0600'
+  resources: []

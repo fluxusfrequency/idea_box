@@ -11,7 +11,7 @@ div class="row"
       label for="password" Password Confirmation:
       input#password_confirmation type="password" name="registration[password_confirmation]"
       label for="phone" Phone:
-      input#phone type="text" name="registration[phone]" value="#{user.phone}"
+      input#phone type="text" name="registration[phone]" value="#{user.clean_phone}"
       label for="username" Email:
       input#username type="text" name="registration[email]" value="#{user.email}"
       br

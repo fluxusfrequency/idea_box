@@ -49,7 +49,7 @@ module Sinatra
       app.helpers Helpers
 
       app.get '/sms' do
-        text_user = UserStore.all.find{|user| params[:From].to_s.match(user.phone)}
+        text_user = UserStore.all.find{|user| params[:From].to_s.match("+1#{user.phone}")}
         IdeaStore.filename = "db/user/#{text_user.id}_ideas"
         parts = params[:Body].scan(/\S+/)
         IdeaStore.create({"title" => parts[0], "description" => parts[1..parts.length].join(" "), "tags" => "text", "portfolio_id" => 6})

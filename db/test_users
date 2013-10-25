@@ -1,2 +1,20 @@
 ---
-users: []
+users:
+- id: 1
+  username: new user
+  password: 5f4dcc3b5aa765d61d8327deb882cf99
+  email: johndoe@example.com
+  portfolios:
+    1: work
+    6: texts
+  phone: '1234567890'
+  created_at: '2013-10-24 17:34:51 -0600'
+- id: 2
+  username: new user
+  password: 5f4dcc3b5aa765d61d8327deb882cf99
+  email: johndoe@example.com
+  portfolios:
+    1: work
+    6: texts
+  phone: '1234567890'
+  created_at: '2013-10-24 17:35:10 -0600'
