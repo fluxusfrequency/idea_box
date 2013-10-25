@@ -7,7 +7,7 @@ h7 class="subheader" style=("display: inline; font-size: 0.8em") Updated on: #{i
 br
 -if idea.resources
   h7 class="subheader" style=("display: inline; font-size: 0.8em") Resources: 
-  -idea.resources.each do |resource|
+  -idea.resources.join.split(', ').each do |resource|
     -if resource.match(/(http:\/\/)?www\..+\..+/)
       a href="http://#{resource}" title=resource style=("display: inline; font-size: 0.8em") #{resource}#{", " unless resource == idea.resources.last}
     -elsif resource.match(/(http:\/\/)www\..+\..+/)
