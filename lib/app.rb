@@ -64,8 +64,8 @@ end
 
   configure :development do
     register Sinatra::Reloader
-    use BetterErrors::Middleware
-    BetterErrors.application_root = 'lib/app'
+    # use BetterErrors::Middleware
+    # BetterErrors.application_root = 'lib/app'
   end
 
   not_found do
@@ -218,7 +218,8 @@ end
 
   get '/download/:filename' do |filename|
     protected!
-    send_file "./lib/app/public/images/user/#{user.id}_uploads/#{filename}", :filename => filename, :type => 'Application/octet-stream'
+    # send_file "./lib/app/public/images/user/#{user.id}_uploads/#{filename}", :filename => filename, :type => 'Application/octet-stream'
+    flash[:notice] = "Downloads are temporarily disabled."
     redirect '/'
   end
 
